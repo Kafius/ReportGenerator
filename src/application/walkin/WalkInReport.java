@@ -1,13 +1,14 @@
 package application.walkin;
 
 import java.util.List;
+import application.Info;
 
 import javafx.collections.FXCollections;
 
 public class WalkInReport {
     String name;
 	String reportType;
-	BasicInfo info;
+	Info info;
 	List<Sample> table;
 	List<String> conclusions;
 	int tableLength;
@@ -15,13 +16,13 @@ public class WalkInReport {
 	public WalkInReport(String reportType) {
 		this.table = FXCollections.observableArrayList();
 		this.reportType = reportType;
-		this.info = new BasicInfo();
+		this.info = new Info();
 		this.conclusions = FXCollections.observableArrayList();
 		this.tableLength = 0;
 		this.finalConclusion="";
 	}
 
-	public void setInfo(BasicInfo info) {
+	public void setInfo(Info info) {
 		this.info=info;
 	}
 	public void setTable(List<Sample> set) {
@@ -32,7 +33,7 @@ public class WalkInReport {
 	}
 	
 	public void removeSample(Sample sample) {
-		table.remove(table.indexOf(sample));
+		table.remove(sample);
 	}
 	
 	public void addConclusion(String conclusion) {
@@ -40,32 +41,30 @@ public class WalkInReport {
 	}
 	
 	public void generateConclusion() {
-		if(this.reportType.equals("Asbestos")) {
-			for(int i=0;i<this.conclusions.size();i++) {
-				this.finalConclusion+=conclusions.get(i) +"\n";
-			}
-		}
-		else if(this.reportType.equals("Bacteroides")) {
-			if(this.conclusions.size()==2) {
-				this.finalConclusion+=conclusions.get(0) + "while "+ conclusions.get(1);
-			}
-		}
-		else if(this.reportType.equals("Lead")) {
-			this.finalConclusion = "Results of analysis indicate that ";
-			if(conclusions.size()==1) {
-				this.finalConclusion+=conclusions.get(0)+ ".";
-			}
-			else if(conclusions.size()==2) {
-				this.finalConclusion+=conclusions.get(0)+" and "+conclusions.get(1)+ ".";
-			}
-			else {
-				this.finalConclusion+=conclusions.get(0)+", "+conclusions.get(1)+ " and "+ conclusions.get(2) + ".";
-			}
-		}
-		else {
-			for(int i=0;i<conclusions.size();i++) {
-				this.finalConclusion += conclusions.get(i) + "\n";
-			}
+		switch (this.reportType) {
+			case "Asbestos":
+				for (String conclusion : this.conclusions) this.finalConclusion += conclusion + "\n";
+				break;
+			case "Bacteroides":
+				if (this.conclusions.size() == 2) {
+					this.finalConclusion += conclusions.get(0) + "while " + conclusions.get(1);
+				}
+				break;
+			case "Lead":
+				this.finalConclusion = "Results of analysis indicate that ";
+				if (conclusions.size() == 1) {
+					this.finalConclusion += conclusions.get(0) + ".";
+				} else if (conclusions.size() == 2) {
+					this.finalConclusion += conclusions.get(0) + " and " + conclusions.get(1) + ".";
+				} else {
+					this.finalConclusion += conclusions.get(0) + ", " + conclusions.get(1) + " and " + conclusions.get(2) + ".";
+				}
+				break;
+			default:
+				for (String conclusion : conclusions) {
+					this.finalConclusion += conclusion + "\n";
+				}
+				break;
 		}
 	}
 	
@@ -81,7 +80,7 @@ public class WalkInReport {
 		return this.reportType;
 	}
 
-	public BasicInfo getInfo(){
+	public Info getInfo(){
 		return this.info;
 	}
 
