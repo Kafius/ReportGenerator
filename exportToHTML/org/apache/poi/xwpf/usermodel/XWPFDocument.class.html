@@ -1,0 +1,1177 @@
+<html>
+<head>
+<title>XWPFDocument.class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6897bb;}
+.s4 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+XWPFDocument.class</font>
+</center></td></tr></table>
+<pre><span class="s0">//</span>
+<span class="s0">// Source code recreated from a .class file by IntelliJ IDEA</span>
+<span class="s0">// (powered by FernFlower decompiler)</span>
+<span class="s0">//</span>
+
+<span class="s2">package </span><span class="s1">org.apache.poi.xwpf.usermodel</span><span class="s2">;</span>
+
+<span class="s2">import </span><span class="s1">java.io.ByteArrayOutputStream</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.io.IOException</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.io.InputStream</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.io.OutputStream</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.util.ArrayList</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.util.Arrays</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.util.Collection</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.util.Collections</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.util.HashMap</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.util.Iterator</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.util.LinkedList</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.util.List</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">java.util.Map</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">javax.xml.namespace.QName</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.ooxml.POIXMLDocument</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.ooxml.POIXMLDocumentPart</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.ooxml.POIXMLException</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.ooxml.POIXMLRelation</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.ooxml.POIXMLTypeLoader</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.ooxml.POIXMLDocumentPart.RelationPart</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.ooxml.POIXMLProperties.ExtendedProperties</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.ooxml.util.IdentifierManager</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.ooxml.util.PackageHelper</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.openxml4j.exceptions.InvalidFormatException</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.openxml4j.exceptions.OpenXML4JException</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.openxml4j.opc.OPCPackage</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.openxml4j.opc.PackagePart</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.openxml4j.opc.PackagePartName</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.openxml4j.opc.PackageRelationship</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.openxml4j.opc.PackagingURIHelper</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.openxml4j.opc.TargetMode</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.poifs.crypt.HashAlgorithm</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.util.IOUtils</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.util.Internal</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.util.POILogFactory</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.util.POILogger</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.wp.usermodel.HeaderFooterType</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.xmlbeans.XmlCursor</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.xmlbeans.XmlException</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.xmlbeans.XmlObject</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.apache.xmlbeans.XmlOptions</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBody</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTComment</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTDocument1</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTOnOff</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRow</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSdtBlock</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTStyles</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.CommentsDocument</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.DocumentDocument</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.EndnotesDocument</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.FootnotesDocument</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.NumberingDocument</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.STDocProtect</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.STOnOff</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.StylesDocument</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.DocumentDocument.Factory</span><span class="s2">;</span>
+<span class="s2">import </span><span class="s1">org.openxmlformats.schemas.wordprocessingml.x2006.main.STHdrFtr.Enum</span><span class="s2">;</span>
+
+<span class="s2">public class </span><span class="s1">XWPFDocument </span><span class="s2">extends </span><span class="s1">POIXMLDocument </span><span class="s2">implements </span><span class="s1">Document</span><span class="s2">, </span><span class="s1">IBody {</span>
+    <span class="s2">private static final </span><span class="s1">POILogger LOG = POILogFactory.getLogger(XWPFDocument.</span><span class="s2">class</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">List&lt;XWPFFooter&gt; footers = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">List&lt;XWPFHeader&gt; headers = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">List&lt;XWPFComment&gt; comments = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">List&lt;XWPFHyperlink&gt; hyperlinks = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">List&lt;XWPFParagraph&gt; paragraphs = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">List&lt;XWPFTable&gt; tables = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">List&lt;XWPFSDT&gt; contentControls = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">List&lt;IBodyElement&gt; bodyElements = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">List&lt;XWPFPictureData&gt; pictures = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">Map&lt;Long</span><span class="s2">, </span><span class="s1">List&lt;XWPFPictureData&gt;&gt; packagePictures = </span><span class="s2">new </span><span class="s1">HashMap()</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">XWPFEndnotes endnotes</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">XWPFNumbering numbering</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">XWPFStyles styles</span><span class="s2">;</span>
+    <span class="s2">protected </span><span class="s1">XWPFFootnotes footnotes</span><span class="s2">;</span>
+    <span class="s2">private </span><span class="s1">CTDocument1 ctDocument</span><span class="s2">;</span>
+    <span class="s2">private </span><span class="s1">XWPFSettings settings</span><span class="s2">;</span>
+    <span class="s2">protected final </span><span class="s1">List&lt;XWPFChart&gt; charts = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+    <span class="s2">private </span><span class="s1">IdentifierManager drawingIdManager = </span><span class="s2">new </span><span class="s1">IdentifierManager(</span><span class="s3">0L</span><span class="s2">, </span><span class="s3">4294967295L</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s2">private </span><span class="s1">FootnoteEndnoteIdManager footnoteIdManager = </span><span class="s2">new </span><span class="s1">FootnoteEndnoteIdManager(</span><span class="s2">this</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s2">private </span><span class="s1">XWPFHeaderFooterPolicy headerFooterPolicy</span><span class="s2">;</span>
+
+    <span class="s2">public </span><span class="s1">XWPFDocument(OPCPackage pkg) </span><span class="s2">throws </span><span class="s1">IOException {</span>
+        <span class="s2">super</span><span class="s1">(pkg)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.load(XWPFFactory.getInstance())</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFDocument(InputStream is) </span><span class="s2">throws </span><span class="s1">IOException {</span>
+        <span class="s2">super</span><span class="s1">(PackageHelper.open(is))</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.load(XWPFFactory.getInstance())</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFDocument() {</span>
+        <span class="s2">super</span><span class="s1">(newPackage())</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.onDocumentCreate()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">protected static </span><span class="s1">OPCPackage newPackage() {</span>
+        <span class="s1">OPCPackage pkg = </span><span class="s2">null;</span>
+
+        <span class="s2">try </span><span class="s1">{</span>
+            <span class="s1">pkg = OPCPackage.create(</span><span class="s2">new </span><span class="s1">ByteArrayOutputStream())</span><span class="s2">;</span>
+            <span class="s1">PackagePartName corePartName = PackagingURIHelper.createPartName(XWPFRelation.DOCUMENT.getDefaultFileName())</span><span class="s2">;</span>
+            <span class="s1">pkg.addRelationship(corePartName</span><span class="s2">, </span><span class="s1">TargetMode.INTERNAL</span><span class="s2">, </span><span class="s4">&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">pkg.createPart(corePartName</span><span class="s2">, </span><span class="s1">XWPFRelation.DOCUMENT.getContentType())</span><span class="s2">;</span>
+            <span class="s1">pkg.getPackageProperties().setCreatorProperty(</span><span class="s4">&quot;Apache POI&quot;</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s2">return </span><span class="s1">pkg</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">catch </span><span class="s1">(Exception var2) {</span>
+            <span class="s1">IOUtils.closeQuietly(pkg)</span><span class="s2">;</span>
+            <span class="s2">throw new </span><span class="s1">POIXMLException(var2)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">protected void </span><span class="s1">onDocumentRead() </span><span class="s2">throws </span><span class="s1">IOException {</span>
+        <span class="s2">try </span><span class="s1">{</span>
+            <span class="s1">DocumentDocument doc = Factory.parse(</span><span class="s2">this</span><span class="s1">.getPackagePart().getInputStream()</span><span class="s2">, </span><span class="s1">POIXMLTypeLoader.DEFAULT_XML_OPTIONS)</span><span class="s2">;</span>
+            <span class="s2">this</span><span class="s1">.ctDocument = doc.getDocument()</span><span class="s2">;</span>
+            <span class="s2">this</span><span class="s1">.initFootnotes()</span><span class="s2">;</span>
+            <span class="s1">XmlCursor docCursor = </span><span class="s2">this</span><span class="s1">.ctDocument.newCursor()</span><span class="s2">;</span>
+            <span class="s1">docCursor.selectPath(</span><span class="s4">&quot;./*&quot;</span><span class="s1">)</span><span class="s2">;</span>
+
+            <span class="s2">while</span><span class="s1">(</span><span class="s2">true</span><span class="s1">) {</span>
+                <span class="s1">XmlObject o</span><span class="s2">;</span>
+                <span class="s2">do </span><span class="s1">{</span>
+                    <span class="s2">if </span><span class="s1">(!docCursor.toNextSelection()) {</span>
+                        <span class="s1">docCursor.dispose()</span><span class="s2">;</span>
+                        <span class="s2">if </span><span class="s1">(doc.getDocument().getBody().getSectPr() != </span><span class="s2">null</span><span class="s1">) {</span>
+                            <span class="s2">this</span><span class="s1">.headerFooterPolicy = </span><span class="s2">new </span><span class="s1">XWPFHeaderFooterPolicy(</span><span class="s2">this</span><span class="s1">)</span><span class="s2">;</span>
+                        <span class="s1">}</span>
+
+                        <span class="s1">Iterator var13 = </span><span class="s2">this</span><span class="s1">.getRelationParts().iterator()</span><span class="s2">;</span>
+
+                        <span class="s2">while</span><span class="s1">(</span><span class="s2">true</span><span class="s1">) {</span>
+                            <span class="s2">while</span><span class="s1">(var13.hasNext()) {</span>
+                                <span class="s1">RelationPart rp = (RelationPart)var13.next()</span><span class="s2">;</span>
+                                <span class="s1">POIXMLDocumentPart p = rp.getDocumentPart()</span><span class="s2">;</span>
+                                <span class="s1">String relation = rp.getRelationship().getRelationshipType()</span><span class="s2">;</span>
+                                <span class="s2">if </span><span class="s1">(relation.equals(XWPFRelation.STYLES.getRelation())) {</span>
+                                    <span class="s2">this</span><span class="s1">.styles = (XWPFStyles)p</span><span class="s2">;</span>
+                                    <span class="s2">this</span><span class="s1">.styles.onDocumentRead()</span><span class="s2">;</span>
+                                <span class="s1">} </span><span class="s2">else if </span><span class="s1">(relation.equals(XWPFRelation.NUMBERING.getRelation())) {</span>
+                                    <span class="s2">this</span><span class="s1">.numbering = (XWPFNumbering)p</span><span class="s2">;</span>
+                                    <span class="s2">this</span><span class="s1">.numbering.onDocumentRead()</span><span class="s2">;</span>
+                                <span class="s1">} </span><span class="s2">else if </span><span class="s1">(relation.equals(XWPFRelation.FOOTER.getRelation())) {</span>
+                                    <span class="s1">XWPFFooter footer = (XWPFFooter)p</span><span class="s2">;</span>
+                                    <span class="s2">this</span><span class="s1">.footers.add(footer)</span><span class="s2">;</span>
+                                    <span class="s1">footer.onDocumentRead()</span><span class="s2">;</span>
+                                <span class="s1">} </span><span class="s2">else if </span><span class="s1">(relation.equals(XWPFRelation.HEADER.getRelation())) {</span>
+                                    <span class="s1">XWPFHeader header = (XWPFHeader)p</span><span class="s2">;</span>
+                                    <span class="s2">this</span><span class="s1">.headers.add(header)</span><span class="s2">;</span>
+                                    <span class="s1">header.onDocumentRead()</span><span class="s2">;</span>
+                                <span class="s1">} </span><span class="s2">else if </span><span class="s1">(relation.equals(XWPFRelation.COMMENT.getRelation())) {</span>
+                                    <span class="s1">CommentsDocument cmntdoc = org.openxmlformats.schemas.wordprocessingml.x2006.main.CommentsDocument.Factory.parse(p.getPackagePart().getInputStream()</span><span class="s2">, </span><span class="s1">POIXMLTypeLoader.DEFAULT_XML_OPTIONS)</span><span class="s2">;</span>
+                                    <span class="s1">CTComment[] var23 = cmntdoc.getComments().getCommentArray()</span><span class="s2">;</span>
+                                    <span class="s2">int </span><span class="s1">var9 = var23.length</span><span class="s2">;</span>
+
+                                    <span class="s2">for</span><span class="s1">(</span><span class="s2">int </span><span class="s1">var10 = </span><span class="s3">0</span><span class="s2">; </span><span class="s1">var10 &lt; var9</span><span class="s2">; </span><span class="s1">++var10) {</span>
+                                        <span class="s1">CTComment ctcomment = var23[var10]</span><span class="s2">;</span>
+                                        <span class="s2">this</span><span class="s1">.comments.add(</span><span class="s2">new </span><span class="s1">XWPFComment(ctcomment</span><span class="s2">, this</span><span class="s1">))</span><span class="s2">;</span>
+                                    <span class="s1">}</span>
+                                <span class="s1">} </span><span class="s2">else if </span><span class="s1">(relation.equals(XWPFRelation.SETTINGS.getRelation())) {</span>
+                                    <span class="s2">this</span><span class="s1">.settings = (XWPFSettings)p</span><span class="s2">;</span>
+                                    <span class="s2">this</span><span class="s1">.settings.onDocumentRead()</span><span class="s2">;</span>
+                                <span class="s1">} </span><span class="s2">else if </span><span class="s1">(relation.equals(XWPFRelation.IMAGES.getRelation())) {</span>
+                                    <span class="s1">XWPFPictureData picData = (XWPFPictureData)p</span><span class="s2">;</span>
+                                    <span class="s1">picData.onDocumentRead()</span><span class="s2">;</span>
+                                    <span class="s2">this</span><span class="s1">.registerPackagePictureData(picData)</span><span class="s2">;</span>
+                                    <span class="s2">this</span><span class="s1">.pictures.add(picData)</span><span class="s2">;</span>
+                                <span class="s1">} </span><span class="s2">else if </span><span class="s1">(relation.equals(XWPFRelation.CHART.getRelation())) {</span>
+                                    <span class="s1">XWPFChart chartData = (XWPFChart)p</span><span class="s2">;</span>
+                                    <span class="s2">this</span><span class="s1">.charts.add(chartData)</span><span class="s2">;</span>
+                                <span class="s1">} </span><span class="s2">else if </span><span class="s1">(relation.equals(XWPFRelation.GLOSSARY_DOCUMENT.getRelation())) {</span>
+                                    <span class="s1">Iterator var7 = p.getRelations().iterator()</span><span class="s2">;</span>
+
+                                    <span class="s2">while</span><span class="s1">(var7.hasNext()) {</span>
+                                        <span class="s1">POIXMLDocumentPart gp = (POIXMLDocumentPart)var7.next()</span><span class="s2">;</span>
+                                        <span class="s1">POIXMLDocumentPart._invokeOnDocumentRead(gp)</span><span class="s2">;</span>
+                                    <span class="s1">}</span>
+                                <span class="s1">}</span>
+                            <span class="s1">}</span>
+
+                            <span class="s2">this</span><span class="s1">.initHyperlinks()</span><span class="s2">;</span>
+                            <span class="s2">return;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                    <span class="s1">o = docCursor.getObject()</span><span class="s2">;</span>
+                <span class="s1">} </span><span class="s2">while</span><span class="s1">(!(o </span><span class="s2">instanceof </span><span class="s1">CTBody))</span><span class="s2">;</span>
+
+                <span class="s1">XmlCursor bodyCursor = o.newCursor()</span><span class="s2">;</span>
+                <span class="s1">bodyCursor.selectPath(</span><span class="s4">&quot;./*&quot;</span><span class="s1">)</span><span class="s2">;</span>
+
+                <span class="s2">while</span><span class="s1">(bodyCursor.toNextSelection()) {</span>
+                    <span class="s1">XmlObject bodyObj = bodyCursor.getObject()</span><span class="s2">;</span>
+                    <span class="s2">if </span><span class="s1">(bodyObj </span><span class="s2">instanceof </span><span class="s1">CTP) {</span>
+                        <span class="s1">XWPFParagraph p = </span><span class="s2">new </span><span class="s1">XWPFParagraph((CTP)bodyObj</span><span class="s2">, this</span><span class="s1">)</span><span class="s2">;</span>
+                        <span class="s2">this</span><span class="s1">.bodyElements.add(p)</span><span class="s2">;</span>
+                        <span class="s2">this</span><span class="s1">.paragraphs.add(p)</span><span class="s2">;</span>
+                    <span class="s1">} </span><span class="s2">else if </span><span class="s1">(bodyObj </span><span class="s2">instanceof </span><span class="s1">CTTbl) {</span>
+                        <span class="s1">XWPFTable t = </span><span class="s2">new </span><span class="s1">XWPFTable((CTTbl)bodyObj</span><span class="s2">, this</span><span class="s1">)</span><span class="s2">;</span>
+                        <span class="s2">this</span><span class="s1">.bodyElements.add(t)</span><span class="s2">;</span>
+                        <span class="s2">this</span><span class="s1">.tables.add(t)</span><span class="s2">;</span>
+                    <span class="s1">} </span><span class="s2">else if </span><span class="s1">(bodyObj </span><span class="s2">instanceof </span><span class="s1">CTSdtBlock) {</span>
+                        <span class="s1">XWPFSDT c = </span><span class="s2">new </span><span class="s1">XWPFSDT((CTSdtBlock)bodyObj</span><span class="s2">, this</span><span class="s1">)</span><span class="s2">;</span>
+                        <span class="s2">this</span><span class="s1">.bodyElements.add(c)</span><span class="s2">;</span>
+                        <span class="s2">this</span><span class="s1">.contentControls.add(c)</span><span class="s2">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+
+                <span class="s1">bodyCursor.dispose()</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">} </span><span class="s2">catch </span><span class="s1">(XmlException var12) {</span>
+            <span class="s2">throw new </span><span class="s1">POIXMLException(var12)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">private void </span><span class="s1">initHyperlinks() {</span>
+        <span class="s2">try </span><span class="s1">{</span>
+            <span class="s2">this</span><span class="s1">.hyperlinks = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+            <span class="s1">Iterator var1 = </span><span class="s2">this</span><span class="s1">.getPackagePart().getRelationshipsByType(XWPFRelation.HYPERLINK.getRelation()).iterator()</span><span class="s2">;</span>
+
+            <span class="s2">while</span><span class="s1">(var1.hasNext()) {</span>
+                <span class="s1">PackageRelationship rel = (PackageRelationship)var1.next()</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.hyperlinks.add(</span><span class="s2">new </span><span class="s1">XWPFHyperlink(rel.getId()</span><span class="s2">, </span><span class="s1">rel.getTargetURI().toString()))</span><span class="s2">;</span>
+            <span class="s1">}</span>
+
+        <span class="s1">} </span><span class="s2">catch </span><span class="s1">(InvalidFormatException var3) {</span>
+            <span class="s2">throw new </span><span class="s1">POIXMLException(var3)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">private void </span><span class="s1">initFootnotes() </span><span class="s2">throws </span><span class="s1">XmlException</span><span class="s2">, </span><span class="s1">IOException {</span>
+        <span class="s1">Iterator var1 = </span><span class="s2">this</span><span class="s1">.getRelationParts().iterator()</span><span class="s2">;</span>
+
+        <span class="s2">while</span><span class="s1">(var1.hasNext()) {</span>
+            <span class="s1">RelationPart rp = (RelationPart)var1.next()</span><span class="s2">;</span>
+            <span class="s1">POIXMLDocumentPart p = rp.getDocumentPart()</span><span class="s2">;</span>
+            <span class="s1">String relation = rp.getRelationship().getRelationshipType()</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(relation.equals(XWPFRelation.FOOTNOTE.getRelation())) {</span>
+                <span class="s2">this</span><span class="s1">.footnotes = (XWPFFootnotes)p</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.footnotes.onDocumentRead()</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.footnotes.setIdManager(</span><span class="s2">this</span><span class="s1">.footnoteIdManager)</span><span class="s2">;</span>
+            <span class="s1">} </span><span class="s2">else if </span><span class="s1">(relation.equals(XWPFRelation.ENDNOTE.getRelation())) {</span>
+                <span class="s2">this</span><span class="s1">.endnotes = (XWPFEndnotes)p</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.endnotes.onDocumentRead()</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.endnotes.setIdManager(</span><span class="s2">this</span><span class="s1">.footnoteIdManager)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s2">protected void </span><span class="s1">onDocumentCreate() {</span>
+        <span class="s2">this</span><span class="s1">.ctDocument = org.openxmlformats.schemas.wordprocessingml.x2006.main.CTDocument1.Factory.newInstance()</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.ctDocument.addNewBody()</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.settings = (XWPFSettings)</span><span class="s2">this</span><span class="s1">.createRelationship(XWPFRelation.SETTINGS</span><span class="s2">, </span><span class="s1">XWPFFactory.getInstance())</span><span class="s2">;</span>
+        <span class="s1">ExtendedProperties expProps = </span><span class="s2">this</span><span class="s1">.getProperties().getExtendedProperties()</span><span class="s2">;</span>
+        <span class="s1">expProps.getUnderlyingProperties().setApplication(</span><span class="s4">&quot;Apache POI&quot;</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Internal</span>
+    <span class="s2">public </span><span class="s1">CTDocument1 getDocument() {</span>
+        <span class="s2">return this</span><span class="s1">.ctDocument</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">IdentifierManager getDrawingIdManager() {</span>
+        <span class="s2">return this</span><span class="s1">.drawingIdManager</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;IBodyElement&gt; getBodyElements() {</span>
+        <span class="s2">return </span><span class="s1">Collections.unmodifiableList(</span><span class="s2">this</span><span class="s1">.bodyElements)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">Iterator&lt;IBodyElement&gt; getBodyElementsIterator() {</span>
+        <span class="s2">return this</span><span class="s1">.bodyElements.iterator()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;XWPFParagraph&gt; getParagraphs() {</span>
+        <span class="s2">return </span><span class="s1">Collections.unmodifiableList(</span><span class="s2">this</span><span class="s1">.paragraphs)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;XWPFTable&gt; getTables() {</span>
+        <span class="s2">return </span><span class="s1">Collections.unmodifiableList(</span><span class="s2">this</span><span class="s1">.tables)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;XWPFChart&gt; getCharts() {</span>
+        <span class="s2">return </span><span class="s1">Collections.unmodifiableList(</span><span class="s2">this</span><span class="s1">.charts)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFTable getTableArray(</span><span class="s2">int </span><span class="s1">pos) {</span>
+        <span class="s2">return </span><span class="s1">pos &gt;= </span><span class="s3">0 </span><span class="s1">&amp;&amp; pos &lt; </span><span class="s2">this</span><span class="s1">.tables.size() ? (XWPFTable)</span><span class="s2">this</span><span class="s1">.tables.get(pos) : </span><span class="s2">null;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;XWPFFooter&gt; getFooterList() {</span>
+        <span class="s2">return </span><span class="s1">Collections.unmodifiableList(</span><span class="s2">this</span><span class="s1">.footers)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFFooter getFooterArray(</span><span class="s2">int </span><span class="s1">pos) {</span>
+        <span class="s2">return </span><span class="s1">pos &gt;= </span><span class="s3">0 </span><span class="s1">&amp;&amp; pos &lt; </span><span class="s2">this</span><span class="s1">.footers.size() ? (XWPFFooter)</span><span class="s2">this</span><span class="s1">.footers.get(pos) : </span><span class="s2">null;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;XWPFHeader&gt; getHeaderList() {</span>
+        <span class="s2">return </span><span class="s1">Collections.unmodifiableList(</span><span class="s2">this</span><span class="s1">.headers)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFHeader getHeaderArray(</span><span class="s2">int </span><span class="s1">pos) {</span>
+        <span class="s2">return </span><span class="s1">pos &gt;= </span><span class="s3">0 </span><span class="s1">&amp;&amp; pos &lt; </span><span class="s2">this</span><span class="s1">.headers.size() ? (XWPFHeader)</span><span class="s2">this</span><span class="s1">.headers.get(pos) : </span><span class="s2">null;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">String getTblStyle(XWPFTable table) {</span>
+        <span class="s2">return </span><span class="s1">table.getStyleID()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFHyperlink getHyperlinkByID(String id) {</span>
+        <span class="s1">Iterator var2 = </span><span class="s2">this</span><span class="s1">.hyperlinks.iterator()</span><span class="s2">;</span>
+
+        <span class="s1">XWPFHyperlink link</span><span class="s2">;</span>
+        <span class="s2">do </span><span class="s1">{</span>
+            <span class="s2">if </span><span class="s1">(!var2.hasNext()) {</span>
+                <span class="s2">this</span><span class="s1">.initHyperlinks()</span><span class="s2">;</span>
+                <span class="s1">var2 = </span><span class="s2">this</span><span class="s1">.hyperlinks.iterator()</span><span class="s2">;</span>
+
+                <span class="s2">do </span><span class="s1">{</span>
+                    <span class="s2">if </span><span class="s1">(!var2.hasNext()) {</span>
+                        <span class="s2">return null;</span>
+                    <span class="s1">}</span>
+
+                    <span class="s1">link = (XWPFHyperlink)var2.next()</span><span class="s2">;</span>
+                <span class="s1">} </span><span class="s2">while</span><span class="s1">(!link.getId().equals(id))</span><span class="s2">;</span>
+
+                <span class="s2">return </span><span class="s1">link</span><span class="s2">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">link = (XWPFHyperlink)var2.next()</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">while</span><span class="s1">(!link.getId().equals(id))</span><span class="s2">;</span>
+
+        <span class="s2">return </span><span class="s1">link</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFFootnote getFootnoteByID(</span><span class="s2">int </span><span class="s1">id) {</span>
+        <span class="s2">return this</span><span class="s1">.footnotes == </span><span class="s2">null </span><span class="s1">? </span><span class="s2">null </span><span class="s1">: (XWPFFootnote)</span><span class="s2">this</span><span class="s1">.footnotes.getFootnoteById(id)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFEndnote getEndnoteByID(</span><span class="s2">int </span><span class="s1">id) {</span>
+        <span class="s2">return this</span><span class="s1">.endnotes == </span><span class="s2">null </span><span class="s1">? </span><span class="s2">null </span><span class="s1">: </span><span class="s2">this</span><span class="s1">.endnotes.getFootnoteById(id)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;XWPFFootnote&gt; getFootnotes() {</span>
+        <span class="s2">return this</span><span class="s1">.footnotes == </span><span class="s2">null </span><span class="s1">? Collections.emptyList() : </span><span class="s2">this</span><span class="s1">.footnotes.getFootnotesList()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFHyperlink[] getHyperlinks() {</span>
+        <span class="s2">return </span><span class="s1">(XWPFHyperlink[])</span><span class="s2">this</span><span class="s1">.hyperlinks.toArray(</span><span class="s2">new </span><span class="s1">XWPFHyperlink[</span><span class="s3">0</span><span class="s1">])</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFComment getCommentByID(String id) {</span>
+        <span class="s1">Iterator var2 = </span><span class="s2">this</span><span class="s1">.comments.iterator()</span><span class="s2">;</span>
+
+        <span class="s1">XWPFComment comment</span><span class="s2">;</span>
+        <span class="s2">do </span><span class="s1">{</span>
+            <span class="s2">if </span><span class="s1">(!var2.hasNext()) {</span>
+                <span class="s2">return null;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">comment = (XWPFComment)var2.next()</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">while</span><span class="s1">(!comment.getId().equals(id))</span><span class="s2">;</span>
+
+        <span class="s2">return </span><span class="s1">comment</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFComment[] getComments() {</span>
+        <span class="s2">return </span><span class="s1">(XWPFComment[])</span><span class="s2">this</span><span class="s1">.comments.toArray(</span><span class="s2">new </span><span class="s1">XWPFComment[</span><span class="s3">0</span><span class="s1">])</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">PackagePart getPartById(String id) {</span>
+        <span class="s2">try </span><span class="s1">{</span>
+            <span class="s1">PackagePart corePart = </span><span class="s2">this</span><span class="s1">.getCorePart()</span><span class="s2">;</span>
+            <span class="s2">return </span><span class="s1">corePart.getRelatedPart(corePart.getRelationship(id))</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">catch </span><span class="s1">(InvalidFormatException var3) {</span>
+            <span class="s2">throw new </span><span class="s1">IllegalArgumentException(var3)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFHeaderFooterPolicy getHeaderFooterPolicy() {</span>
+        <span class="s2">return this</span><span class="s1">.headerFooterPolicy</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFHeaderFooterPolicy createHeaderFooterPolicy() {</span>
+        <span class="s2">if </span><span class="s1">(</span><span class="s2">this</span><span class="s1">.headerFooterPolicy == </span><span class="s2">null</span><span class="s1">) {</span>
+            <span class="s2">this</span><span class="s1">.headerFooterPolicy = </span><span class="s2">new </span><span class="s1">XWPFHeaderFooterPolicy(</span><span class="s2">this</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return this</span><span class="s1">.headerFooterPolicy</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFHeader createHeader(HeaderFooterType type) {</span>
+        <span class="s1">XWPFHeaderFooterPolicy hfPolicy = </span><span class="s2">this</span><span class="s1">.createHeaderFooterPolicy()</span><span class="s2">;</span>
+        <span class="s2">if </span><span class="s1">(type == HeaderFooterType.FIRST) {</span>
+            <span class="s1">CTSectPr ctSectPr = </span><span class="s2">this</span><span class="s1">.getSection()</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(!ctSectPr.isSetTitlePg()) {</span>
+                <span class="s1">CTOnOff titlePg = ctSectPr.addNewTitlePg()</span><span class="s2">;</span>
+                <span class="s1">titlePg.setVal(STOnOff.ON)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return </span><span class="s1">hfPolicy.createHeader(Enum.forInt(type.toInt()))</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFFooter createFooter(HeaderFooterType type) {</span>
+        <span class="s1">XWPFHeaderFooterPolicy hfPolicy = </span><span class="s2">this</span><span class="s1">.createHeaderFooterPolicy()</span><span class="s2">;</span>
+        <span class="s2">if </span><span class="s1">(type == HeaderFooterType.FIRST) {</span>
+            <span class="s1">CTSectPr ctSectPr = </span><span class="s2">this</span><span class="s1">.getSection()</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(!ctSectPr.isSetTitlePg()) {</span>
+                <span class="s1">CTOnOff titlePg = ctSectPr.addNewTitlePg()</span><span class="s2">;</span>
+                <span class="s1">titlePg.setVal(STOnOff.ON)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return </span><span class="s1">hfPolicy.createFooter(Enum.forInt(type.toInt()))</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">private </span><span class="s1">CTSectPr getSection() {</span>
+        <span class="s1">CTBody ctBody = </span><span class="s2">this</span><span class="s1">.getDocument().getBody()</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">ctBody.isSetSectPr() ? ctBody.getSectPr() : ctBody.addNewSectPr()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Internal</span>
+    <span class="s2">public </span><span class="s1">CTStyles getStyle() </span><span class="s2">throws </span><span class="s1">XmlException</span><span class="s2">, </span><span class="s1">IOException {</span>
+        <span class="s1">PackagePart[] parts</span><span class="s2">;</span>
+        <span class="s2">try </span><span class="s1">{</span>
+            <span class="s1">parts = </span><span class="s2">this</span><span class="s1">.getRelatedByType(XWPFRelation.STYLES.getRelation())</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">catch </span><span class="s1">(InvalidFormatException var3) {</span>
+            <span class="s2">throw new </span><span class="s1">IllegalStateException(var3)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">if </span><span class="s1">(parts.length != </span><span class="s3">1</span><span class="s1">) {</span>
+            <span class="s2">throw new </span><span class="s1">IllegalStateException(</span><span class="s4">&quot;Expecting one Styles document part, but found &quot; </span><span class="s1">+ parts.length)</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+            <span class="s1">StylesDocument sd = org.openxmlformats.schemas.wordprocessingml.x2006.main.StylesDocument.Factory.parse(parts[</span><span class="s3">0</span><span class="s1">].getInputStream()</span><span class="s2">, </span><span class="s1">POIXMLTypeLoader.DEFAULT_XML_OPTIONS)</span><span class="s2">;</span>
+            <span class="s2">return </span><span class="s1">sd.getStyles()</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;PackagePart&gt; getAllEmbeddedParts() </span><span class="s2">throws </span><span class="s1">OpenXML4JException {</span>
+        <span class="s1">List&lt;PackagePart&gt; embedds = </span><span class="s2">new </span><span class="s1">LinkedList()</span><span class="s2">;</span>
+        <span class="s1">PackagePart part = </span><span class="s2">this</span><span class="s1">.getPackagePart()</span><span class="s2">;</span>
+        <span class="s1">Iterator var3 = </span><span class="s2">this</span><span class="s1">.getPackagePart().getRelationshipsByType(</span><span class="s4">&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/oleObject&quot;</span><span class="s1">).iterator()</span><span class="s2">;</span>
+
+        <span class="s1">PackageRelationship rel</span><span class="s2">;</span>
+        <span class="s2">while</span><span class="s1">(var3.hasNext()) {</span>
+            <span class="s1">rel = (PackageRelationship)var3.next()</span><span class="s2">;</span>
+            <span class="s1">embedds.add(part.getRelatedPart(rel))</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">var3 = </span><span class="s2">this</span><span class="s1">.getPackagePart().getRelationshipsByType(</span><span class="s4">&quot;http://schemas.openxmlformats.org/officeDocument/2006/relationships/package&quot;</span><span class="s1">).iterator()</span><span class="s2">;</span>
+
+        <span class="s2">while</span><span class="s1">(var3.hasNext()) {</span>
+            <span class="s1">rel = (PackageRelationship)var3.next()</span><span class="s2">;</span>
+            <span class="s1">embedds.add(part.getRelatedPart(rel))</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return </span><span class="s1">embedds</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">private int </span><span class="s1">getBodyElementSpecificPos(</span><span class="s2">int </span><span class="s1">pos</span><span class="s2">, </span><span class="s1">List&lt;? </span><span class="s2">extends </span><span class="s1">IBodyElement&gt; list) {</span>
+        <span class="s2">if </span><span class="s1">(list.size() == </span><span class="s3">0</span><span class="s1">) {</span>
+            <span class="s2">return </span><span class="s1">-</span><span class="s3">1</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+            <span class="s2">if </span><span class="s1">(pos &gt;= </span><span class="s3">0 </span><span class="s1">&amp;&amp; pos &lt; </span><span class="s2">this</span><span class="s1">.bodyElements.size()) {</span>
+                <span class="s1">IBodyElement needle = (IBodyElement)</span><span class="s2">this</span><span class="s1">.bodyElements.get(pos)</span><span class="s2">;</span>
+                <span class="s2">if </span><span class="s1">(needle.getElementType() != ((IBodyElement)list.get(</span><span class="s3">0</span><span class="s1">)).getElementType()) {</span>
+                    <span class="s2">return </span><span class="s1">-</span><span class="s3">1</span><span class="s2">;</span>
+                <span class="s1">}</span>
+
+                <span class="s2">int </span><span class="s1">startPos = Math.min(pos</span><span class="s2">, </span><span class="s1">list.size() - </span><span class="s3">1</span><span class="s1">)</span><span class="s2">;</span>
+
+                <span class="s2">for</span><span class="s1">(</span><span class="s2">int </span><span class="s1">i = startPos</span><span class="s2">; </span><span class="s1">i &gt;= </span><span class="s3">0</span><span class="s2">; </span><span class="s1">--i) {</span>
+                    <span class="s2">if </span><span class="s1">(list.get(i) == needle) {</span>
+                        <span class="s2">return </span><span class="s1">i</span><span class="s2">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+            <span class="s2">return </span><span class="s1">-</span><span class="s3">1</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public int </span><span class="s1">getParagraphPos(</span><span class="s2">int </span><span class="s1">pos) {</span>
+        <span class="s2">return this</span><span class="s1">.getBodyElementSpecificPos(pos</span><span class="s2">, this</span><span class="s1">.paragraphs)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public int </span><span class="s1">getTablePos(</span><span class="s2">int </span><span class="s1">pos) {</span>
+        <span class="s2">return this</span><span class="s1">.getBodyElementSpecificPos(pos</span><span class="s2">, this</span><span class="s1">.tables)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFParagraph insertNewParagraph(XmlCursor cursor) {</span>
+        <span class="s2">if </span><span class="s1">(!</span><span class="s2">this</span><span class="s1">.isCursorInBody(cursor)) {</span>
+            <span class="s2">return null;</span>
+        <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+            <span class="s1">String uri = CTP.type.getName().getNamespaceURI()</span><span class="s2">;</span>
+            <span class="s1">String localPart = </span><span class="s4">&quot;p&quot;</span><span class="s2">;</span>
+            <span class="s1">cursor.beginElement(localPart</span><span class="s2">, </span><span class="s1">uri)</span><span class="s2">;</span>
+            <span class="s1">cursor.toParent()</span><span class="s2">;</span>
+            <span class="s1">CTP p = (CTP)cursor.getObject()</span><span class="s2">;</span>
+            <span class="s1">XWPFParagraph newP = </span><span class="s2">new </span><span class="s1">XWPFParagraph(p</span><span class="s2">, this</span><span class="s1">)</span><span class="s2">;</span>
+
+            <span class="s1">XmlObject o</span><span class="s2">;</span>
+            <span class="s2">for</span><span class="s1">(o = </span><span class="s2">null; </span><span class="s1">!(o </span><span class="s2">instanceof </span><span class="s1">CTP) &amp;&amp; cursor.toPrevSibling()</span><span class="s2">; </span><span class="s1">o = cursor.getObject()) {</span>
+            <span class="s1">}</span>
+
+            <span class="s2">if </span><span class="s1">(o </span><span class="s2">instanceof </span><span class="s1">CTP &amp;&amp; o != p) {</span>
+                <span class="s2">int </span><span class="s1">pos = </span><span class="s2">this</span><span class="s1">.paragraphs.indexOf(</span><span class="s2">this</span><span class="s1">.getParagraph((CTP)o)) + </span><span class="s3">1</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.paragraphs.add(pos</span><span class="s2">, </span><span class="s1">newP)</span><span class="s2">;</span>
+            <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+                <span class="s2">this</span><span class="s1">.paragraphs.add(</span><span class="s3">0</span><span class="s2">, </span><span class="s1">newP)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">XmlCursor newParaPos = p.newCursor()</span><span class="s2">;</span>
+
+            <span class="s2">try </span><span class="s1">{</span>
+                <span class="s2">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s2">;</span>
+                <span class="s1">cursor.toCursor(newParaPos)</span><span class="s2">;</span>
+
+                <span class="s2">while</span><span class="s1">(</span><span class="s2">true</span><span class="s1">) {</span>
+                    <span class="s2">do </span><span class="s1">{</span>
+                        <span class="s2">if </span><span class="s1">(!cursor.toPrevSibling()) {</span>
+                            <span class="s2">this</span><span class="s1">.bodyElements.add(i</span><span class="s2">, </span><span class="s1">newP)</span><span class="s2">;</span>
+                            <span class="s1">cursor.toCursor(newParaPos)</span><span class="s2">;</span>
+                            <span class="s1">cursor.toEndToken()</span><span class="s2">;</span>
+                            <span class="s1">XWPFParagraph var9 = newP</span><span class="s2">;</span>
+                            <span class="s2">return </span><span class="s1">var9</span><span class="s2">;</span>
+                        <span class="s1">}</span>
+
+                        <span class="s1">o = cursor.getObject()</span><span class="s2">;</span>
+                    <span class="s1">} </span><span class="s2">while</span><span class="s1">(!(o </span><span class="s2">instanceof </span><span class="s1">CTP) &amp;&amp; !(o </span><span class="s2">instanceof </span><span class="s1">CTTbl))</span><span class="s2">;</span>
+
+                    <span class="s1">++i</span><span class="s2">;</span>
+                <span class="s1">}</span>
+            <span class="s1">} </span><span class="s2">finally </span><span class="s1">{</span>
+                <span class="s1">newParaPos.dispose()</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFTable insertNewTbl(XmlCursor cursor) {</span>
+        <span class="s2">if </span><span class="s1">(!</span><span class="s2">this</span><span class="s1">.isCursorInBody(cursor)) {</span>
+            <span class="s2">return null;</span>
+        <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+            <span class="s1">String uri = CTTbl.type.getName().getNamespaceURI()</span><span class="s2">;</span>
+            <span class="s1">String localPart = </span><span class="s4">&quot;tbl&quot;</span><span class="s2">;</span>
+            <span class="s1">cursor.beginElement(localPart</span><span class="s2">, </span><span class="s1">uri)</span><span class="s2">;</span>
+            <span class="s1">cursor.toParent()</span><span class="s2">;</span>
+            <span class="s1">CTTbl t = (CTTbl)cursor.getObject()</span><span class="s2">;</span>
+            <span class="s1">XWPFTable newT = </span><span class="s2">new </span><span class="s1">XWPFTable(t</span><span class="s2">, this</span><span class="s1">)</span><span class="s2">;</span>
+
+            <span class="s1">XmlObject o</span><span class="s2">;</span>
+            <span class="s2">for</span><span class="s1">(o = </span><span class="s2">null; </span><span class="s1">!(o </span><span class="s2">instanceof </span><span class="s1">CTTbl) &amp;&amp; cursor.toPrevSibling()</span><span class="s2">; </span><span class="s1">o = cursor.getObject()) {</span>
+            <span class="s1">}</span>
+
+            <span class="s2">int </span><span class="s1">i</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(!(o </span><span class="s2">instanceof </span><span class="s1">CTTbl)) {</span>
+                <span class="s2">this</span><span class="s1">.tables.add(</span><span class="s3">0</span><span class="s2">, </span><span class="s1">newT)</span><span class="s2">;</span>
+            <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+                <span class="s1">i = </span><span class="s2">this</span><span class="s1">.tables.indexOf(</span><span class="s2">this</span><span class="s1">.getTable((CTTbl)o)) + </span><span class="s3">1</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.tables.add(i</span><span class="s2">, </span><span class="s1">newT)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">i = </span><span class="s3">0</span><span class="s2">;</span>
+            <span class="s1">XmlCursor tableCursor = t.newCursor()</span><span class="s2">;</span>
+
+            <span class="s2">try </span><span class="s1">{</span>
+                <span class="s1">cursor.toCursor(tableCursor)</span><span class="s2">;</span>
+
+                <span class="s2">while</span><span class="s1">(cursor.toPrevSibling()) {</span>
+                    <span class="s1">o = cursor.getObject()</span><span class="s2">;</span>
+                    <span class="s2">if </span><span class="s1">(o </span><span class="s2">instanceof </span><span class="s1">CTP || o </span><span class="s2">instanceof </span><span class="s1">CTTbl) {</span>
+                        <span class="s1">++i</span><span class="s2">;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+
+                <span class="s2">this</span><span class="s1">.bodyElements.add(i</span><span class="s2">, </span><span class="s1">newT)</span><span class="s2">;</span>
+                <span class="s1">cursor.toCursor(tableCursor)</span><span class="s2">;</span>
+                <span class="s1">cursor.toEndToken()</span><span class="s2">;</span>
+                <span class="s1">XWPFTable var9 = newT</span><span class="s2">;</span>
+                <span class="s2">return </span><span class="s1">var9</span><span class="s2">;</span>
+            <span class="s1">} </span><span class="s2">finally </span><span class="s1">{</span>
+                <span class="s1">tableCursor.dispose()</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">private boolean </span><span class="s1">isCursorInBody(XmlCursor cursor) {</span>
+        <span class="s1">XmlCursor verify = cursor.newCursor()</span><span class="s2">;</span>
+        <span class="s1">verify.toParent()</span><span class="s2">;</span>
+        <span class="s2">boolean </span><span class="s1">result = verify.getObject() == </span><span class="s2">this</span><span class="s1">.ctDocument.getBody()</span><span class="s2">;</span>
+        <span class="s1">verify.dispose()</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">result</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">private int </span><span class="s1">getPosOfBodyElement(IBodyElement needle) {</span>
+        <span class="s1">BodyElementType type = needle.getElementType()</span><span class="s2">;</span>
+
+        <span class="s2">for</span><span class="s1">(</span><span class="s2">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s2">; </span><span class="s1">i &lt; </span><span class="s2">this</span><span class="s1">.bodyElements.size()</span><span class="s2">; </span><span class="s1">++i) {</span>
+            <span class="s1">IBodyElement current = (IBodyElement)</span><span class="s2">this</span><span class="s1">.bodyElements.get(i)</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(current.getElementType() == type &amp;&amp; current.equals(needle)) {</span>
+                <span class="s2">return </span><span class="s1">i</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return </span><span class="s1">-</span><span class="s3">1</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public int </span><span class="s1">getPosOfParagraph(XWPFParagraph p) {</span>
+        <span class="s2">return this</span><span class="s1">.getPosOfBodyElement(p)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public int </span><span class="s1">getPosOfTable(XWPFTable t) {</span>
+        <span class="s2">return this</span><span class="s1">.getPosOfBodyElement(t)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">protected void </span><span class="s1">commit() </span><span class="s2">throws </span><span class="s1">IOException {</span>
+        <span class="s1">XmlOptions xmlOptions = </span><span class="s2">new </span><span class="s1">XmlOptions(POIXMLTypeLoader.DEFAULT_XML_OPTIONS)</span><span class="s2">;</span>
+        <span class="s1">xmlOptions.setSaveSyntheticDocumentElement(</span><span class="s2">new </span><span class="s1">QName(CTDocument1.type.getName().getNamespaceURI()</span><span class="s2">, </span><span class="s4">&quot;document&quot;</span><span class="s1">))</span><span class="s2">;</span>
+        <span class="s1">PackagePart part = </span><span class="s2">this</span><span class="s1">.getPackagePart()</span><span class="s2">;</span>
+        <span class="s1">OutputStream out = part.getOutputStream()</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.ctDocument.save(out</span><span class="s2">, </span><span class="s1">xmlOptions)</span><span class="s2">;</span>
+        <span class="s1">out.close()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">private int </span><span class="s1">getRelationIndex(XWPFRelation relation) {</span>
+        <span class="s2">int </span><span class="s1">i = </span><span class="s3">1</span><span class="s2">;</span>
+        <span class="s1">Iterator var3 = </span><span class="s2">this</span><span class="s1">.getRelationParts().iterator()</span><span class="s2">;</span>
+
+        <span class="s2">while</span><span class="s1">(var3.hasNext()) {</span>
+            <span class="s1">RelationPart rp = (RelationPart)var3.next()</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(rp.getRelationship().getRelationshipType().equals(relation.getRelation())) {</span>
+                <span class="s1">++i</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return </span><span class="s1">i</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFParagraph createParagraph() {</span>
+        <span class="s1">XWPFParagraph p = </span><span class="s2">new </span><span class="s1">XWPFParagraph(</span><span class="s2">this</span><span class="s1">.ctDocument.getBody().addNewP()</span><span class="s2">, this</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.bodyElements.add(p)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.paragraphs.add(p)</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">p</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFNumbering createNumbering() {</span>
+        <span class="s2">if </span><span class="s1">(</span><span class="s2">this</span><span class="s1">.numbering == </span><span class="s2">null</span><span class="s1">) {</span>
+            <span class="s1">NumberingDocument numberingDoc = org.openxmlformats.schemas.wordprocessingml.x2006.main.NumberingDocument.Factory.newInstance()</span><span class="s2">;</span>
+            <span class="s1">XWPFRelation relation = XWPFRelation.NUMBERING</span><span class="s2">;</span>
+            <span class="s2">int </span><span class="s1">i = </span><span class="s2">this</span><span class="s1">.getRelationIndex(relation)</span><span class="s2">;</span>
+            <span class="s1">XWPFNumbering wrapper = (XWPFNumbering)</span><span class="s2">this</span><span class="s1">.createRelationship(relation</span><span class="s2">, </span><span class="s1">XWPFFactory.getInstance()</span><span class="s2">, </span><span class="s1">i)</span><span class="s2">;</span>
+            <span class="s1">wrapper.setNumbering(numberingDoc.addNewNumbering())</span><span class="s2">;</span>
+            <span class="s2">this</span><span class="s1">.numbering = wrapper</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return this</span><span class="s1">.numbering</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFStyles createStyles() {</span>
+        <span class="s2">if </span><span class="s1">(</span><span class="s2">this</span><span class="s1">.styles == </span><span class="s2">null</span><span class="s1">) {</span>
+            <span class="s1">StylesDocument stylesDoc = org.openxmlformats.schemas.wordprocessingml.x2006.main.StylesDocument.Factory.newInstance()</span><span class="s2">;</span>
+            <span class="s1">XWPFRelation relation = XWPFRelation.STYLES</span><span class="s2">;</span>
+            <span class="s2">int </span><span class="s1">i = </span><span class="s2">this</span><span class="s1">.getRelationIndex(relation)</span><span class="s2">;</span>
+            <span class="s1">XWPFStyles wrapper = (XWPFStyles)</span><span class="s2">this</span><span class="s1">.createRelationship(relation</span><span class="s2">, </span><span class="s1">XWPFFactory.getInstance()</span><span class="s2">, </span><span class="s1">i)</span><span class="s2">;</span>
+            <span class="s1">wrapper.setStyles(stylesDoc.addNewStyles())</span><span class="s2">;</span>
+            <span class="s2">this</span><span class="s1">.styles = wrapper</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return this</span><span class="s1">.styles</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFFootnotes createFootnotes() {</span>
+        <span class="s2">if </span><span class="s1">(</span><span class="s2">this</span><span class="s1">.footnotes == </span><span class="s2">null</span><span class="s1">) {</span>
+            <span class="s1">FootnotesDocument footnotesDoc = org.openxmlformats.schemas.wordprocessingml.x2006.main.FootnotesDocument.Factory.newInstance()</span><span class="s2">;</span>
+            <span class="s1">XWPFRelation relation = XWPFRelation.FOOTNOTE</span><span class="s2">;</span>
+            <span class="s2">int </span><span class="s1">i = </span><span class="s2">this</span><span class="s1">.getRelationIndex(relation)</span><span class="s2">;</span>
+            <span class="s1">XWPFFootnotes wrapper = (XWPFFootnotes)</span><span class="s2">this</span><span class="s1">.createRelationship(relation</span><span class="s2">, </span><span class="s1">XWPFFactory.getInstance()</span><span class="s2">, </span><span class="s1">i)</span><span class="s2">;</span>
+            <span class="s1">wrapper.setFootnotes(footnotesDoc.addNewFootnotes())</span><span class="s2">;</span>
+            <span class="s1">wrapper.setIdManager(</span><span class="s2">this</span><span class="s1">.footnoteIdManager)</span><span class="s2">;</span>
+            <span class="s2">this</span><span class="s1">.footnotes = wrapper</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return this</span><span class="s1">.footnotes</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Internal</span>
+    <span class="s2">public </span><span class="s1">XWPFFootnote addFootnote(CTFtnEdn note) {</span>
+        <span class="s2">return this</span><span class="s1">.footnotes.addFootnote(note)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Internal</span>
+    <span class="s2">public </span><span class="s1">XWPFEndnote addEndnote(CTFtnEdn note) {</span>
+        <span class="s1">XWPFEndnote endnote = </span><span class="s2">new </span><span class="s1">XWPFEndnote(</span><span class="s2">this, </span><span class="s1">note)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.endnotes.addEndnote(note)</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">endnote</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">removeBodyElement(</span><span class="s2">int </span><span class="s1">pos) {</span>
+        <span class="s2">if </span><span class="s1">(pos &gt;= </span><span class="s3">0 </span><span class="s1">&amp;&amp; pos &lt; </span><span class="s2">this</span><span class="s1">.bodyElements.size()) {</span>
+            <span class="s1">BodyElementType type = ((IBodyElement)</span><span class="s2">this</span><span class="s1">.bodyElements.get(pos)).getElementType()</span><span class="s2">;</span>
+            <span class="s2">int </span><span class="s1">paraPos</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(type == BodyElementType.TABLE) {</span>
+                <span class="s1">paraPos = </span><span class="s2">this</span><span class="s1">.getTablePos(pos)</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.tables.remove(paraPos)</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.ctDocument.getBody().removeTbl(paraPos)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+
+            <span class="s2">if </span><span class="s1">(type == BodyElementType.PARAGRAPH) {</span>
+                <span class="s1">paraPos = </span><span class="s2">this</span><span class="s1">.getParagraphPos(pos)</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.paragraphs.remove(paraPos)</span><span class="s2">;</span>
+                <span class="s2">this</span><span class="s1">.ctDocument.getBody().removeP(paraPos)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+
+            <span class="s2">this</span><span class="s1">.bodyElements.remove(pos)</span><span class="s2">;</span>
+            <span class="s2">return true;</span>
+        <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+            <span class="s2">return false;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">setParagraph(XWPFParagraph paragraph</span><span class="s2">, int </span><span class="s1">pos) {</span>
+        <span class="s2">this</span><span class="s1">.paragraphs.set(pos</span><span class="s2">, </span><span class="s1">paragraph)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.ctDocument.getBody().setPArray(pos</span><span class="s2">, </span><span class="s1">paragraph.getCTP())</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFParagraph getLastParagraph() {</span>
+        <span class="s2">int </span><span class="s1">lastPos = </span><span class="s2">this</span><span class="s1">.paragraphs.toArray().length - </span><span class="s3">1</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">(XWPFParagraph)</span><span class="s2">this</span><span class="s1">.paragraphs.get(lastPos)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFTable createTable() {</span>
+        <span class="s1">XWPFTable table = </span><span class="s2">new </span><span class="s1">XWPFTable(</span><span class="s2">this</span><span class="s1">.ctDocument.getBody().addNewTbl()</span><span class="s2">, this</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.bodyElements.add(table)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.tables.add(table)</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">table</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFTable createTable(</span><span class="s2">int </span><span class="s1">rows</span><span class="s2">, int </span><span class="s1">cols) {</span>
+        <span class="s1">XWPFTable table = </span><span class="s2">new </span><span class="s1">XWPFTable(</span><span class="s2">this</span><span class="s1">.ctDocument.getBody().addNewTbl()</span><span class="s2">, this, </span><span class="s1">rows</span><span class="s2">, </span><span class="s1">cols)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.bodyElements.add(table)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.tables.add(table)</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">table</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">createTOC() {</span>
+        <span class="s1">CTSdtBlock block = </span><span class="s2">this</span><span class="s1">.getDocument().getBody().addNewSdt()</span><span class="s2">;</span>
+        <span class="s1">TOC toc = </span><span class="s2">new </span><span class="s1">TOC(block)</span><span class="s2">;</span>
+        <span class="s1">Iterator var3 = </span><span class="s2">this</span><span class="s1">.paragraphs.iterator()</span><span class="s2">;</span>
+
+        <span class="s2">while</span><span class="s1">(var3.hasNext()) {</span>
+            <span class="s1">XWPFParagraph par = (XWPFParagraph)var3.next()</span><span class="s2">;</span>
+            <span class="s1">String parStyle = par.getStyle()</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(parStyle != </span><span class="s2">null </span><span class="s1">&amp;&amp; parStyle.startsWith(</span><span class="s4">&quot;Heading&quot;</span><span class="s1">)) {</span>
+                <span class="s2">try </span><span class="s1">{</span>
+                    <span class="s2">int </span><span class="s1">level = Integer.parseInt(parStyle.substring(</span><span class="s4">&quot;Heading&quot;</span><span class="s1">.length()))</span><span class="s2">;</span>
+                    <span class="s1">toc.addRow(level</span><span class="s2">, </span><span class="s1">par.getText()</span><span class="s2">, </span><span class="s3">1</span><span class="s2">, </span><span class="s4">&quot;112723803&quot;</span><span class="s1">)</span><span class="s2">;</span>
+                <span class="s1">} </span><span class="s2">catch </span><span class="s1">(NumberFormatException var7) {</span>
+                    <span class="s1">LOG.log(</span><span class="s3">7</span><span class="s2">, new </span><span class="s1">Object[]{</span><span class="s4">&quot;can't format number in TOC heading&quot;</span><span class="s2">, </span><span class="s1">var7})</span><span class="s2">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">setTable(</span><span class="s2">int </span><span class="s1">pos</span><span class="s2">, </span><span class="s1">XWPFTable table) {</span>
+        <span class="s2">this</span><span class="s1">.tables.set(pos</span><span class="s2">, </span><span class="s1">table)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.ctDocument.getBody().setTblArray(pos</span><span class="s2">, </span><span class="s1">table.getCTTbl())</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">isEnforcedProtection() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.isEnforcedWith()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">isEnforcedReadonlyProtection() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.isEnforcedWith(STDocProtect.READ_ONLY)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">isEnforcedFillingFormsProtection() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.isEnforcedWith(STDocProtect.FORMS)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">isEnforcedCommentsProtection() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.isEnforcedWith(STDocProtect.COMMENTS)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">isEnforcedTrackedChangesProtection() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.isEnforcedWith(STDocProtect.TRACKED_CHANGES)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">isEnforcedUpdateFields() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.isUpdateFields()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">enforceReadonlyProtection() {</span>
+        <span class="s2">this</span><span class="s1">.settings.setEnforcementEditValue(STDocProtect.READ_ONLY)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">enforceReadonlyProtection(String password</span><span class="s2">, </span><span class="s1">HashAlgorithm hashAlgo) {</span>
+        <span class="s2">this</span><span class="s1">.settings.setEnforcementEditValue(STDocProtect.READ_ONLY</span><span class="s2">, </span><span class="s1">password</span><span class="s2">, </span><span class="s1">hashAlgo)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">enforceFillingFormsProtection() {</span>
+        <span class="s2">this</span><span class="s1">.settings.setEnforcementEditValue(STDocProtect.FORMS)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">enforceFillingFormsProtection(String password</span><span class="s2">, </span><span class="s1">HashAlgorithm hashAlgo) {</span>
+        <span class="s2">this</span><span class="s1">.settings.setEnforcementEditValue(STDocProtect.FORMS</span><span class="s2">, </span><span class="s1">password</span><span class="s2">, </span><span class="s1">hashAlgo)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">enforceCommentsProtection() {</span>
+        <span class="s2">this</span><span class="s1">.settings.setEnforcementEditValue(STDocProtect.COMMENTS)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">enforceCommentsProtection(String password</span><span class="s2">, </span><span class="s1">HashAlgorithm hashAlgo) {</span>
+        <span class="s2">this</span><span class="s1">.settings.setEnforcementEditValue(STDocProtect.COMMENTS</span><span class="s2">, </span><span class="s1">password</span><span class="s2">, </span><span class="s1">hashAlgo)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">enforceTrackedChangesProtection() {</span>
+        <span class="s2">this</span><span class="s1">.settings.setEnforcementEditValue(STDocProtect.TRACKED_CHANGES)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">enforceTrackedChangesProtection(String password</span><span class="s2">, </span><span class="s1">HashAlgorithm hashAlgo) {</span>
+        <span class="s2">this</span><span class="s1">.settings.setEnforcementEditValue(STDocProtect.TRACKED_CHANGES</span><span class="s2">, </span><span class="s1">password</span><span class="s2">, </span><span class="s1">hashAlgo)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">validateProtectionPassword(String password) {</span>
+        <span class="s2">return this</span><span class="s1">.settings.validateProtectionPassword(password)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">removeProtectionEnforcement() {</span>
+        <span class="s2">this</span><span class="s1">.settings.removeEnforcement()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">enforceUpdateFields() {</span>
+        <span class="s2">this</span><span class="s1">.settings.setUpdateFields()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">isTrackRevisions() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.isTrackRevisions()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">setTrackRevisions(</span><span class="s2">boolean </span><span class="s1">enable) {</span>
+        <span class="s2">this</span><span class="s1">.settings.setTrackRevisions(enable)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public long </span><span class="s1">getZoomPercent() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.getZoomPercent()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">setZoomPercent(</span><span class="s2">long </span><span class="s1">zoomPercent) {</span>
+        <span class="s2">this</span><span class="s1">.settings.setZoomPercent(zoomPercent)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">getEvenAndOddHeadings() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.getEvenAndOddHeadings()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">setEvenAndOddHeadings(</span><span class="s2">boolean </span><span class="s1">enable) {</span>
+        <span class="s2">this</span><span class="s1">.settings.setEvenAndOddHeadings(enable)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">getMirrorMargins() {</span>
+        <span class="s2">return this</span><span class="s1">.settings.getMirrorMargins()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">setMirrorMargins(</span><span class="s2">boolean </span><span class="s1">enable) {</span>
+        <span class="s2">this</span><span class="s1">.settings.setMirrorMargins(enable)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public void </span><span class="s1">insertTable(</span><span class="s2">int </span><span class="s1">pos</span><span class="s2">, </span><span class="s1">XWPFTable table) {</span>
+        <span class="s2">this</span><span class="s1">.bodyElements.add(pos</span><span class="s2">, </span><span class="s1">table)</span><span class="s2">;</span>
+        <span class="s2">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s2">;</span>
+        <span class="s1">CTTbl[] var4 = </span><span class="s2">this</span><span class="s1">.ctDocument.getBody().getTblArray()</span><span class="s2">;</span>
+        <span class="s2">int </span><span class="s1">var5 = var4.length</span><span class="s2">;</span>
+
+        <span class="s2">for</span><span class="s1">(</span><span class="s2">int </span><span class="s1">var6 = </span><span class="s3">0</span><span class="s2">; </span><span class="s1">var6 &lt; var5</span><span class="s2">; </span><span class="s1">++var6) {</span>
+            <span class="s1">CTTbl tbl = var4[var6]</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(tbl == table.getCTTbl()) {</span>
+                <span class="s2">break;</span>
+            <span class="s1">}</span>
+
+            <span class="s1">++i</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">this</span><span class="s1">.tables.add(i</span><span class="s2">, </span><span class="s1">table)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;XWPFPictureData&gt; getAllPictures() {</span>
+        <span class="s2">return </span><span class="s1">Collections.unmodifiableList(</span><span class="s2">this</span><span class="s1">.pictures)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;XWPFPictureData&gt; getAllPackagePictures() {</span>
+        <span class="s1">List&lt;XWPFPictureData&gt; result = </span><span class="s2">new </span><span class="s1">ArrayList()</span><span class="s2">;</span>
+        <span class="s1">Collection&lt;List&lt;XWPFPictureData&gt;&gt; values = </span><span class="s2">this</span><span class="s1">.packagePictures.values()</span><span class="s2">;</span>
+        <span class="s1">Iterator var3 = values.iterator()</span><span class="s2">;</span>
+
+        <span class="s2">while</span><span class="s1">(var3.hasNext()) {</span>
+            <span class="s1">List&lt;XWPFPictureData&gt; list = (List)var3.next()</span><span class="s2">;</span>
+            <span class="s1">result.addAll(list)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return </span><span class="s1">Collections.unmodifiableList(result)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">void </span><span class="s1">registerPackagePictureData(XWPFPictureData picData) {</span>
+        <span class="s1">List&lt;XWPFPictureData&gt; list = (List)</span><span class="s2">this</span><span class="s1">.packagePictures.computeIfAbsent(picData.getChecksum()</span><span class="s2">, </span><span class="s1">(k) -&gt; {</span>
+            <span class="s2">return new </span><span class="s1">ArrayList(</span><span class="s3">1</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">})</span><span class="s2">;</span>
+        <span class="s2">if </span><span class="s1">(!list.contains(picData)) {</span>
+            <span class="s1">list.add(picData)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">XWPFPictureData findPackagePictureData(</span><span class="s2">byte</span><span class="s1">[] pictureData</span><span class="s2">, int </span><span class="s1">format) {</span>
+        <span class="s2">long </span><span class="s1">checksum = IOUtils.calculateChecksum(pictureData)</span><span class="s2">;</span>
+        <span class="s1">XWPFPictureData xwpfPicData = </span><span class="s2">null;</span>
+        <span class="s1">List&lt;XWPFPictureData&gt; xwpfPicDataList = (List)</span><span class="s2">this</span><span class="s1">.packagePictures.get(checksum)</span><span class="s2">;</span>
+        <span class="s2">if </span><span class="s1">(xwpfPicDataList != </span><span class="s2">null</span><span class="s1">) {</span>
+            <span class="s1">Iterator iter = xwpfPicDataList.iterator()</span><span class="s2">;</span>
+
+            <span class="s2">while</span><span class="s1">(iter.hasNext() &amp;&amp; xwpfPicData == </span><span class="s2">null</span><span class="s1">) {</span>
+                <span class="s1">XWPFPictureData curElem = (XWPFPictureData)iter.next()</span><span class="s2">;</span>
+                <span class="s2">if </span><span class="s1">(Arrays.equals(pictureData</span><span class="s2">, </span><span class="s1">curElem.getData())) {</span>
+                    <span class="s1">xwpfPicData = curElem</span><span class="s2">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return </span><span class="s1">xwpfPicData</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">String addPictureData(</span><span class="s2">byte</span><span class="s1">[] pictureData</span><span class="s2">, int </span><span class="s1">format) </span><span class="s2">throws </span><span class="s1">InvalidFormatException {</span>
+        <span class="s1">XWPFPictureData xwpfPicData = </span><span class="s2">this</span><span class="s1">.findPackagePictureData(pictureData</span><span class="s2">, </span><span class="s1">format)</span><span class="s2">;</span>
+        <span class="s1">POIXMLRelation relDesc = XWPFPictureData.RELATIONS[format]</span><span class="s2">;</span>
+        <span class="s2">if </span><span class="s1">(xwpfPicData == </span><span class="s2">null</span><span class="s1">) {</span>
+            <span class="s2">int </span><span class="s1">idx = </span><span class="s2">this</span><span class="s1">.getNextPicNameNumber(format)</span><span class="s2">;</span>
+            <span class="s1">xwpfPicData = (XWPFPictureData)</span><span class="s2">this</span><span class="s1">.createRelationship(relDesc</span><span class="s2">, </span><span class="s1">XWPFFactory.getInstance()</span><span class="s2">, </span><span class="s1">idx)</span><span class="s2">;</span>
+            <span class="s1">PackagePart picDataPart = xwpfPicData.getPackagePart()</span><span class="s2">;</span>
+
+            <span class="s2">try </span><span class="s1">{</span>
+                <span class="s1">OutputStream out = picDataPart.getOutputStream()</span><span class="s2">;</span>
+                <span class="s1">Throwable var8 = </span><span class="s2">null;</span>
+
+                <span class="s2">try </span><span class="s1">{</span>
+                    <span class="s1">out.write(pictureData)</span><span class="s2">;</span>
+                <span class="s1">} </span><span class="s2">catch </span><span class="s1">(Throwable var18) {</span>
+                    <span class="s1">var8 = var18</span><span class="s2">;</span>
+                    <span class="s2">throw </span><span class="s1">var18</span><span class="s2">;</span>
+                <span class="s1">} </span><span class="s2">finally </span><span class="s1">{</span>
+                    <span class="s2">if </span><span class="s1">(out != </span><span class="s2">null</span><span class="s1">) {</span>
+                        <span class="s2">if </span><span class="s1">(var8 != </span><span class="s2">null</span><span class="s1">) {</span>
+                            <span class="s2">try </span><span class="s1">{</span>
+                                <span class="s1">out.close()</span><span class="s2">;</span>
+                            <span class="s1">} </span><span class="s2">catch </span><span class="s1">(Throwable var17) {</span>
+                                <span class="s1">var8.addSuppressed(var17)</span><span class="s2">;</span>
+                            <span class="s1">}</span>
+                        <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+                            <span class="s1">out.close()</span><span class="s2">;</span>
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+
+                <span class="s1">}</span>
+            <span class="s1">} </span><span class="s2">catch </span><span class="s1">(IOException var20) {</span>
+                <span class="s2">throw new </span><span class="s1">POIXMLException(var20)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+
+            <span class="s2">this</span><span class="s1">.registerPackagePictureData(xwpfPicData)</span><span class="s2">;</span>
+            <span class="s2">this</span><span class="s1">.pictures.add(xwpfPicData)</span><span class="s2">;</span>
+            <span class="s2">return this</span><span class="s1">.getRelationId(xwpfPicData)</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">else if </span><span class="s1">(!</span><span class="s2">this</span><span class="s1">.getRelations().contains(xwpfPicData)) {</span>
+            <span class="s1">RelationPart rp = </span><span class="s2">this</span><span class="s1">.addRelation((String)</span><span class="s2">null, </span><span class="s1">XWPFRelation.IMAGES</span><span class="s2">, </span><span class="s1">xwpfPicData)</span><span class="s2">;</span>
+            <span class="s2">return </span><span class="s1">rp.getRelationship().getId()</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+            <span class="s2">return this</span><span class="s1">.getRelationId(xwpfPicData)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">String addPictureData(InputStream is</span><span class="s2">, int </span><span class="s1">format) </span><span class="s2">throws </span><span class="s1">InvalidFormatException {</span>
+        <span class="s2">try </span><span class="s1">{</span>
+            <span class="s2">byte</span><span class="s1">[] data = IOUtils.toByteArray(is)</span><span class="s2">;</span>
+            <span class="s2">return this</span><span class="s1">.addPictureData(data</span><span class="s2">, </span><span class="s1">format)</span><span class="s2">;</span>
+        <span class="s1">} </span><span class="s2">catch </span><span class="s1">(IOException var4) {</span>
+            <span class="s2">throw new </span><span class="s1">POIXMLException(var4)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public int </span><span class="s1">getNextPicNameNumber(</span><span class="s2">int </span><span class="s1">format) </span><span class="s2">throws </span><span class="s1">InvalidFormatException {</span>
+        <span class="s2">int </span><span class="s1">img = </span><span class="s2">this</span><span class="s1">.getAllPackagePictures().size() + </span><span class="s3">1</span><span class="s2">;</span>
+        <span class="s1">String proposal = XWPFPictureData.RELATIONS[format].getFileName(img)</span><span class="s2">;</span>
+
+        <span class="s2">for</span><span class="s1">(PackagePartName createPartName = PackagingURIHelper.createPartName(proposal)</span><span class="s2">; this</span><span class="s1">.getPackage().getPart(createPartName) != </span><span class="s2">null; </span><span class="s1">createPartName = PackagingURIHelper.createPartName(proposal)) {</span>
+            <span class="s1">++img</span><span class="s2">;</span>
+            <span class="s1">proposal = XWPFPictureData.RELATIONS[format].getFileName(img)</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return </span><span class="s1">img</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFPictureData getPictureDataByID(String blipID) {</span>
+        <span class="s1">POIXMLDocumentPart relatedPart = </span><span class="s2">this</span><span class="s1">.getRelationById(blipID)</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">relatedPart </span><span class="s2">instanceof </span><span class="s1">XWPFPictureData ? (XWPFPictureData)relatedPart : </span><span class="s2">null;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFNumbering getNumbering() {</span>
+        <span class="s2">return this</span><span class="s1">.numbering</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFStyles getStyles() {</span>
+        <span class="s2">return this</span><span class="s1">.styles</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFParagraph getParagraph(CTP p) {</span>
+        <span class="s2">for</span><span class="s1">(</span><span class="s2">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s2">; </span><span class="s1">i &lt; </span><span class="s2">this</span><span class="s1">.getParagraphs().size()</span><span class="s2">; </span><span class="s1">++i) {</span>
+            <span class="s2">if </span><span class="s1">(((XWPFParagraph)</span><span class="s2">this</span><span class="s1">.getParagraphs().get(i)).getCTP() == p) {</span>
+                <span class="s2">return </span><span class="s1">(XWPFParagraph)</span><span class="s2">this</span><span class="s1">.getParagraphs().get(i)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return null;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFTable getTable(CTTbl ctTbl) {</span>
+        <span class="s2">for</span><span class="s1">(</span><span class="s2">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s2">; </span><span class="s1">i &lt; </span><span class="s2">this</span><span class="s1">.tables.size()</span><span class="s2">; </span><span class="s1">++i) {</span>
+            <span class="s2">if </span><span class="s1">(((XWPFTable)</span><span class="s2">this</span><span class="s1">.getTables().get(i)).getCTTbl() == ctTbl) {</span>
+                <span class="s2">return </span><span class="s1">(XWPFTable)</span><span class="s2">this</span><span class="s1">.getTables().get(i)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return null;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">Iterator&lt;XWPFTable&gt; getTablesIterator() {</span>
+        <span class="s2">return this</span><span class="s1">.tables.iterator()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">Iterator&lt;XWPFParagraph&gt; getParagraphsIterator() {</span>
+        <span class="s2">return this</span><span class="s1">.paragraphs.iterator()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFParagraph getParagraphArray(</span><span class="s2">int </span><span class="s1">pos) {</span>
+        <span class="s2">return </span><span class="s1">pos &gt;= </span><span class="s3">0 </span><span class="s1">&amp;&amp; pos &lt; </span><span class="s2">this</span><span class="s1">.paragraphs.size() ? (XWPFParagraph)</span><span class="s2">this</span><span class="s1">.paragraphs.get(pos) : </span><span class="s2">null;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">POIXMLDocumentPart getPart() {</span>
+        <span class="s2">return this;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">BodyType getPartType() {</span>
+        <span class="s2">return </span><span class="s1">BodyType.DOCUMENT</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFTableCell getTableCell(CTTc cell) {</span>
+        <span class="s1">XmlCursor cursor = cell.newCursor()</span><span class="s2">;</span>
+        <span class="s1">cursor.toParent()</span><span class="s2">;</span>
+        <span class="s1">XmlObject o = cursor.getObject()</span><span class="s2">;</span>
+        <span class="s2">if </span><span class="s1">(!(o </span><span class="s2">instanceof </span><span class="s1">CTRow)) {</span>
+            <span class="s2">return null;</span>
+        <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+            <span class="s1">CTRow row = (CTRow)o</span><span class="s2">;</span>
+            <span class="s1">cursor.toParent()</span><span class="s2">;</span>
+            <span class="s1">o = cursor.getObject()</span><span class="s2">;</span>
+            <span class="s1">cursor.dispose()</span><span class="s2">;</span>
+            <span class="s2">if </span><span class="s1">(!(o </span><span class="s2">instanceof </span><span class="s1">CTTbl)) {</span>
+                <span class="s2">return null;</span>
+            <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+                <span class="s1">CTTbl tbl = (CTTbl)o</span><span class="s2">;</span>
+                <span class="s1">XWPFTable table = </span><span class="s2">this</span><span class="s1">.getTable(tbl)</span><span class="s2">;</span>
+                <span class="s2">if </span><span class="s1">(table == </span><span class="s2">null</span><span class="s1">) {</span>
+                    <span class="s2">return null;</span>
+                <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+                    <span class="s1">XWPFTableRow tableRow = table.getRow(row)</span><span class="s2">;</span>
+                    <span class="s2">return </span><span class="s1">tableRow == </span><span class="s2">null </span><span class="s1">? </span><span class="s2">null </span><span class="s1">: tableRow.getTableCell(cell)</span><span class="s2">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFDocument getXWPFDocument() {</span>
+        <span class="s2">return this;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFChart createChart() </span><span class="s2">throws </span><span class="s1">InvalidFormatException</span><span class="s2">, </span><span class="s1">IOException {</span>
+        <span class="s2">return this</span><span class="s1">.createChart(</span><span class="s3">500000</span><span class="s2">, </span><span class="s3">500000</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFChart createChart(</span><span class="s2">int </span><span class="s1">width</span><span class="s2">, int </span><span class="s1">height) </span><span class="s2">throws </span><span class="s1">InvalidFormatException</span><span class="s2">, </span><span class="s1">IOException {</span>
+        <span class="s2">return this</span><span class="s1">.createChart(</span><span class="s2">this</span><span class="s1">.createParagraph().createRun()</span><span class="s2">, </span><span class="s1">width</span><span class="s2">, </span><span class="s1">height)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFChart createChart(XWPFRun run</span><span class="s2">, int </span><span class="s1">width</span><span class="s2">, int </span><span class="s1">height) </span><span class="s2">throws </span><span class="s1">InvalidFormatException</span><span class="s2">, </span><span class="s1">IOException {</span>
+        <span class="s2">int </span><span class="s1">chartNumber = </span><span class="s2">this</span><span class="s1">.getNextPartNumber(XWPFRelation.CHART</span><span class="s2">, this</span><span class="s1">.charts.size() + </span><span class="s3">1</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">RelationPart rp = </span><span class="s2">this</span><span class="s1">.createRelationship(XWPFRelation.CHART</span><span class="s2">, </span><span class="s1">XWPFFactory.getInstance()</span><span class="s2">, </span><span class="s1">chartNumber</span><span class="s2">, false</span><span class="s1">)</span><span class="s2">;</span>
+        <span class="s1">XWPFChart xwpfChart = (XWPFChart)rp.getDocumentPart()</span><span class="s2">;</span>
+        <span class="s1">xwpfChart.setChartIndex(chartNumber)</span><span class="s2">;</span>
+        <span class="s1">xwpfChart.attach(rp.getRelationship().getId()</span><span class="s2">, </span><span class="s1">run)</span><span class="s2">;</span>
+        <span class="s1">xwpfChart.setChartBoundingBox((</span><span class="s2">long</span><span class="s1">)width</span><span class="s2">, </span><span class="s1">(</span><span class="s2">long</span><span class="s1">)height)</span><span class="s2">;</span>
+        <span class="s2">this</span><span class="s1">.charts.add(xwpfChart)</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">xwpfChart</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFFootnote createFootnote() {</span>
+        <span class="s1">XWPFFootnotes footnotes = </span><span class="s2">this</span><span class="s1">.createFootnotes()</span><span class="s2">;</span>
+        <span class="s1">XWPFFootnote footnote = footnotes.createFootnote()</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">footnote</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">removeFootnote(</span><span class="s2">int </span><span class="s1">pos) {</span>
+        <span class="s2">return null </span><span class="s1">!= </span><span class="s2">this</span><span class="s1">.footnotes ? </span><span class="s2">this</span><span class="s1">.footnotes.removeFootnote(pos) : </span><span class="s2">false;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFEndnote createEndnote() {</span>
+        <span class="s1">XWPFEndnotes endnotes = </span><span class="s2">this</span><span class="s1">.createEndnotes()</span><span class="s2">;</span>
+        <span class="s1">XWPFEndnote endnote = endnotes.createEndnote()</span><span class="s2">;</span>
+        <span class="s2">return </span><span class="s1">endnote</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">XWPFEndnotes createEndnotes() {</span>
+        <span class="s2">if </span><span class="s1">(</span><span class="s2">this</span><span class="s1">.endnotes == </span><span class="s2">null</span><span class="s1">) {</span>
+            <span class="s1">EndnotesDocument endnotesDoc = org.openxmlformats.schemas.wordprocessingml.x2006.main.EndnotesDocument.Factory.newInstance()</span><span class="s2">;</span>
+            <span class="s1">XWPFRelation relation = XWPFRelation.ENDNOTE</span><span class="s2">;</span>
+            <span class="s2">int </span><span class="s1">i = </span><span class="s2">this</span><span class="s1">.getRelationIndex(relation)</span><span class="s2">;</span>
+            <span class="s1">XWPFEndnotes wrapper = (XWPFEndnotes)</span><span class="s2">this</span><span class="s1">.createRelationship(relation</span><span class="s2">, </span><span class="s1">XWPFFactory.getInstance()</span><span class="s2">, </span><span class="s1">i)</span><span class="s2">;</span>
+            <span class="s1">wrapper.setEndnotes(endnotesDoc.addNewEndnotes())</span><span class="s2">;</span>
+            <span class="s1">wrapper.setIdManager(</span><span class="s2">this</span><span class="s1">.footnoteIdManager)</span><span class="s2">;</span>
+            <span class="s2">this</span><span class="s1">.endnotes = wrapper</span><span class="s2">;</span>
+        <span class="s1">}</span>
+
+        <span class="s2">return this</span><span class="s1">.endnotes</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public </span><span class="s1">List&lt;XWPFEndnote&gt; getEndnotes() {</span>
+        <span class="s2">return this</span><span class="s1">.endnotes == </span><span class="s2">null </span><span class="s1">? Collections.emptyList() : </span><span class="s2">this</span><span class="s1">.endnotes.getEndnotesList()</span><span class="s2">;</span>
+    <span class="s1">}</span>
+
+    <span class="s2">public boolean </span><span class="s1">removeEndnote(</span><span class="s2">int </span><span class="s1">pos) {</span>
+        <span class="s2">return null </span><span class="s1">!= </span><span class="s2">this</span><span class="s1">.endnotes ? </span><span class="s2">this</span><span class="s1">.endnotes.removeEndnote(pos) : </span><span class="s2">false;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

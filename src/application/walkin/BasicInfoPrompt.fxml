@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="669.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.walkin.BasicInfoController">
+   <children>
+      <Rectangle fx:id="reportSection" arcHeight="5.0" arcWidth="5.0" fill="#cae6ff00" height="137.0" layoutX="19.0" layoutY="132.0" stroke="#d0cfcf" strokeType="INSIDE" width="726.0" />
+      <Rectangle fx:id="companySection" arcHeight="5.0" arcWidth="5.0" fill="#cae6ff00" height="137.0" layoutX="18.0" layoutY="282.0" stroke="#d0cfcf" strokeType="INSIDE" width="726.0" />
+      <Rectangle fx:id="clientSection" arcHeight="5.0" arcWidth="5.0" fill="#cae6ff00" height="137.0" layoutX="18.0" layoutY="434.0" stroke="#d0cfcf" strokeType="INSIDE" width="726.0" />
+      <GridPane fx:id="reportInfoGrid" layoutX="26.0" layoutY="132.0" prefHeight="126.0" prefWidth="710.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="samplingDateL" text="Sampling Date" GridPane.rowIndex="1" />
+            <Label fx:id="reportDateL" text="Report Date" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="projectNumberTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="151.0" GridPane.columnIndex="1" />
+            <DatePicker fx:id="reportDatePicker" prefHeight="25.0" prefWidth="151.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="projectNumberL" text="Project Number" />
+            <DatePicker fx:id="samplingDatePicker" prefHeight="25.0" prefWidth="152.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Line fx:id="topBorder" endX="661.0" layoutX="101.0" layoutY="92.0" startX="-100.0" stroke="#1e1e1e" />
+      <Label fx:id="title" layoutX="26.0" layoutY="14.0" text="Create a New Report">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="logo" fitHeight="90.0" fitWidth="150.0" layoutX="605.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../pictures/safetechlogo1.png" />
+         </image>
+      </ImageView>
+      <VBox fx:id="companyInfoBox" layoutX="19.0" layoutY="282.0" prefHeight="137.0" prefWidth="726.0">
+         <children>
+            <HBox fx:id="companyNameSection" prefHeight="94.0" prefWidth="726.0">
+               <children>
+                  <Label fx:id="companyNameL" text="Name" translateX="10.0" translateY="25.0" />
+                  <ComboBox fx:id="companyNameCB" prefHeight="25.0" prefWidth="648.0" translateX="35.0" translateY="25.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="companyAddressSection" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="companyAddressL" text="Address" translateX="10.0" translateY="25.0" />
+                  <TextField fx:id="companyAddressTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="209.0" translateX="25.0" translateY="25.0" />
+                  <Label fx:id="companyCityL" text="City" translateX="45.0" translateY="25.0" />
+                  <TextField fx:id="companyCityTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="98.0" translateX="55.0" translateY="25.0" />
+                  <Label fx:id="companyProvinceL" text="Province" translateX="80.0" translateY="25.0" />
+                  <ChoiceBox fx:id="companyProvinceCB" prefHeight="25.0" prefWidth="57.0" translateX="100.0" translateY="25.0" />
+                  <Label fx:id="companyPostalCodeL" text="Postal Code" translateX="110.0" translateY="25.0" />
+                  <TextField fx:id="companyPostalCodeTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="53.0" translateX="120.0" translateY="25.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label fx:id="companyInfoLabel" layoutX="77.0" layoutY="272.0" text="Company Info">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <VBox fx:id="projectInfoBox" layoutX="19.0" layoutY="434.0" prefHeight="137.0" prefWidth="726.0">
+         <children>
+            <HBox fx:id="clientNameSection" prefHeight="94.0" prefWidth="726.0">
+               <children>
+                  <Label fx:id="clientNameL" text="Client Name" translateX="10.0" translateY="25.0" />
+                  <ChoiceBox fx:id="clientNameTitles" prefHeight="25.0" prefWidth="54.0" translateX="50.0" translateY="25.0" />
+                  <TextField fx:id="clientNameTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="500.0" translateX="95.0" translateY="25.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="clientAddressSection" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="projectAddressL" text="Address" translateX="10.0" translateY="25.0" />
+                  <TextField fx:id="projectAddressTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="209.0" translateX="25.0" translateY="25.0" />
+                  <Label fx:id="projectCityL" text="City" translateX="45.0" translateY="25.0" />
+                  <TextField fx:id="projectCityTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="98.0" translateX="55.0" translateY="25.0" />
+                  <Label fx:id="projectProvinceL" text="Province" translateX="80.0" translateY="25.0" />
+                  <ChoiceBox fx:id="projectProvinceCB" prefHeight="25.0" prefWidth="57.0" translateX="100.0" translateY="25.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label fx:id="projectInfoLabel" layoutX="77.0" layoutY="424.0" text="Project Info">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="subtitle" layoutX="43.0" layoutY="63.0" text="Enter Basic Info">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <HBox fx:id="buttonSection" layoutX="16.0" layoutY="620.0" prefHeight="25.0" prefWidth="733.0">
+         <children>
+            <Button fx:id="changeButton" mnemonicParsing="false" onAction="#changeReports" prefHeight="25.0" prefWidth="133.0" text="Change Report Type" translateX="40.0" />
+            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#submitBasicInfo" prefWidth="81.0" text="Next &gt;" translateX="440.0" />
+         </children>
+      </HBox>
+      <Line fx:id="bottomBorder" endX="662.0" layoutX="101.0" layoutY="602.0" startX="-100.0" />
+   </children>
+</AnchorPane>
