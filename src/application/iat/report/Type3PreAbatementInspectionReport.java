@@ -2,12 +2,15 @@ package application.iat.report;
 
 import application.Info;
 
-public class BuildDemoType3Report {
+public class Type3PreAbatementInspectionReport {
     String name;
     Info info;
-    BuildDemoType3Report(){
+    String scopeOfWork;
+
+    Type3PreAbatementInspectionReport(){
         this.name="";
         this.info = new Info();
+        this.scopeOfWork = "";
     }
 
     public String getName() {
@@ -24,5 +27,13 @@ public class BuildDemoType3Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    public String getScopeOfWork() {
+        return scopeOfWork;
+    }
+
+    public void setScopeOfWork(String scopeOfWork) {
+        this.scopeOfWork = scopeOfWork;
     }
 }

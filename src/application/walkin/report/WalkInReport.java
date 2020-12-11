@@ -1,15 +1,17 @@
-package application.walkin;
+package application.walkin.report;
 
 import java.util.List;
 import application.Info;
 
+import application.walkin.sample.Sample;
+import com.sun.xml.bind.v2.util.CollisionCheckStack;
 import javafx.collections.FXCollections;
 
 public class WalkInReport {
+    public Info info;
     String name;
 	String reportType;
-	Info info;
-	List<Sample> table;
+	public List<Sample> table;
 	List<String> conclusions;
 	int tableLength;
 	String finalConclusion;

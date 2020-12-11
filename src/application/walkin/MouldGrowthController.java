@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.GenerateReportController;
+import application.walkin.report.WalkInReport;
+import application.walkin.sample.MouldSample;
+import application.walkin.sample.Sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.walkin.BasicInfoController;
-import application.walkin.WalkInReport;
+import application.walkin.report.WalkInReport;
 import data.ReportType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

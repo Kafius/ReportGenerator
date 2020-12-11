@@ -1,42 +1,39 @@
 package application;
 
 public class Info {
-	private String projectNumber;
-	private String projectName;
-	private String projectAddress;
-	private String projectCity;
-	private String projectProvince;
-	private String projectPostalCode;
-	private String technician;
-	private String projectManager;
-	private String clientName;
+	private String projectNumber; //done
+	private String projectName; //done
+	private String projectAddress; //done
+	private String projectCity; //done
+	private String projectProvince; //done
+	private String projectPostalCode; //done
+	private String technician; //done
+	private String projectManager; //done
+	private String clientName; //done
 	private String clientPosition;
-	private String companyName;
-	private String companyAddress;
-	private String companyCity;
-	private String companyProvince;
-	private String companyPostalCode;
-	private String buildingName;
-	private String specificLocation;
-	private String siteWorkDate;
-	private String reportDate;
-	private String preAbatementStartDate;
-	private String visualAbatementStart;
-	private String visualAbatementEnd;
-	private String postAbatementDate;
-	private String siteEndDate;
-	private String selRep;
-	private String clientContract;
-	private String onSiteTime;
-	private String clientAddress;
-	private String clientCity;
-	private String clientProvince;
-	private String clientPostalCode;
-	private String contactName;
-	private String contactTitle;
+	private String companyName; //done
+	private String companyAddress; //done
+	private String companyCity; //done
+	private String companyProvince; //done
+	private String companyPostalCode; //done
+	private String buildingName; //done
+	private String specificLocation; //done
+	private String siteWorkDate; //done
+	private String reportDate; //done
+	private String preAbatementStartDate; //done
+	private String visualAbatementStart; //done
+	private String visualAbatementEnd; //done
+	private String postAbatementDate; //done
+	private String siteEndDate; //done
+	private String selRep; //done
+	private String onSiteTime; //done
+	private String clientAddress; //done
+	private String clientCity; //done
+	private String clientProvince; //done
+	private String clientPostalCode; //done
 	private String locationOfAirSamples;
-	private String inspectionStartDate;
-	private String samplingDate;
+	private String inspectionStartDate; //done
+	private String samplingDate; //done
 
 
 	public Info() {
@@ -65,14 +62,11 @@ public class Info {
 		this.postAbatementDate="";
 		this.siteEndDate="";
 		this.selRep="";
-		this.clientContract="";
 		this.onSiteTime="";
 		this.clientAddress="";
 		this.clientCity="";
 		this.clientProvince="";
 		this.clientPostalCode="";
-		this.contactName="";
-		this.contactTitle="";
 		this.locationOfAirSamples="";
 		this.inspectionStartDate="";
 		this.samplingDate="";
@@ -278,13 +272,6 @@ public class Info {
 		this.selRep = selRep;
 	}
 
-	public String getClientContract() {
-		return clientContract;
-	}
-
-	public void setClientContract(String clientContract) {
-		this.clientContract = clientContract;
-	}
 
 	public String getOnSiteTime() {
 		return onSiteTime;
@@ -324,22 +311,6 @@ public class Info {
 
 	public void setClientPostalCode(String clientPostalCode) {
 		this.clientPostalCode = clientPostalCode;
-	}
-
-	public String getContactName() {
-		return contactName;
-	}
-
-	public void setContactName(String contactName) {
-		this.contactName = contactName;
-	}
-
-	public String getContactTitle() {
-		return contactTitle;
-	}
-
-	public void setContactTitle(String contactTitle) {
-		this.contactTitle = contactTitle;
 	}
 
 	public String getLocationOfAirSamples() {

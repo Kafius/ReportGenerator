@@ -6,17 +6,15 @@ import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class IATGreenrockReport {
+public class Type3AirSamplingReport {
     String name;
     Info info;
     List<PostAirTestingSample> table;
-
-    IATGreenrockReport(){
+    Type3AirSamplingReport(){
         this.name="";
         this.info=new Info();
-        this.table= FXCollections.observableArrayList();
+        this.table = FXCollections.observableArrayList();
     }
-
     public String getName() {
         return name;
     }

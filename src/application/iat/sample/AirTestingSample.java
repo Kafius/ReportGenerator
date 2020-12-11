@@ -1,4 +1,4 @@
-package application.iat;
+package application.iat.sample;
 
 public class AirTestingSample {
     String date;
@@ -17,7 +17,7 @@ public class AirTestingSample {
         this.airborneFibreConc="";
     }
 
-    AirTestingSample(String d, String t, String n, String l, String v, String aFC){
+    public AirTestingSample(String d, String t, String n, String l, String v, String aFC){
         this.date=d;
         this.type=t;
         this.number=n;

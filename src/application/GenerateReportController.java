@@ -44,7 +44,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import application.walkin.WalkInReport;
+import application.walkin.report.WalkInReport;
 
 public class GenerateReportController implements Initializable{
 	WalkInReport newReport3;

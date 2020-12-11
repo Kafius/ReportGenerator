@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.GenerateReportController;
+import application.walkin.report.WalkInReport;
+import application.walkin.sample.LeadSample;
+import application.walkin.sample.Sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -83,7 +86,7 @@ public class LeadController implements Initializable{
 	//collects user inputed data from textfields and creates a sample entry for the table
 	public void addEntry(ActionEvent event) {
 		if(checkEntryInputs()) {
-			LeadSample newLeadSample = new LeadSample(sampleNumberTF.getText(),sampleDescriptionTF.getText(),colourTF.getText(),leadConcentration.getText());	
+			LeadSample newLeadSample = new LeadSample(sampleNumberTF.getText(),sampleDescriptionTF.getText(),colourTF.getText(),leadConcentration.getText());
 			newLeadSample.setConclusionCase();
 			table.getItems().add(newLeadSample);
 			newReport2.addSample(newLeadSample);

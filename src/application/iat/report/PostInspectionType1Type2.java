@@ -1,7 +1,7 @@
 package application.iat.report;
 
 import application.Info;
-import application.iat.PostAirTestingSample;
+import application.iat.sample.PostAirTestingSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;

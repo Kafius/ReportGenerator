@@ -1,4 +1,4 @@
-	package application.walkin;
+package application.walkin.sample;
 
 import javafx.beans.property.SimpleStringProperty;
 

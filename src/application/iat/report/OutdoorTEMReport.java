@@ -1,8 +1,7 @@
 package application.iat.report;
 
 import application.Info;
-import application.iat.PostAirTestingSample;
-import application.iat.TEMAsbestosFibreSample;
+import application.iat.sample.TEMAsbestosFibreSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;

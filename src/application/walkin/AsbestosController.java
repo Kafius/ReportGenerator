@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.GenerateReportController;
+import application.walkin.report.WalkInReport;
+import application.walkin.sample.AsbestosSample;
+import application.walkin.sample.Sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,7 +62,11 @@ public class AsbestosController implements Initializable{
 	
 	//table data
 	@FXML private TableView<Sample> table;
-	@FXML private TableColumn<Sample, String> sampleNumber, materialDescription, sampleLocation, asbestosContent, asbestosForm;
+	@FXML private TableColumn<Sample, String> sampleNumber;
+	@FXML private TableColumn<Sample, String> materialDescription;
+	@FXML private TableColumn<Sample, String> sampleLocation;
+	@FXML private TableColumn<Sample, String> asbestosContent;
+	@FXML private TableColumn<Sample, String> asbestosForm;
 
 	//entry section
 	@FXML private GridPane entry;

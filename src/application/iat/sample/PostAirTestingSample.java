@@ -1,4 +1,4 @@
-package application.iat;
+package application.iat.sample;
 
 public class PostAirTestingSample {
     String number;
@@ -13,7 +13,7 @@ public class PostAirTestingSample {
         this.airborneFibreConc = "";
     }
 
-    PostAirTestingSample(String n, String l, String v,String aFC){
+    public PostAirTestingSample(String n, String l, String v, String aFC){
         this.number=n;
         this.location=l;
         this.volume=v;

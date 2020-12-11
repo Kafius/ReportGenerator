@@ -16,6 +16,7 @@ public class siteInspectionReport {
 
     siteInspectionReport(){
         this.info = new Info();
+
         this.negativePressureDifferential = 0;
         this.numberOfCAHU = 0;
         this.HEPAvacuums = 0;

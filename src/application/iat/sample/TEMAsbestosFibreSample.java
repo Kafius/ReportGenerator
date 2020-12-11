@@ -1,4 +1,4 @@
-package application.iat;
+package application.iat.sample;
 
 public class TEMAsbestosFibreSample {
     String number;
@@ -15,7 +15,7 @@ public class TEMAsbestosFibreSample {
         this.asbestosTypes="";
     }
 
-    TEMAsbestosFibreSample(String n,String l,String PCM, String TEM, String aT){
+    public TEMAsbestosFibreSample(String n, String l, String PCM, String TEM, String aT){
         this.number=n;
         this.location=l;
         this.PCMConcentration=PCM;

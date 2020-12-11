@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import application.walkin.report.WalkInReport;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
