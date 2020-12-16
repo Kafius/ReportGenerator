@@ -1,12 +1,13 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import application.iat.sample.AirTestingSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class Type3CloseOutReport {
+public class Type3CloseOutReport extends Report {
     String name;
     Info info;
     List<AirTestingSample> table;
@@ -15,8 +16,7 @@ public class Type3CloseOutReport {
     String postAbatementInspection;
 
     Type3CloseOutReport(){
-        this.name="";
-        this.info = new Info();
+        super();
         this.table = FXCollections.observableArrayList();
         this.preDeficiencies = FXCollections.observableArrayList();
         this.duringAbatementInspection="";

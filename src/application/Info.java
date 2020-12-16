@@ -35,8 +35,77 @@ public class Info {
 	private String inspectionStartDate; //done
 	private String samplingDate; //done
 
+	private boolean projectNumberExist; //done
+	private boolean projectNameExist; //done
+	private boolean projectAddressExist; //done
+	private boolean projectCityExist; //done
+	private boolean projectProvinceExist; //done
+	private boolean projectPostalCodeExist; //done
+	private boolean technicianExist; //done
+	private boolean projectManagerExist; //done
+	private boolean clientNameExist; //done
+	private boolean clientPositionExist;
+	private boolean companyNameExist; //done
+	private boolean companyAddressExist; //done
+	private boolean companyCityExist; //done
+	private boolean companyProvinceExist; //done
+	private boolean companyPostalCodeExist; //done
+	private boolean buildingNameExist; //done
+	private boolean specificLocationExist; //done
+	private boolean siteWorkDateExist; //done
+	private boolean reportDateExist; //done
+	private boolean preAbatementStartDateExist; //done
+	private boolean visualAbatementStartExist; //done
+	private boolean visualAbatementEndExist; //done
+	private boolean postAbatementDateExist; //done
+	private boolean siteEndDateExist; //done
+	private boolean selRepExist; //done
+	private boolean onSiteTimeExist; //done
+	private boolean clientAddressExist; //done
+	private boolean clientCityExist; //done
+	private boolean clientProvinceExist; //done
+	private boolean clientPostalCodeExist; //done
+	private boolean locationOfAirSamplesExist;
+	private boolean inspectionStartDateExist; //done
+	private boolean samplingDateExist; //done
+
 
 	public Info() {
+
+		this.projectNumberExist=false; //done
+		this.projectNameExist=false; //done
+		this.projectAddressExist=false; //done
+		this.projectCityExist=false; //done
+		this.projectProvinceExist=false; //done
+		this.projectPostalCodeExist=false; //done
+		this.technicianExist=false; //done
+		this.projectManagerExist=false; //done
+		this.clientNameExist=false; //done
+		this.clientPositionExist=false;
+		this.companyNameExist=false; //done
+		this.companyAddressExist=false; //done
+		this.companyCityExist=false; //done
+		this.companyProvinceExist=false; //done
+		this.companyPostalCodeExist=false; //done
+		this.buildingNameExist=false; //done
+		this.specificLocationExist=false; //done
+		this.siteWorkDateExist=false; //done
+		this.reportDateExist=false; //done
+		this.preAbatementStartDateExist=false; //done
+		this.visualAbatementStartExist=false; //done
+		this.visualAbatementEndExist=false; //done
+		this.postAbatementDateExist=false; //done
+		this.siteEndDateExist=false; //done
+		this.selRepExist=false; //done
+		this.onSiteTimeExist=false; //done
+		this.clientAddressExist=false; //done
+		this.clientCityExist=false; //done
+		this.clientProvinceExist=false; //done
+		this.clientPostalCodeExist=false; //done
+		this.locationOfAirSamplesExist=false;
+		this.inspectionStartDateExist=false; //done
+		this.samplingDateExist=false; //done
+
 		this.projectNumber="";
 		this.projectName="";
 		this.projectAddress="";
@@ -342,5 +411,268 @@ public class Info {
 		this.projectCity = this.companyCity;
 		this.projectProvince = this.companyProvince;
 	}
-	
+
+	public boolean isProjectNumberExist() {
+		return projectNumberExist;
+	}
+
+	public void setProjectNumberExist(boolean projectNumberExist) {
+		this.projectNumberExist = projectNumberExist;
+	}
+
+	public boolean isProjectNameExist() {
+		return projectNameExist;
+	}
+
+	public void setProjectNameExist(boolean projectNameExist) {
+		this.projectNameExist = projectNameExist;
+	}
+
+	public boolean isProjectAddressExist() {
+		return projectAddressExist;
+	}
+
+	public void setProjectAddressExist(boolean projectAddressExist) {
+		this.projectAddressExist = projectAddressExist;
+	}
+
+	public boolean isProjectCityExist() {
+		return projectCityExist;
+	}
+
+	public void setProjectCityExist(boolean projectCityExist) {
+		this.projectCityExist = projectCityExist;
+	}
+
+	public boolean isProjectProvinceExist() {
+		return projectProvinceExist;
+	}
+
+	public void setProjectProvinceExist(boolean projectProvinceExist) {
+		this.projectProvinceExist = projectProvinceExist;
+	}
+
+	public boolean isProjectPostalCodeExist() {
+		return projectPostalCodeExist;
+	}
+
+	public void setProjectPostalCodeExist(boolean projectPostalCodeExist) {
+		this.projectPostalCodeExist = projectPostalCodeExist;
+	}
+
+	public boolean isTechnicianExist() {
+		return technicianExist;
+	}
+
+	public void setTechnicianExist(boolean technicianExist) {
+		this.technicianExist = technicianExist;
+	}
+
+	public boolean isProjectManagerExist() {
+		return projectManagerExist;
+	}
+
+	public void setProjectManagerExist(boolean projectManagerExist) {
+		this.projectManagerExist = projectManagerExist;
+	}
+
+	public boolean isClientNameExist() {
+		return clientNameExist;
+	}
+
+	public void setClientNameExist(boolean clientNameExist) {
+		this.clientNameExist = clientNameExist;
+	}
+
+	public boolean isClientPositionExist() {
+		return clientPositionExist;
+	}
+
+	public void setClientPositionExist(boolean clientPositionExist) {
+		this.clientPositionExist = clientPositionExist;
+	}
+
+	public boolean isCompanyNameExist() {
+		return companyNameExist;
+	}
+
+	public void setCompanyNameExist(boolean companyNameExist) {
+		this.companyNameExist = companyNameExist;
+	}
+
+	public boolean isCompanyAddressExist() {
+		return companyAddressExist;
+	}
+
+	public void setCompanyAddressExist(boolean companyAddressExist) {
+		this.companyAddressExist = companyAddressExist;
+	}
+
+	public boolean isCompanyCityExist() {
+		return companyCityExist;
+	}
+
+	public void setCompanyCityExist(boolean companyCityExist) {
+		this.companyCityExist = companyCityExist;
+	}
+
+	public boolean isCompanyProvinceExist() {
+		return companyProvinceExist;
+	}
+
+	public void setCompanyProvinceExist(boolean companyProvinceExist) {
+		this.companyProvinceExist = companyProvinceExist;
+	}
+
+	public boolean isCompanyPostalCodeExist() {
+		return companyPostalCodeExist;
+	}
+
+	public void setCompanyPostalCodeExist(boolean companyPostalCodeExist) {
+		this.companyPostalCodeExist = companyPostalCodeExist;
+	}
+
+	public boolean isBuildingNameExist() {
+		return buildingNameExist;
+	}
+
+	public void setBuildingNameExist(boolean buildingNameExist) {
+		this.buildingNameExist = buildingNameExist;
+	}
+
+	public boolean isSpecificLocationExist() {
+		return specificLocationExist;
+	}
+
+	public void setSpecificLocationExist(boolean specificLocationExist) {
+		this.specificLocationExist = specificLocationExist;
+	}
+
+	public boolean isSiteWorkDateExist() {
+		return siteWorkDateExist;
+	}
+
+	public void setSiteWorkDateExist(boolean siteWorkDateExist) {
+		this.siteWorkDateExist = siteWorkDateExist;
+	}
+
+	public boolean isReportDateExist() {
+		return reportDateExist;
+	}
+
+	public void setReportDateExist(boolean reportDateExist) {
+		this.reportDateExist = reportDateExist;
+	}
+
+	public boolean isPreAbatementStartDateExist() {
+		return preAbatementStartDateExist;
+	}
+
+	public void setPreAbatementStartDateExist(boolean preAbatementStartDateExist) {
+		this.preAbatementStartDateExist = preAbatementStartDateExist;
+	}
+
+	public boolean isVisualAbatementStartExist() {
+		return visualAbatementStartExist;
+	}
+
+	public void setVisualAbatementStartExist(boolean visualAbatementStartExist) {
+		this.visualAbatementStartExist = visualAbatementStartExist;
+	}
+
+	public boolean isVisualAbatementEndExist() {
+		return visualAbatementEndExist;
+	}
+
+	public void setVisualAbatementEndExist(boolean visualAbatementEndExist) {
+		this.visualAbatementEndExist = visualAbatementEndExist;
+	}
+
+	public boolean isPostAbatementDateExist() {
+		return postAbatementDateExist;
+	}
+
+	public void setPostAbatementDateExist(boolean postAbatementDateExist) {
+		this.postAbatementDateExist = postAbatementDateExist;
+	}
+
+	public boolean isSiteEndDateExist() {
+		return siteEndDateExist;
+	}
+
+	public void setSiteEndDateExist(boolean siteEndDateExist) {
+		this.siteEndDateExist = siteEndDateExist;
+	}
+
+	public boolean isSelRepExist() {
+		return selRepExist;
+	}
+
+	public void setSelRepExist(boolean selRepExist) {
+		this.selRepExist = selRepExist;
+	}
+
+	public boolean isOnSiteTimeExist() {
+		return onSiteTimeExist;
+	}
+
+	public void setOnSiteTimeExist(boolean onSiteTimeExist) {
+		this.onSiteTimeExist = onSiteTimeExist;
+	}
+
+	public boolean isClientAddressExist() {
+		return clientAddressExist;
+	}
+
+	public void setClientAddressExist(boolean clientAddressExist) {
+		this.clientAddressExist = clientAddressExist;
+	}
+
+	public boolean isClientCityExist() {
+		return clientCityExist;
+	}
+
+	public void setClientCityExist(boolean clientCityExist) {
+		this.clientCityExist = clientCityExist;
+	}
+
+	public boolean isClientProvinceExist() {
+		return clientProvinceExist;
+	}
+
+	public void setClientProvinceExist(boolean clientProvinceExist) {
+		this.clientProvinceExist = clientProvinceExist;
+	}
+
+	public boolean isClientPostalCodeExist() {
+		return clientPostalCodeExist;
+	}
+
+	public void setClientPostalCodeExist(boolean clientPostalCodeExist) {
+		this.clientPostalCodeExist = clientPostalCodeExist;
+	}
+
+	public boolean isLocationOfAirSamplesExist() {
+		return locationOfAirSamplesExist;
+	}
+
+	public void setLocationOfAirSamplesExist(boolean locationOfAirSamplesExist) {
+		this.locationOfAirSamplesExist = locationOfAirSamplesExist;
+	}
+
+	public boolean isInspectionStartDateExist() {
+		return inspectionStartDateExist;
+	}
+
+	public void setInspectionStartDateExist(boolean inspectionStartDateExist) {
+		this.inspectionStartDateExist = inspectionStartDateExist;
+	}
+
+	public boolean isSamplingDateExist() {
+		return samplingDateExist;
+	}
+
+	public void setSamplingDateExist(boolean samplingDateExist) {
+		this.samplingDateExist = samplingDateExist;
+	}
 }

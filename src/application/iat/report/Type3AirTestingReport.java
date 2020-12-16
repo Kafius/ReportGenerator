@@ -1,12 +1,13 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import application.iat.sample.PostAirTestingSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class Type3AirTestingReport {
+public class Type3AirTestingReport extends Report {
     String name;
     Info info;
     String scopeOfWork;
@@ -15,8 +16,7 @@ public class Type3AirTestingReport {
     List<PostAirTestingSample> table;
 
     Type3AirTestingReport(){
-        this.name = "";
-        this.info= new Info();
+        super();
         this.scopeOfWork= "";
         this.flowRate= "";
         this.postAbatementInspection= "";

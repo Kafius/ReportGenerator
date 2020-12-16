@@ -1,19 +1,19 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import application.iat.sample.PostAirTestingSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class IATGreenrockReport {
+public class IATGreenrockReport extends Report {
     String name;
     Info info;
     List<PostAirTestingSample> table;
 
     IATGreenrockReport(){
-        this.name="";
-        this.info=new Info();
+        super();
         this.table= FXCollections.observableArrayList();
     }
 

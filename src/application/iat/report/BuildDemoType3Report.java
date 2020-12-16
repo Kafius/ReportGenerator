@@ -1,13 +1,13 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 
-public class BuildDemoType3Report {
+public class BuildDemoType3Report extends Report {
     String name;
     Info info;
     BuildDemoType3Report(){
-        this.name="";
-        this.info = new Info();
+        super();
     }
 
     public String getName() {

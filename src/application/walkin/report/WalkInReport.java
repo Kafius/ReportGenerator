@@ -3,11 +3,12 @@ package application.walkin.report;
 import java.util.List;
 import application.Info;
 
+import application.Report;
 import application.walkin.sample.Sample;
 import com.sun.xml.bind.v2.util.CollisionCheckStack;
 import javafx.collections.FXCollections;
 
-public class WalkInReport {
+public class WalkInReport extends Report {
     public Info info;
     String name;
 	String reportType;
@@ -16,9 +17,15 @@ public class WalkInReport {
 	int tableLength;
 	String finalConclusion;
 	public WalkInReport(String reportType) {
+		super(reportType);
 		this.table = FXCollections.observableArrayList();
-		this.reportType = reportType;
-		this.info = new Info();
+		this.conclusions = FXCollections.observableArrayList();
+		this.tableLength = 0;
+		this.finalConclusion="";
+	}
+
+	public WalkInReport(Report report){
+		super(report.reportType);
 		this.conclusions = FXCollections.observableArrayList();
 		this.tableLength = 0;
 		this.finalConclusion="";

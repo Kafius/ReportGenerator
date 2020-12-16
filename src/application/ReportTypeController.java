@@ -29,7 +29,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 public class ReportTypeController implements Initializable{
-	WalkInReport walkInReport;
+	Report report;
 	
 	//Visuals
 	@FXML private Label mainTitle;
@@ -75,14 +75,43 @@ public class ReportTypeController implements Initializable{
 	}
 	
 	public void getReportTypeList() {
-		ReportType type = new ReportType("Walk In","Walk In","Asbestos","N/A");
+		ReportType type = new ReportType("0","Walk In","Asbestos","N/A");
 		list.add(type);
-		type = new ReportType("Walk In","Walk In","Bacteroides","N/A");
+		type = new ReportType("1","Walk In","Bacteroides","N/A");
 		list.add(type);
-		type = new ReportType("Walk In","Walk In","Lead","N/A");
+		type = new ReportType("2","Walk In","Lead","N/A");
 		list.add(type);
-		type = new ReportType("Walk In","Walk In","Mould","N/A");
+		type = new ReportType("3","Walk In","Mould","N/A");
 		list.add(type);
+		type = new ReportType("4","Inspection & Air Testing","Inspection & Air Testing Report - during Type 3","N/A");
+		list.add(type);
+		type = new ReportType("4","Inspection & Air Testing","Pre-Abatement Inspection Report_Type 3_Formal","N/A");
+		list.add(type);
+		type = new ReportType("5","Inspection & Air Testing","Type 3 Summary Report_Pre, During, Post, Clearance","N/A");
+		list.add(type);
+		type = new ReportType("6","Inspection & Air Testing","Type 3 Summary Report_Pre, Post, Clearance","N/A");
+		list.add(type);
+		type = new ReportType("7","Inspection & Air Testing","Type 3 Close Out Report","N/A");
+		list.add(type);
+		type = new ReportType("8","Inspection & Air Testing","Post-Abatement Inspection & Air Testing Report - Greenrock Properties","N/A");
+		list.add(type);
+		type = new ReportType("9","Inspection & Air Testing","Type 2 Summary Report","N/A");
+		list.add(type);
+		type = new ReportType("10","Inspection & Air Testing","Post-Abatement Inspection Report_Building Demolition_Type 3","N/A");
+		list.add(type);
+		type = new ReportType("11","Inspection & Air Testing","Post-Abatement Inpsection Report_Type 2 visual only","N/A");
+		list.add(type);
+		type = new ReportType("12","Inspection & Air Testing","PCM Air Sampling - Residential","N/A");
+		list.add(type);
+		type = new ReportType("13","Inspection & Air Testing","PCM Air Sampling - Construction Projects","N/A");
+		list.add(type);
+		type = new ReportType("14","Inspection & Air Testing","Type 3 Clearance Report_Final Visual & Air Sampling","N/A");
+		list.add(type);
+		type = new ReportType("15","Inspection & Air Testing","TEM Air Sampling_during outdoor Type 3 opeation","N/A");
+		list.add(type);
+		type = new ReportType("16","Inspection & Air Testing","Inspection and Air Testing during Abatement_Outdoor Type 3","N/A");
+		list.add(type);
+
 	}
 	
 	public void uncheckButton() {
@@ -92,12 +121,26 @@ public class ReportTypeController implements Initializable{
 	}
 	
 	public void selectReportType(ActionEvent event) {
-		walkInReport= new WalkInReport(table.getSelectionModel().getSelectedItem().getTitle());
+		FXMLLoader loader;
+		Parent root;
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/walkin/BasicInfoPrompt.fxml"));
-	        Parent root = loader.load();
-	        BasicInfoController controller = loader.getController();
-	        controller.getReport(walkInReport);
+			switch(table.getSelectionModel().getSelectedItem().getCategory()){
+				case "Walk In":
+					report= new WalkInReport(table.getSelectionModel().getSelectedItem().getTitle());
+					loader = new FXMLLoader(getClass().getResource("/application/walkin/BasicInfoPrompt.fxml"));
+					root = loader.load();
+					BasicInfoController controller1 = loader.getController();
+					controller1.getReport(report);
+					break;
+				default:
+					report = new Report(table.getSelectionModel().getSelectedItem().getTitle());
+					setInformation(table.getSelectionModel().getSelectedItem().getTitle());
+					loader = new FXMLLoader(getClass().getResource("/application/InfoPrompt.fxml"));
+					root = loader.load();
+					InfoController controller = loader.getController();
+					controller.getReport(report);
+			}
+
 
 	        Stage stage = new Stage();
 	        stage.setScene(new Scene(root));
@@ -139,6 +182,39 @@ public class ReportTypeController implements Initializable{
 		}
 		else {
 			table.setItems(list);
+		}
+	}
+
+	public void setInformation(String reportType){
+		switch(reportType){
+			case "Inspection & Air Testing Report - during Type 3":
+				report.getInfo().set
+			case "Pre-Abatement Inspection Report_Type 3_Formal":
+				report.getInfo().set
+			case "Type 3 Summary Report_Pre, During, Post, Clearance":
+				report.getInfo().set
+			case "Type 3 Summary Report_Pre, Post, Clearance":
+				report.getInfo().set
+			case "Type 3 Close Out Report":
+				report.getInfo().set
+			case "Post-Abatement Inspection & Air Testing Report - Greenrock Properties":
+				report.getInfo().set
+			case "Type 2 Summary Report":
+				report.getInfo().set
+			case "Post-Abatement Inspection Report_Building Demolition_Type 3":
+				report.getInfo().set
+			case "Post-Abatement Inpsection Report_Type 2 visual only":
+				report.getInfo().set
+			case "PCM Air Sampling - Residential":
+				report.getInfo().set
+			case "PCM Air Sampling - Construction Projects":
+				report.getInfo().set
+			case "Type 3 Clearance Report_Final Visual & Air Sampling":
+				report.getInfo().set
+			case "TEM Air Sampling_during outdoor Type 3 opeation":
+				report.getInfo().set
+			case "Inspection and Air Testing during Abatement_Outdoor Type 3":
+				report.getInfo().set
 		}
 	}
 }

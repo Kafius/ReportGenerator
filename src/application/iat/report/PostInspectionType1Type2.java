@@ -1,18 +1,18 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import application.iat.sample.PostAirTestingSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class PostInspectionType1Type2 {
+public class PostInspectionType1Type2 extends Report {
     String name;
     Info info;
     List<PostAirTestingSample> table;
     PostInspectionType1Type2(){
-        this.name = "";
-        this.info = new Info();
+        super();
         this.table = FXCollections.observableArrayList();
     }
 

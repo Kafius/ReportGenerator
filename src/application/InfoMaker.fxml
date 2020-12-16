@@ -17,8 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InfoMaker">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InfoController">
    <children>
       <Label fx:id="title" layoutX="26.0" layoutY="14.0" text="Create a New Report">
          <font>
@@ -37,7 +36,7 @@
       </Label>
       <Line fx:id="topBorder" endX="660.0" layoutX="101.0" layoutY="92.0" startX="-100.0" stroke="#1e1e1e" />
       <Line fx:id="bottomBorder" endX="660.0" layoutX="101.0" layoutY="602.0" startX="-100.0" />
-      <ScrollPane hbarPolicy="NEVER" layoutY="93.0" prefHeight="504.0" prefWidth="762.0">
+      <ScrollPane hbarPolicy="NEVER" layoutY="92.0" prefHeight="504.0" prefWidth="762.0">
          <content>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="910.0" prefWidth="762.0">
                <children>
@@ -53,27 +52,27 @@
                               <Label fx:id="projectNumberL" text="Project Number" translateX="10.0" translateY="25.0" />
                               <TextField fx:id="projectNumberTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="105.0" translateX="25.0" translateY="25.0" />
                               <Label text="SEL Rep" translateX="40.0" translateY="25.0" />
-                              <TextField prefHeight="25.0" prefWidth="129.0" translateX="60.0" translateY="25.0" />
+                              <TextField fx:id="SELRepTF" prefHeight="25.0" prefWidth="129.0" translateX="60.0" translateY="25.0" />
                            </children>
                         </HBox>
                         <HBox prefHeight="66.0" prefWidth="200.0">
                            <children>
                               <Label fx:id="samplingDateL" text="Technician" translateX="10.0" translateY="25.0" />
-                              <TextField maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="236.0" translateX="25.0" translateY="25.0" />
+                              <TextField fx:id="technicianTF" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="236.0" translateX="25.0" translateY="25.0" />
                               <Label fx:id="reportDateL" text="Project Manager" translateX="70.0" translateY="25.0" />
-                              <TextField maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="232.0" translateX="85.0" translateY="25.0" />
+                              <TextField fx:id="projectManagerTF" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="232.0" translateX="85.0" translateY="25.0" />
                            </children>
                         </HBox>
                         <HBox fx:id="companyAddressSection1" prefHeight="66.0" prefWidth="726.0">
                            <children>
                               <Label fx:id="companyAddressL1" text="Address" translateX="10.0" translateY="25.0" />
-                              <TextField fx:id="companyAddressTF1" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="209.0" translateX="25.0" translateY="25.0" />
-                              <Label fx:id="companyCityL1" text="City" translateX="45.0" translateY="25.0" />
-                              <TextField fx:id="companyCityTF1" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="98.0" translateX="55.0" translateY="25.0" />
+                              <TextField fx:id="projectAddressTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="209.0" translateX="25.0" translateY="25.0" />
+                              <Label text="City" translateX="45.0" translateY="25.0" />
+                              <TextField fx:id="projectCityTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="98.0" translateX="55.0" translateY="25.0" />
                               <Label fx:id="companyProvinceL1" text="Province" translateX="80.0" translateY="25.0" />
-                              <ChoiceBox fx:id="companyProvinceCB1" prefHeight="25.0" prefWidth="57.0" translateX="100.0" translateY="25.0" />
+                              <ChoiceBox fx:id="projectProvinceCB" prefHeight="25.0" prefWidth="57.0" translateX="100.0" translateY="25.0" />
                               <Label fx:id="companyPostalCodeL2" text="Postal Code" translateX="110.0" translateY="25.0" />
-                              <TextField fx:id="companyPostalCodeTF2" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="53.0" translateX="120.0" translateY="25.0" />
+                              <TextField fx:id="projectPostalCodeTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="53.0" translateX="120.0" translateY="25.0" />
                            </children>
                         </HBox>
                      </children>
@@ -83,51 +82,51 @@
                         <HBox fx:id="companyNameSection2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="726.0">
                            <children>
                               <Label fx:id="companyNameL1" text="Building Name" translateX="10.0" translateY="25.0" />
-                              <TextField prefHeight="25.0" prefWidth="226.0" translateX="25.0" translateY="25.0" />
+                              <TextField fx:id="buildingNameTF" prefHeight="25.0" prefWidth="226.0" translateX="25.0" translateY="25.0" />
                               <Label text="Specific Location" translateX="40.0" translateY="25.0" />
-                              <TextField prefHeight="25.0" prefWidth="234.0" translateX="60.0" translateY="25.0" />
+                              <TextField fx:id="specificLocationTF" prefHeight="25.0" prefWidth="234.0" translateX="60.0" translateY="25.0" />
                            </children>
                         </HBox>
                         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="726.0">
                            <children>
                               <Label text="Location of Air Samples" translateX="10.0" translateY="25.0" />
-                              <TextField translateX="25.0" translateY="25.0" />
+                              <TextField fx:id="locationOfAirSamplesTF" translateX="25.0" translateY="25.0" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="companyInfoBox3" layoutX="21.0" layoutY="382.0" prefHeight="198.0" prefWidth="726.0">
+                  <VBox fx:id="companyInfoBox3" layoutX="21.0" layoutY="382.0" onDragDone="#initialize" prefHeight="198.0" prefWidth="726.0">
                      <children>
                         <HBox fx:id="companyNameSection3" prefHeight="66.0" prefWidth="726.0">
                            <children>
                               <Label fx:id="companyNameL2" text="Site Work Date" translateX="10.0" translateY="25.0" />
-                              <DatePicker layoutX="25.0" prefHeight="25.0" prefWidth="60.0" translateX="25.0" translateY="25.0" />
+                              <DatePicker fx:id="siteWorkDateDP" layoutX="25.0" prefHeight="25.0" prefWidth="60.0" translateX="25.0" translateY="25.0" />
                               <Label text="Report Date" translateX="50.0" translateY="25.0" />
-                              <DatePicker prefHeight="25.0" prefWidth="60.0" translateX="60.0" translateY="25.0" />
+                              <DatePicker fx:id="reportDateDP" prefHeight="25.0" prefWidth="60.0" translateX="60.0" translateY="25.0" />
                               <Label text="On Site Time" translateX="80.0" translateY="25.0" />
-                              <Spinner prefHeight="25.0" prefWidth="60.0" translateX="90.0" translateY="25.0" />
+                              <Spinner fx:id="onSiteTimeS" prefHeight="25.0" prefWidth="60.0" translateX="90.0" translateY="25.0" />
                               <Label text="Sampling Date" translateX="110.0" translateY="25.0" />
-                              <DatePicker prefWidth="60.0" translateX="120.0" translateY="25.0" />
+                              <DatePicker fx:id="samplingDateDP" prefWidth="60.0" translateX="120.0" translateY="25.0" />
                            </children>
                         </HBox>
                         <HBox fx:id="companyAddressSection2" prefHeight="66.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="companyAddressL2" text="Pre Abatement Start Date" translateX="10.0" translateY="25.0" />
-                              <DatePicker prefHeight="25.0" prefWidth="60.0" translateX="20.0" translateY="25.0" />
+                              <Label text="Pre Abatement Start Date" translateX="10.0" translateY="25.0" />
+                              <DatePicker fx:id="preAbatementStartDP" prefHeight="25.0" prefWidth="60.0" translateX="20.0" translateY="25.0" />
                               <Label fx:id="companyCityL2" text="Visual Abatement Start Date" translateX="30.0" translateY="25.0" />
-                              <DatePicker prefHeight="25.0" prefWidth="60.0" translateX="45.0" translateY="25.0" />
+                              <DatePicker fx:id="visualAbatementStartDP" prefHeight="25.0" prefWidth="60.0" translateX="45.0" translateY="25.0" />
                               <Label fx:id="companyProvinceL2" text="Visual Abatement End Date" translateX="60.0" translateY="25.0" />
-                              <DatePicker prefHeight="25.0" prefWidth="60.0" translateX="65.0" translateY="25.0" />
+                              <DatePicker fx:id="visualAbatementEndDP" prefHeight="25.0" prefWidth="60.0" translateX="65.0" translateY="25.0" />
                            </children>
                         </HBox>
                         <HBox prefHeight="66.0" prefWidth="200.0">
                            <children>
                               <Label text="Post Abatement Date" translateX="10.0" translateY="25.0" />
-                              <DatePicker prefHeight="25.0" prefWidth="60.0" translateX="20.0" translateY="25.0" />
+                              <DatePicker fx:id="postAbatementDateDP" prefHeight="25.0" prefWidth="60.0" translateX="20.0" translateY="25.0" />
                               <Label text="Site End Date" translateX="30.0" translateY="25.0" />
-                              <DatePicker prefWidth="60.0" translateX="40.0" translateY="25.0" />
+                              <DatePicker fx:id="siteEndDateDP" prefWidth="60.0" translateX="40.0" translateY="25.0" />
                               <Label text="Inspection Start Date" translateX="50.0" translateY="25.0" />
-                              <DatePicker prefWidth="60.0" translateX="60.0" translateY="25.0" />
+                              <DatePicker fx:id="inspectionStartDateDP" prefWidth="60.0" translateX="60.0" translateY="25.0" />
                            </children>
                         </HBox>
                      </children>
@@ -159,22 +158,22 @@
                         <HBox fx:id="clientNameSection" prefHeight="94.0" prefWidth="726.0">
                            <children>
                               <Label fx:id="clientNameL" text="Client Name" translateX="10.0" translateY="25.0" />
-                              <ChoiceBox fx:id="clientNameTitles" prefHeight="25.0" prefWidth="54.0" translateX="20.0" translateY="25.0" />
+                              <ChoiceBox fx:id="clientPrefixCB" prefHeight="25.0" prefWidth="54.0" translateX="20.0" translateY="25.0" />
                               <TextField fx:id="clientNameTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="132.0" translateX="25.0" translateY="25.0" />
                               <Label text="Client Position" translateX="55.0" translateY="25.0" />
-                              <TextField prefHeight="25.0" prefWidth="333.0" translateX="60.0" translateY="25.0" />
+                              <TextField fx:id="clientPositionTF" prefHeight="25.0" prefWidth="333.0" translateX="60.0" translateY="25.0" />
                            </children>
                         </HBox>
                         <HBox fx:id="clientAddressSection" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label fx:id="projectAddressL" text="Address" translateX="10.0" translateY="25.0" />
-                              <TextField fx:id="projectAddressTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="209.0" translateX="25.0" translateY="25.0" />
+                              <TextField fx:id="clientAddressTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="209.0" translateX="25.0" translateY="25.0" />
                               <Label fx:id="projectCityL" text="City" translateX="45.0" translateY="25.0" />
-                              <TextField fx:id="projectCityTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="98.0" translateX="55.0" translateY="25.0" />
+                              <TextField fx:id="clientCityTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="98.0" translateX="55.0" translateY="25.0" />
                               <Label fx:id="projectProvinceL" text="Province" translateX="80.0" translateY="25.0" />
-                              <ChoiceBox fx:id="projectProvinceCB" prefHeight="25.0" prefWidth="57.0" translateX="100.0" translateY="25.0" />
+                              <ChoiceBox fx:id="clientProvinceCB" prefHeight="25.0" prefWidth="57.0" translateX="100.0" translateY="25.0" />
                               <Label fx:id="companyPostalCodeL1" text="Postal Code" translateX="110.0" translateY="25.0" />
-                              <TextField fx:id="companyPostalCodeTF1" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="53.0" translateX="120.0" translateY="25.0" />
+                              <TextField fx:id="clientPostalCodeTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="53.0" translateX="120.0" translateY="25.0" />
                            </children>
                         </HBox>
                      </children>

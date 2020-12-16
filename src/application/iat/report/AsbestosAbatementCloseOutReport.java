@@ -1,12 +1,13 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import application.iat.sample.AirTestingSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class AsbestosAbatementCloseOutReport {
+public class AsbestosAbatementCloseOutReport extends Report {
     String name;
     Info info;
     List<String> deficiencies;
@@ -15,8 +16,7 @@ public class AsbestosAbatementCloseOutReport {
     List<AirTestingSample> table;
 
     AsbestosAbatementCloseOutReport(){
-        this.name="";
-        this.info = new Info();
+        super();
         this.deficiencies = FXCollections.observableArrayList();
         this.procedure = "";
         this.specifications = "";

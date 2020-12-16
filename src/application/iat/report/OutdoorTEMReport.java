@@ -1,18 +1,18 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import application.iat.sample.TEMAsbestosFibreSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class OutdoorTEMReport {
+public class OutdoorTEMReport extends Report {
     String name;
     Info info;
     List<TEMAsbestosFibreSample> table;
     OutdoorTEMReport(){
-        this.name="";
-        this.info = new Info();
+        super();
         this.table = FXCollections.observableArrayList();
     }
     public String getName() {

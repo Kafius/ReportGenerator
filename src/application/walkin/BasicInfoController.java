@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import application.Report;
 import application.walkin.report.WalkInReport;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -164,8 +165,8 @@ public class BasicInfoController implements Initializable{
 	}
 	
 	//gets data from previous prompt
-	public void getReport(WalkInReport report) {
-		newReport=report;
+	public void getReport(Report report) {
+		newReport=new WalkInReport(report);
 		
 		companyNameCB.setValue(newReport.info.getCompanyName());
 		companyAddressTF.setText(newReport.info.getCompanyAddress());

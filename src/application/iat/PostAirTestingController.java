@@ -1,6 +1,5 @@
 package application.iat;
 
-import application.iat.sample.AirTestingSample;
 import application.iat.sample.PostAirTestingSample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

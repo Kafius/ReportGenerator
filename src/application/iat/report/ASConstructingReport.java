@@ -1,18 +1,18 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import application.iat.sample.AirTestingSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class ASConstructingReport {
+public class ASConstructingReport extends Report {
     String name;
     Info info;
     List<AirTestingSample> table;
     ASConstructingReport(){
-        this.name="";
-        this.info=new Info();
+        super();
         this.table = FXCollections.observableArrayList();
     }
     public String getName() {

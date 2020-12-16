@@ -1,11 +1,12 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class siteInspectionReport {
+public class siteInspectionReport extends Report {
     String name;
     Info info;
     int negativePressureDifferential;
@@ -15,8 +16,7 @@ public class siteInspectionReport {
     List<String> postDeficiencies;
 
     siteInspectionReport(){
-        this.info = new Info();
-
+        super();
         this.negativePressureDifferential = 0;
         this.numberOfCAHU = 0;
         this.HEPAvacuums = 0;

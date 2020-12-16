@@ -1,15 +1,15 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import javafx.collections.FXCollections;
 
-public class Type2InspectionOnlyReport {
+public class Type2InspectionOnlyReport extends Report {
     String name;
     Info info;
 
     Type2InspectionOnlyReport(){
-        this.name="";
-        this.info= new Info();
+        super();
     }
 
     public String getName() {

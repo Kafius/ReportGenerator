@@ -1,12 +1,13 @@
 package application.iat.report;
 
 import application.Info;
+import application.Report;
 import application.iat.sample.AirTestingSample;
 import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class MultipleType3Report {
+public class MultipleType3Report extends Report {
     String name;
     Info info;
     List<String> deficiencies;
@@ -14,8 +15,7 @@ public class MultipleType3Report {
     List<AirTestingSample> table;
 
     MultipleType3Report(){
-        this.name="";
-        this.info = new Info();
+        super();
         this.deficiencies = FXCollections.observableArrayList();
         this.procedure = "";
         this.table = FXCollections.observableArrayList();
