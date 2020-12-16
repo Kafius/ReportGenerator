@@ -10,9 +10,10 @@ import java.util.List;
 public class Type3AirSamplingReport extends Report {
     String name;
     Info info;
+    String reportType;
     List<PostAirTestingSample> table;
     Type3AirSamplingReport(){
-        super();
+        super("Type3AirSampling");
         this.table = FXCollections.observableArrayList();
     }
     public String getName() {
@@ -29,6 +30,16 @@ public class Type3AirSamplingReport extends Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    @Override
+    public String getReportType() {
+        return reportType;
+    }
+
+    @Override
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 
     public List<PostAirTestingSample> getTable() {

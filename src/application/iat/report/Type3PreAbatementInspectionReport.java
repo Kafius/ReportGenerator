@@ -6,10 +6,11 @@ import application.Report;
 public class Type3PreAbatementInspectionReport extends Report {
     String name;
     Info info;
+    String reportType;
     String scopeOfWork;
 
     Type3PreAbatementInspectionReport(){
-        super();
+        super("Type3PreAbatementInspection");
         this.scopeOfWork = "";
     }
 
@@ -27,6 +28,16 @@ public class Type3PreAbatementInspectionReport extends Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    @Override
+    public String getReportType() {
+        return reportType;
+    }
+
+    @Override
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 
     public String getScopeOfWork() {

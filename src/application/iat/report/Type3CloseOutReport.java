@@ -10,13 +10,14 @@ import java.util.List;
 public class Type3CloseOutReport extends Report {
     String name;
     Info info;
+    String reportType;
     List<AirTestingSample> table;
     List<String> preDeficiencies;
     String duringAbatementInspection;
     String postAbatementInspection;
 
-    Type3CloseOutReport(){
-        super();
+    public Type3CloseOutReport(){
+        super("Type3CloseOut");
         this.table = FXCollections.observableArrayList();
         this.preDeficiencies = FXCollections.observableArrayList();
         this.duringAbatementInspection="";
@@ -37,6 +38,20 @@ public class Type3CloseOutReport extends Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    @Override
+    public String getReportType() {
+        return reportType;
+    }
+
+    @Override
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
+    }
+
+    public List<AirTestingSample> getTable() {
+        return table;
     }
 
     public List<AirTestingSample> getTable1() {

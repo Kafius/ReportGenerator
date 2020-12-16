@@ -70,6 +70,74 @@ public class Info {
 	private boolean samplingDateExist; //done
 
 
+	public Info(boolean projectNumberExist,
+			boolean projectNameExist,
+			boolean projectAddressExist,
+			boolean projectCityExist,
+			boolean projectProvinceExist,
+			boolean projectPostalCodeExist,
+			boolean technicianExist,
+			boolean projectManagerExist,
+			boolean clientNameExist,
+			boolean clientPositionExist,
+			boolean companyNameExist,
+			boolean companyAddressExist,
+			boolean companyCityExist,
+			boolean companyProvinceExist,
+			boolean companyPostalCodeExist,
+			boolean buildingNameExist,
+			boolean specificLocationExist,
+			boolean siteWorkDateExist,
+			boolean reportDateExist,
+			boolean preAbatementStartDateExist,
+			boolean visualAbatementStartExist,
+			boolean visualAbatementEndExist,
+			boolean postAbatementDateExist,
+			boolean siteEndDateExist,
+			boolean selRepExist,
+			boolean onSiteTimeExist,
+			boolean clientAddressExist,
+			boolean clientCityExist,
+			boolean clientProvinceExist,
+			boolean clientPostalCodeExist,
+			boolean locationOfAirSamplesExist,
+			boolean inspectionStartDateExist,
+			boolean samplingDateExist ) {
+
+		this.projectNumberExist = projectNumberExist;
+		this.projectNameExist = projectNameExist;
+		this.projectAddressExist = projectAddressExist;
+		this.projectCityExist = projectCityExist;
+		this.projectProvinceExist = projectProvinceExist;
+		this.projectPostalCodeExist = projectPostalCodeExist;
+		this.technicianExist = technicianExist;
+		this.projectManagerExist = projectManagerExist;
+		this.clientNameExist = clientNameExist;
+		this.clientPositionExist = clientPositionExist;
+		this.companyNameExist = companyNameExist;
+		this.companyAddressExist = companyAddressExist;
+		this.companyCityExist = companyCityExist;
+		this.companyProvinceExist = companyProvinceExist;
+		this.companyPostalCodeExist = companyPostalCodeExist;
+		this.buildingNameExist = buildingNameExist;
+		this.specificLocationExist = specificLocationExist;
+		this.siteWorkDateExist = siteWorkDateExist;
+		this.reportDateExist = reportDateExist;
+		this.preAbatementStartDateExist = preAbatementStartDateExist;
+		this.visualAbatementStartExist = visualAbatementStartExist;
+		this.visualAbatementEndExist = visualAbatementEndExist;
+		this.postAbatementDateExist = postAbatementDateExist;
+		this.siteEndDateExist = siteEndDateExist;
+		this.selRepExist = selRepExist;
+		this.onSiteTimeExist = onSiteTimeExist;
+		this.clientAddressExist = clientAddressExist;
+		this.clientCityExist = clientCityExist;
+		this.clientProvinceExist = clientProvinceExist;
+		this.clientPostalCodeExist = clientPostalCodeExist;
+		this.locationOfAirSamplesExist = locationOfAirSamplesExist;
+		this.inspectionStartDateExist = inspectionStartDateExist;
+		this.samplingDateExist = samplingDateExist;
+	}
 	public Info() {
 
 		this.projectNumberExist=false; //done
@@ -323,93 +391,6 @@ public class Info {
 
 	public void setPostAbatementDate(String postAbatementDate) {
 		this.postAbatementDate = postAbatementDate;
-	}
-
-	public String getSiteEndDate() {
-		return siteEndDate;
-	}
-
-	public void setSiteEndDate(String siteEndDate) {
-		this.siteEndDate = siteEndDate;
-	}
-
-	public String getSelRep() {
-		return selRep;
-	}
-
-	public void setSelRep(String selRep) {
-		this.selRep = selRep;
-	}
-
-
-	public String getOnSiteTime() {
-		return onSiteTime;
-	}
-
-	public void setOnSiteTime(String onSiteTime) {
-		this.onSiteTime = onSiteTime;
-	}
-
-	public String getClientAddress() {
-		return clientAddress;
-	}
-
-	public void setClientAddress(String clientAddress) {
-		this.clientAddress = clientAddress;
-	}
-
-	public String getClientCity() {
-		return clientCity;
-	}
-
-	public void setClientCity(String clientCity) {
-		this.clientCity = clientCity;
-	}
-
-	public String getClientProvince() {
-		return clientProvince;
-	}
-
-	public void setClientProvince(String clientProvince) {
-		this.clientProvince = clientProvince;
-	}
-
-	public String getClientPostalCode() {
-		return clientPostalCode;
-	}
-
-	public void setClientPostalCode(String clientPostalCode) {
-		this.clientPostalCode = clientPostalCode;
-	}
-
-	public String getLocationOfAirSamples() {
-		return locationOfAirSamples;
-	}
-
-	public void setLocationOfAirSamples(String locationOfAirSamples) {
-		this.locationOfAirSamples = locationOfAirSamples;
-	}
-
-	public String getInspectionStartDate() {
-		return inspectionStartDate;
-	}
-
-	public void setInspectionStartDate(String inspectionStartDate) {
-		this.inspectionStartDate = inspectionStartDate;
-	}
-
-	public String getSamplingDate() {
-		return samplingDate;
-	}
-
-	public void setSamplingDate(String samplingDate) {
-		this.samplingDate = samplingDate;
-	}
-
-	public void copyAddresses() {
-		this.projectAddress = this.companyAddress;
-		this.projectCity = this.companyCity;
-		this.projectProvince = this.companyProvince;
 	}
 
 	public boolean isProjectNumberExist() {
@@ -675,4 +656,92 @@ public class Info {
 	public void setSamplingDateExist(boolean samplingDateExist) {
 		this.samplingDateExist = samplingDateExist;
 	}
+
+	public String getSiteEndDate() {
+		return siteEndDate;
+	}
+
+	public void setSiteEndDate(String siteEndDate) {
+		this.siteEndDate = siteEndDate;
+	}
+
+	public String getSelRep() {
+		return selRep;
+	}
+
+	public void setSelRep(String selRep) {
+		this.selRep = selRep;
+	}
+
+
+	public String getOnSiteTime() {
+		return onSiteTime;
+	}
+
+	public void setOnSiteTime(String onSiteTime) {
+		this.onSiteTime = onSiteTime;
+	}
+
+	public String getClientAddress() {
+		return clientAddress;
+	}
+
+	public void setClientAddress(String clientAddress) {
+		this.clientAddress = clientAddress;
+	}
+
+	public String getClientCity() {
+		return clientCity;
+	}
+
+	public void setClientCity(String clientCity) {
+		this.clientCity = clientCity;
+	}
+
+	public String getClientProvince() {
+		return clientProvince;
+	}
+
+	public void setClientProvince(String clientProvince) {
+		this.clientProvince = clientProvince;
+	}
+
+	public String getClientPostalCode() {
+		return clientPostalCode;
+	}
+
+	public void setClientPostalCode(String clientPostalCode) {
+		this.clientPostalCode = clientPostalCode;
+	}
+
+	public String getLocationOfAirSamples() {
+		return locationOfAirSamples;
+	}
+
+	public void setLocationOfAirSamples(String locationOfAirSamples) {
+		this.locationOfAirSamples = locationOfAirSamples;
+	}
+
+	public String getInspectionStartDate() {
+		return inspectionStartDate;
+	}
+
+	public void setInspectionStartDate(String inspectionStartDate) {
+		this.inspectionStartDate = inspectionStartDate;
+	}
+
+	public String getSamplingDate() {
+		return samplingDate;
+	}
+
+	public void setSamplingDate(String samplingDate) {
+		this.samplingDate = samplingDate;
+	}
+
+	public void copyAddresses() {
+		this.projectAddress = this.companyAddress;
+		this.projectCity = this.companyCity;
+		this.projectProvince = this.companyProvince;
+	}
+
 }

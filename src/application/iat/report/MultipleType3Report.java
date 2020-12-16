@@ -15,7 +15,7 @@ public class MultipleType3Report extends Report {
     List<AirTestingSample> table;
 
     MultipleType3Report(){
-        super();
+        super("MultipleType3");
         this.deficiencies = FXCollections.observableArrayList();
         this.procedure = "";
         this.table = FXCollections.observableArrayList();

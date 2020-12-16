@@ -10,13 +10,14 @@ import java.util.List;
 public class AsbestosAbatementCloseOutReport extends Report {
     String name;
     Info info;
+    String reportType;
     List<String> deficiencies;
     String procedure;
     String specifications;
     List<AirTestingSample> table;
 
-    AsbestosAbatementCloseOutReport(){
-        super();
+    public AsbestosAbatementCloseOutReport(){
+        super("AsbestosAbatementCloseOut");
         this.deficiencies = FXCollections.observableArrayList();
         this.procedure = "";
         this.specifications = "";
@@ -37,6 +38,14 @@ public class AsbestosAbatementCloseOutReport extends Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    public String getReportType() {
+        return reportType;
+    }
+
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 
     public List<String> getDeficiencies() {

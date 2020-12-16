@@ -10,13 +10,14 @@ import java.util.List;
 public class Type3AirTestingReport extends Report {
     String name;
     Info info;
+    String reportType;
     String scopeOfWork;
     String flowRate;
     String postAbatementInspection;
     List<PostAirTestingSample> table;
 
     Type3AirTestingReport(){
-        super();
+        super("Type3AirTesting");
         this.scopeOfWork= "";
         this.flowRate= "";
         this.postAbatementInspection= "";

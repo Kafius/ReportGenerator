@@ -10,9 +10,10 @@ import java.util.List;
 public class ASResidentialReport extends Report {
     String name;
     Info info;
+    String reportType;
     List<AirTestingSample> table;
-    ASResidentialReport(){
-       super();
+    public ASResidentialReport(){
+       super("ASResidential");
        this.table = FXCollections.observableArrayList();
     }
     public String getName() {
@@ -29,6 +30,16 @@ public class ASResidentialReport extends Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    @Override
+    public String getReportType() {
+        return reportType;
+    }
+
+    @Override
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 
     public List<AirTestingSample> getTable() {

@@ -10,9 +10,12 @@ import java.util.List;
 public class ASConstructingReport extends Report {
     String name;
     Info info;
+    String reportType;
     List<AirTestingSample> table;
-    ASConstructingReport(){
-        super();
+    public ASConstructingReport(){
+        super("ASConstructing");
+        this.name="";
+        this.info=new Info();
         this.table = FXCollections.observableArrayList();
     }
     public String getName() {
@@ -29,6 +32,16 @@ public class ASConstructingReport extends Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    @Override
+    public String getReportType() {
+        return reportType;
+    }
+
+    @Override
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 
     public List<AirTestingSample> getTable() {

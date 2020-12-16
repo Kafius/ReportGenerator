@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.iat.report.*;
 import application.walkin.BasicInfoController;
 import application.walkin.report.WalkInReport;
 import data.ReportType;
@@ -135,15 +136,17 @@ public class ReportTypeController implements Initializable{
 				default:
 					report = new Report(table.getSelectionModel().getSelectedItem().getTitle());
 					setInformation(table.getSelectionModel().getSelectedItem().getTitle());
-					loader = new FXMLLoader(getClass().getResource("/application/InfoPrompt.fxml"));
+					loader = new FXMLLoader(getClass().getResource("/application/InfoMaker.fxml"));
 					root = loader.load();
 					InfoController controller = loader.getController();
 					controller.getReport(report);
+					break;
 			}
 
 
 	        Stage stage = new Stage();
 	        stage.setScene(new Scene(root));
+	        stage.setResizable(false);
 	        stage.show();
 	        
 	        Stage thisStage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -188,33 +191,236 @@ public class ReportTypeController implements Initializable{
 	public void setInformation(String reportType){
 		switch(reportType){
 			case "Inspection & Air Testing Report - during Type 3":
-				report.getInfo().set
-			case "Pre-Abatement Inspection Report_Type 3_Formal":
-				report.getInfo().set
-			case "Type 3 Summary Report_Pre, During, Post, Clearance":
-				report.getInfo().set
-			case "Type 3 Summary Report_Pre, Post, Clearance":
-				report.getInfo().set
+				report = new siteInspectionReport();
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
+				report.getInfo().setSelRepExist(true);
+				break;
+
+			case "Pre-Abatement Inspection Report - Type 3 Formal":
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setOnSiteTimeExist(true);
+
+			case "Type 3 Summary Report - pre during post clearance":
+				report = new AsbestosAbatementCloseOutReport();
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setPreAbatementStartDateExist(true);
+				report.getInfo().setVisualAbatementStartExist(true);
+				report.getInfo().setVisualAbatementEndExist(true);
+				report.getInfo().setPostAbatementDateExist(true);
+				report.getInfo().setSiteEndDateExist(true);
+
+			case "Type 3 Summary Report - pre post clearance":
+				report.getInfo().setProjectNumberExist(true);
+
 			case "Type 3 Close Out Report":
-				report.getInfo().set
-			case "Post-Abatement Inspection & Air Testing Report - Greenrock Properties":
-				report.getInfo().set
+				report = new Type3CloseOutReport();
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setPreAbatementStartDateExist(true);
+				report.getInfo().setVisualAbatementStartExist(true);
+				report.getInfo().setVisualAbatementEndExist(true);
+				report.getInfo().setPostAbatementDateExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
+
+			case "Post-Abatement Inspection and Air Testing Report - Greenrock Properties":
+				report = new IATGreenrockReport();
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				report.getInfo().setPreAbatementStartDateExist(true);
+				report.getInfo().setVisualAbatementStartExist(true);
+				report.getInfo().setVisualAbatementEndExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
+
 			case "Type 2 Summary Report":
-				report.getInfo().set
-			case "Post-Abatement Inspection Report_Building Demolition_Type 3":
-				report.getInfo().set
-			case "Post-Abatement Inpsection Report_Type 2 visual only":
-				report.getInfo().set
+
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setPreAbatementStartDateExist(true);
+				report.getInfo().setVisualAbatementStartExist(true);
+				report.getInfo().setVisualAbatementEndExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
+
+			case "Post-Abatement Inspection Report - Building Demolition Type 3":
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setVisualAbatementEndExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
+
+			case "Post-Abatement Inspection Report - Type 2 Visual Only":
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setVisualAbatementEndExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
+
 			case "PCM Air Sampling - Residential":
-				report.getInfo().set
+				report = new ASResidentialReport();
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientAddressExist(true);
+				report.getInfo().setClientCityExist(true);
+				report.getInfo().setClientProvinceExist(true);
+				report.getInfo().setClientPostalCodeExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setSiteEndDateExist(true);
+
 			case "PCM Air Sampling - Construction Projects":
-				report.getInfo().set
-			case "Type 3 Clearance Report_Final Visual & Air Sampling":
-				report.getInfo().set
-			case "TEM Air Sampling_during outdoor Type 3 opeation":
-				report.getInfo().set
+				report = new ASConstructingReport();
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientAddressExist(true);
+				report.getInfo().setClientCityExist(true);
+				report.getInfo().setClientProvinceExist(true);
+				report.getInfo().setClientPostalCodeExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
+
+			case "Type 3 Clearance Report - Final Visual and Air Sampling":
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setInspectionStartDateExist(true);
+
+			case "TEM Air Sampling During Outdoor Type 3 Operation":
+				report.getInfo().setReportDateExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setInspectionStartDateExist(true);
+				report.getInfo().setProjectManagerExist(true);
 			case "Inspection and Air Testing during Abatement_Outdoor Type 3":
-				report.getInfo().set
+				report.getInfo().setReportDateExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setProjectNameExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setVisualAbatementStartExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
 		}
 	}
 }

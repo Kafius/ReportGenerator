@@ -7,16 +7,15 @@ import javafx.collections.FXCollections;
 import java.util.List;
 
 public class siteInspectionReport extends Report {
-    String name;
-    Info info;
+    String reportType;
     int negativePressureDifferential;
     int numberOfCAHU;
     int HEPAvacuums;
     List<String> postObservations;
     List<String> postDeficiencies;
 
-    siteInspectionReport(){
-        super();
+    public siteInspectionReport(){
+        super("siteInspection");
         this.negativePressureDifferential = 0;
         this.numberOfCAHU = 0;
         this.HEPAvacuums = 0;
@@ -38,6 +37,16 @@ public class siteInspectionReport extends Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    @Override
+    public String getReportType() {
+        return reportType;
+    }
+
+    @Override
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 
     public int getNegativePressureDifferential() {
@@ -62,5 +71,21 @@ public class siteInspectionReport extends Report {
 
     public void setHEPAvacuums(int HEPAvacuums) {
         this.HEPAvacuums = HEPAvacuums;
+    }
+
+    public List<String> getPostObservations() {
+        return postObservations;
+    }
+
+    public void setPostObservations(List<String> postObservations) {
+        this.postObservations = postObservations;
+    }
+
+    public List<String> getPostDeficiencies() {
+        return postDeficiencies;
+    }
+
+    public void setPostDeficiencies(List<String> postDeficiencies) {
+        this.postDeficiencies = postDeficiencies;
     }
 }

@@ -7,9 +7,10 @@ import javafx.collections.FXCollections;
 public class Type2InspectionOnlyReport extends Report {
     String name;
     Info info;
+    String reportType;
 
     Type2InspectionOnlyReport(){
-        super();
+        super("Type2InspectionOnly");
     }
 
     public String getName() {
@@ -28,5 +29,13 @@ public class Type2InspectionOnlyReport extends Report {
         this.info = info;
     }
 
+    @Override
+    public String getReportType() {
+        return reportType;
+    }
 
+    @Override
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
+    }
 }

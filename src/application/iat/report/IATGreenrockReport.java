@@ -10,10 +10,11 @@ import java.util.List;
 public class IATGreenrockReport extends Report {
     String name;
     Info info;
+    String reportType;
     List<PostAirTestingSample> table;
 
-    IATGreenrockReport(){
-        super();
+    public IATGreenrockReport(){
+        super("IATGreenrock");
         this.table= FXCollections.observableArrayList();
     }
 

@@ -6,8 +6,9 @@ import application.Report;
 public class BuildDemoType3Report extends Report {
     String name;
     Info info;
+    String reportType;
     BuildDemoType3Report(){
-        super();
+        super("BuildDemoType3");
     }
 
     public String getName() {
@@ -24,5 +25,15 @@ public class BuildDemoType3Report extends Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    @Override
+    public String getReportType() {
+        return reportType;
+    }
+
+    @Override
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 }

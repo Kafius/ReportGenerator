@@ -10,9 +10,10 @@ import java.util.List;
 public class OutdoorTEMReport extends Report {
     String name;
     Info info;
+    String reportType;
     List<TEMAsbestosFibreSample> table;
     OutdoorTEMReport(){
-        super();
+        super("OutdoorTEM");
         this.table = FXCollections.observableArrayList();
     }
     public String getName() {

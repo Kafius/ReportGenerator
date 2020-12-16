@@ -7,12 +7,13 @@ import javafx.collections.FXCollections;
 
 import java.util.List;
 
-public class PostInspectionType1Type2 extends Report {
+public class PostInspectionType1Type2Report extends Report {
     String name;
     Info info;
+    String reportType;
     List<PostAirTestingSample> table;
-    PostInspectionType1Type2(){
-        super();
+    PostInspectionType1Type2Report(){
+        super("PostInspectionType1Type2");
         this.table = FXCollections.observableArrayList();
     }
 
@@ -30,6 +31,16 @@ public class PostInspectionType1Type2 extends Report {
 
     public void setInfo(Info info) {
         this.info = info;
+    }
+
+    @Override
+    public String getReportType() {
+        return reportType;
+    }
+
+    @Override
+    public void setReportType(String reportType) {
+        this.reportType = reportType;
     }
 
     public List<PostAirTestingSample> getTable() {

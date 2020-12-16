@@ -1,15 +1,71 @@
 package application;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class InfoController implements Initializable {
     Report report;
+
+    @FXML
+    AnchorPane ap;
+
+    //buttons for report info
+    @FXML private Button changeButton, nextButton;
+
+    @FXML Label projectNameL;
+    @FXML Label projectNumberL;
+    @FXML Label SELRepL;
+    @FXML Label technicianL;
+    @FXML Label projectManagerL;
+    @FXML Label projectAddressL;
+    @FXML Label projectCityL;
+    @FXML Label projectProvinceL;
+    @FXML Label projectPostalCodeL;
+
+    @FXML Label buildingNameL;
+    @FXML Label specificLocationL;
+    @FXML Label locationOfAirSamplesL;
+
+    @FXML Label siteWorkDateL;
+    @FXML Label reportDateL;
+    @FXML Label onSiteTimeL;
+    @FXML Label samplingDateL;
+    @FXML Label preAbatementStartL;
+    @FXML Label visualAbatementStartL;
+    @FXML Label visualAbatementEndL;
+    @FXML Label postAbatementDateL;
+    @FXML Label siteEndDateL;
+    @FXML Label inspectionStartDateL;
+
+    @FXML Label companyNameL;
+    @FXML Label companyAddressL;
+    @FXML Label companyCityL;
+    @FXML Label companyProvinceL;
+    @FXML Label companyPostalCodeL;
+
+    @FXML Label clientNameL;
+    @FXML Label clientPositionL;
+    @FXML Label clientAddressL;
+    @FXML Label clientCityL;
+    @FXML Label clientProvinceL;
+    @FXML Label clientPostalCodeL;
 
     @FXML TextField projectNameTF;
     @FXML TextField projectNumberTF;
@@ -39,7 +95,7 @@ public class InfoController implements Initializable {
     @FXML ComboBox companyNameCB;
     @FXML TextField companyAddressTF;
     @FXML TextField companyCityTF;
-    @FXML ComboBox<String> companyProvinceCB;
+    @FXML ChoiceBox<String> companyProvinceCB;
     @FXML TextField companyPostalCodeTF;
 
     @FXML ChoiceBox<String> clientPrefixCB;
@@ -50,45 +106,49 @@ public class InfoController implements Initializable {
     @FXML ChoiceBox<String> clientProvinceCB;
     @FXML TextField clientPostalCodeTF;
 
+    ObservableList<String> companyNames = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        projectNumberTF.setDisable(true);
-        SELRepTF.setDisable(true);
-        technicianTF.setDisable(true);
-        projectManagerTF.setDisable(true);
-        projectAddressTF.setDisable(true);
-        projectCityTF.setDisable(true);
-        projectProvinceCB.setDisable(true);
-        projectPostalCodeTF.setDisable(true);
+        clientProvinceCB.getItems().addAll("NL","PE","NS","NB","QC","ON","MB","SK","AB","BC","YT","NT","NU");
+        clientProvinceCB.setValue("--");
 
-        buildingNameTF.setDisable(true);
-        specificLocationTF.setDisable(true);
-        locationOfAirSamplesTF.setDisable(true);
+        companyProvinceCB.getItems().addAll("NL","PE","NS","NB","QC","ON","MB","SK","AB","BC","YT","NT","NU");
+        companyProvinceCB.setValue("--");
 
-        siteWorkDateDP.setDisable(true);
-        reportDateDP.setDisable(true);
-        onSiteTimeS.setDisable(true);
-        samplingDateDP.setDisable(true);
-        preAbatementStartDP.setDisable(true);
-        visualAbatementStartDP.setDisable(true);
-        visualAbatementEndDP.setDisable(true);
-        postAbatementDateDP.setDisable(true);
-        siteEndDateDP.setDisable(true);
-        inspectionStartDateDP.setDisable(true);
+        projectProvinceCB.getItems().addAll("NL","PE","NS","NB","QC","ON","MB","SK","AB","BC","YT","NT","NU");
+        projectProvinceCB.setValue("--");
 
-        companyNameCB.setDisable(true);
-        companyAddressTF.setDisable(true);
-        companyCityTF.setDisable(true);
-        companyProvinceCB.setDisable(true);
-        companyPostalCodeTF.setDisable(true);
+        try {
+            Scanner r = new Scanner(getClass().getResourceAsStream("/data/companyNames.txt"));
+            while (r.hasNextLine()) {
+                companyNames.addAll(r.nextLine());
+            }
+            r.close();
+            companyNameCB.setItems(companyNames);
+            companyNameCB.setEditable(true);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
 
-        clientPrefixCB.setDisable(true);
-        clientNameTF.setDisable(true);
-        clientPositionTF.setDisable(true);
-        clientAddressTF.setDisable(true);
-        clientCityTF.setDisable(true);
-        clientProvinceCB.setDisable(true);
-        clientPostalCodeTF.setDisable(true);
+        companyNameCB.valueProperty().addListener((observable,oldValue,newValue)->{
+            if(newValue.equals("Home Owner")) {
+                projectAddressTF.setText(companyAddressTF.getText());
+                projectCityTF.setText(companyCityTF.getText());
+                projectProvinceCB.setValue(companyProvinceCB.getValue());
+
+                projectAddressTF.setDisable(true);
+                projectCityTF.setDisable(true);
+                projectProvinceCB.setDisable(true);
+            }
+            else {
+                projectAddressTF.setDisable(false);
+                projectCityTF.setDisable(false);
+                projectProvinceCB.setDisable(false);
+            }
+        });
+
     }
 
     public void getReport(Report selectedReport){
@@ -123,103 +183,230 @@ public class InfoController implements Initializable {
         if(selectedReport.info.isProjectNumberExist()) {
             projectNumberTF.setDisable(false);
         }
+        else{
+            projectNumberTF.setText("Not required");
+        }
+
         if(selectedReport.info.isProjectNameExist()) {
             projectNameTF.setDisable(false);
         }
+        else{
+            projectNameTF.setText("Not required");
+        }
+
         if(selectedReport.info.isProjectAddressExist()) {
             projectAddressTF.setDisable(false);
         }
+        else{
+            projectAddressTF.setText("Not required");
+        }
+
         if(selectedReport.info.isProjectCityExist()){
             projectCityTF.setDisable(false);
         }
+        else{
+            projectCityTF.setText("Not required");
+        }
+
         if(selectedReport.info.isProjectProvinceExist()){
             projectProvinceCB.setDisable(false);
         }
+        else{
+            projectProvinceCB.setValue("Not required");
+        }
+
         if(selectedReport.info.isProjectPostalCodeExist()){
             projectPostalCodeTF.setDisable(false);
         }
+        else{
+            projectPostalCodeTF.setText("Not required");
+        }
+
         if(selectedReport.info.isTechnicianExist()){
             technicianTF.setDisable(false);
         }
+        else{
+            technicianTF.setText("Not required");
+        }
+
         if(selectedReport.info.isProjectManagerExist()){
             projectManagerTF.setDisable(false);
         }
+        else{
+            projectManagerTF.setText("Not required");
+        }
+
         if(selectedReport.info.isClientNameExist()){
             clientNameTF.setDisable(false);
             clientPrefixCB.setDisable(false);
         }
+        else{
+            clientNameTF.setText("Not required");
+        }
+
         if(selectedReport.info.isClientPositionExist()){
             clientPositionTF.setDisable(false);
         }
+        else{
+            clientPositionTF.setText("Not required");
+        }
+
         if(selectedReport.info.isCompanyNameExist()){
             companyNameCB.setDisable(false);
         }
+        else{
+            companyNameCB.setValue("Not Required");
+        }
+
         if(selectedReport.info.isCompanyAddressExist()){
             companyAddressTF.setDisable(false);
         }
+        else{
+            companyAddressTF.setText("Not required");
+        }
+
         if(selectedReport.info.isCompanyCityExist()){
             companyCityTF.setDisable(false);
         }
+        else{
+            companyCityTF.setText("Not required");
+        }
+
         if(selectedReport.info.isCompanyProvinceExist()){
             companyProvinceCB.setDisable(false);
         }
+        else{
+            companyProvinceCB.setValue("Not required");
+        }
+
         if(selectedReport.info.isCompanyPostalCodeExist()){
             companyPostalCodeTF.setDisable(false);
         }
+        else{
+            companyPostalCodeTF.setText("Not required");
+        }
+
         if(selectedReport.info.isBuildingNameExist()){
             buildingNameTF.setDisable(false);
         }
+        else{
+            buildingNameTF.setText("Not required");
+        }
+
         if(selectedReport.info.isSpecificLocationExist()){
             specificLocationTF.setDisable(false);
         }
+        else{
+            specificLocationTF.setText("Not required");
+        }
+
         if(selectedReport.info.isSiteWorkDateExist()){
             siteWorkDateDP.setDisable(false);
         }
+
         if(selectedReport.info.isReportDateExist()){
             reportDateDP.setDisable(false);
         }
+
         if(selectedReport.info.isPreAbatementStartDateExist()){
             preAbatementStartDP.setDisable(false);
         }
+
         if(selectedReport.info.isVisualAbatementStartExist()){
             visualAbatementStartDP.setDisable(false);
         }
+
         if(selectedReport.info.isVisualAbatementEndExist()){
             visualAbatementEndDP.setDisable(false);
         }
+
         if(selectedReport.info.isPostAbatementDateExist()){
             postAbatementDateDP.setDisable(false);
         }
+
         if(selectedReport.info.isSiteEndDateExist()){
             siteEndDateDP.setDisable(false);
         }
+
         if(selectedReport.info.isSelRepExist()){
             SELRepTF.setDisable(false);
         }
+        else{
+            SELRepTF.setText("Not required");
+        }
+
         if(selectedReport.info.isOnSiteTimeExist()){
             onSiteTimeS.setDisable(false);
         }
+
         if(selectedReport.info.isClientAddressExist()){
             clientAddressTF.setDisable(false);
         }
+        else{
+            clientAddressTF.setText("Not required");
+        }
+
         if(selectedReport.info.isClientCityExist()){
             clientCityTF.setDisable(false);
         }
+        else{
+            clientCityTF.setText("Not required");
+        }
+
         if(selectedReport.info.isClientProvinceExist()){
             clientProvinceCB.setDisable(false);
         }
+        else{
+            clientProvinceCB.setValue("Not required");
+        }
+
         if(selectedReport.info.isClientPostalCodeExist()){
             clientPostalCodeTF.setDisable(false);
         }
+        else{
+            clientPostalCodeTF.setText("Not required");
+        }
+
         if(selectedReport.info.isLocationOfAirSamplesExist()){
             locationOfAirSamplesTF.setDisable(false);
         }
+        else{
+            locationOfAirSamplesTF.setText("Not required");
+        }
+
         if(selectedReport.info.isInspectionStartDateExist()){
             inspectionStartDateDP.setDisable(false);
         }
+
         if(selectedReport.info.isSamplingDateExist()){
             samplingDateDP.setDisable(false);
         }
 
+    }
+    public void changeReports(ActionEvent event) {
+        Alert confirmChange = new Alert(Alert.AlertType.WARNING);
+        confirmChange.setTitle("Report Generator");
+        confirmChange.setHeaderText("Change Report Type");
+        confirmChange.setContentText("Are you sure you want to change reports? All entered data will be lost");
+        ButtonType yesButton = new ButtonType("Yes");
+        ButtonType cancelButton = new ButtonType("Cancel");
+        confirmChange.getButtonTypes().setAll(yesButton, cancelButton);
+        Optional<ButtonType> result = confirmChange.showAndWait();
+        if(result.get()==yesButton) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/ReportTypeMaker.fxml"));
+                Parent root = (Parent) loader.load();
+
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            return;
+        }
     }
 }
