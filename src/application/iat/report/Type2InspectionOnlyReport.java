@@ -5,12 +5,12 @@ import application.Report;
 import javafx.collections.FXCollections;
 
 public class Type2InspectionOnlyReport extends Report {
-    String name;
-    Info info;
     String reportType;
 
-    Type2InspectionOnlyReport(){
+    public Type2InspectionOnlyReport(){
         super("Type2InspectionOnly");
+        this.name="";
+        this.info=new Info();
     }
 
     public String getName() {

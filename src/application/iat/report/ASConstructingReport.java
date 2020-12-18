@@ -8,8 +8,6 @@ import javafx.collections.FXCollections;
 import java.util.List;
 
 public class ASConstructingReport extends Report {
-    String name;
-    Info info;
     String reportType;
     List<AirTestingSample> table;
     public ASConstructingReport(){

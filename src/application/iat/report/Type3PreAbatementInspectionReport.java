@@ -4,13 +4,13 @@ import application.Info;
 import application.Report;
 
 public class Type3PreAbatementInspectionReport extends Report {
-    String name;
-    Info info;
     String reportType;
     String scopeOfWork;
 
-    Type3PreAbatementInspectionReport(){
+    public Type3PreAbatementInspectionReport(){
         super("Type3PreAbatementInspection");
+        this.name="";
+        this.info=new Info();
         this.scopeOfWork = "";
     }
 

@@ -1,10 +1,16 @@
 package application.iat;
 
+import application.InfoController;
+import application.Report;
 import application.iat.sample.AirTestingSample;
 import application.iat.sample.TEMAsbestosFibreSample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -13,11 +19,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TEMAsbestosFibreController implements Initializable {
+    Report report;
+
     //visuals
     @FXML private Label title;
     @FXML private Label subtitle;
@@ -121,5 +131,50 @@ public class TEMAsbestosFibreController implements Initializable {
         invalidInputs.getButtonTypes().setAll(okayButton);
         invalidInputs.show();
         return;
+    }
+
+    public void getReport(Report selectedReport){
+        report = selectedReport;
+    }
+
+    public void goBack(ActionEvent event) {
+        if (report.interfaceCounter == 1) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/InfoPrompt.fxml"));
+                Parent root = (Parent) loader.load();
+
+                InfoController infoReport = loader.getController();
+                infoReport.getReport(report);
+
+                report.interfaceCounter--;
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(report.getInterfaces().get(report.interfaceCounter)));
+                Parent root = (Parent) loader.load();
+                if (report.getInterfaces().get(report.interfaceCounter).equals("/application/iat/AirTestingMaker.fxml")) {
+                    AirTestingController table = loader.getController();
+                    table.getReport(report);
+                } else if (report.getInterfaces().get(report.interfaceCounter).equals("/application/iat/PostAirTestingMaker.fxml")) {
+                    PostAirTestingController table = loader.getController();
+                    table.getReport(report);
+                } else if (report.getInterfaces().get(report.interfaceCounter).equals("/application/iat/TEMAsbestosFibreMaker.fxml")) {
+                    TEMAsbestosFibreController table = loader.getController();
+                    table.getReport(report);
+                }
+                report.interfaceCounter--;
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

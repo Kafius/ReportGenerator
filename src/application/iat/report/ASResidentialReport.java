@@ -14,6 +14,8 @@ public class ASResidentialReport extends Report {
     List<AirTestingSample> table;
     public ASResidentialReport(){
        super("ASResidential");
+        this.name="";
+        this.info=new Info();
        this.table = FXCollections.observableArrayList();
     }
     public String getName() {

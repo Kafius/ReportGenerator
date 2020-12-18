@@ -8,12 +8,12 @@ import javafx.collections.FXCollections;
 import java.util.List;
 
 public class PostInspectionType1Type2Report extends Report {
-    String name;
-    Info info;
     String reportType;
     List<PostAirTestingSample> table;
-    PostInspectionType1Type2Report(){
+    public PostInspectionType1Type2Report(){
         super("PostInspectionType1Type2");
+        this.name="";
+        this.info=new Info();
         this.table = FXCollections.observableArrayList();
     }
 

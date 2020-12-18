@@ -1,5 +1,12 @@
 package application;
 
+import application.iat.AirTestingController;
+import application.iat.PostAirTestingController;
+import application.iat.TEMAsbestosFibreController;
+import application.walkin.AsbestosController;
+import application.walkin.BacteroidesController;
+import application.walkin.LeadController;
+import application.walkin.MouldGrowthController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -27,7 +35,8 @@ public class InfoController implements Initializable {
     AnchorPane ap;
 
     //buttons for report info
-    @FXML private Button changeButton, nextButton;
+    @FXML private Button changeButton;
+    @FXML private Button nextButton;
 
     @FXML Label projectNameL;
     @FXML Label projectNumberL;
@@ -92,7 +101,7 @@ public class InfoController implements Initializable {
     @FXML DatePicker siteEndDateDP;
     @FXML DatePicker inspectionStartDateDP;
 
-    @FXML ComboBox companyNameCB;
+    @FXML ComboBox<String> companyNameCB;
     @FXML TextField companyAddressTF;
     @FXML TextField companyCityTF;
     @FXML ChoiceBox<String> companyProvinceCB;
@@ -408,5 +417,312 @@ public class InfoController implements Initializable {
         else {
             return;
         }
+    }
+
+    @FXML
+    public void submitBasicInfo(ActionEvent event) {
+        if(checkTextFields()) {
+            if(report.info.isProjectNumberExist()) {
+                report.getInfo().setProjectNumber(projectNumberTF.getText());
+            }
+
+            if(report.info.isProjectNameExist()) {
+                report.getInfo().setProjectName(projectNameTF.getText());
+            }
+
+            if(report.info.isProjectAddressExist()) {
+                report.getInfo().setProjectAddress(projectAddressTF.getText());
+            }
+
+            if(report.info.isProjectCityExist()){
+                report.getInfo().setProjectCity(projectCityTF.getText());
+            }
+
+            if(report.info.isProjectProvinceExist()){
+                report.getInfo().setProjectProvince(projectProvinceCB.getValue());
+            }
+
+            if(report.info.isProjectPostalCodeExist()){
+                report.getInfo().setProjectPostalCode(projectPostalCodeTF.getText());
+            }
+
+            if(report.info.isTechnicianExist()){
+                report.getInfo().setTechnician(technicianTF.getText());
+            }
+
+            if(report.info.isProjectManagerExist()){
+                report.getInfo().setProjectManager(projectManagerTF.getText());
+            }
+
+            if(report.info.isClientNameExist()){
+                report.getInfo().setClientName(clientNameTF.getText());
+            }
+
+            if(report.info.isClientPositionExist()){
+                report.getInfo().setClientPosition(clientPositionTF.getText());
+            }
+
+            if(report.info.isCompanyNameExist()){
+                report.getInfo().setCompanyName(companyNameCB.getValue());
+            }
+
+            if(report.info.isCompanyAddressExist()){
+                report.getInfo().setCompanyAddress(companyAddressTF.getText());
+            }
+
+            if(report.info.isCompanyCityExist()){
+                report.getInfo().setCompanyCity(companyCityTF.getText());
+            }
+
+            if(report.info.isCompanyProvinceExist()){
+                report.getInfo().setCompanyProvince(companyProvinceCB.getValue());
+            }
+
+            if(report.info.isCompanyPostalCodeExist()){
+                report.getInfo().setCompanyPostalCode(companyPostalCodeTF.getText());
+            }
+
+            if(report.info.isBuildingNameExist()){
+                report.getInfo().setBuildingName(buildingNameTF.getText());
+            }
+
+            if(report.info.isSpecificLocationExist()){
+                report.getInfo().setSpecificLocation(specificLocationTF.getText());
+            }
+
+            if(report.info.isSiteWorkDateExist()){
+                report.getInfo().setSiteWorkDate(siteWorkDateDP.getValue().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+            }
+
+            if(report.info.isReportDateExist()){
+                report.getInfo().setReportDate(reportDateDP.getValue().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+            }
+
+            if(report.info.isPreAbatementStartDateExist()){
+                report.getInfo().setPreAbatementStartDate(preAbatementStartDP.getValue().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+            }
+
+            if(report.info.isVisualAbatementStartExist()){
+                report.getInfo().setVisualAbatementStart(visualAbatementStartDP.getValue().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+            }
+
+            if(report.info.isVisualAbatementEndExist()){
+                report.getInfo().setVisualAbatementEnd(visualAbatementEndDP.getValue().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+            }
+
+            if(report.info.isPostAbatementDateExist()){
+                report.getInfo().setPostAbatementDate(postAbatementDateDP.getValue().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+            }
+
+            if(report.info.isSiteEndDateExist()){
+                report.getInfo().setSiteEndDate(siteEndDateDP.getValue().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+            }
+
+            if(report.info.isSelRepExist()){
+                report.getInfo().setSelRep(SELRepTF.getText());
+            }
+
+            if(report.info.isOnSiteTimeExist()){
+                report.getInfo().setOnSiteTime(onSiteTimeS.getValue());
+            }
+
+            if(report.info.isClientAddressExist()){
+                report.getInfo().setClientAddress(clientAddressTF.getText());
+            }
+
+            if(report.info.isClientCityExist()){
+                report.getInfo().setClientCity(clientCityTF.getText());
+            }
+
+            if(report.info.isClientProvinceExist()){
+                report.getInfo().setClientProvince(clientProvinceCB.getValue());
+            }
+
+            if(report.info.isClientPostalCodeExist()){
+                report.getInfo().setClientPostalCode(clientPostalCodeTF.getText());
+            }
+
+            if(report.info.isLocationOfAirSamplesExist()){
+                report.getInfo().setLocationOfAirSamples(locationOfAirSamplesTF.getText());
+            }
+
+            if(report.info.isInspectionStartDateExist()){
+                report.getInfo().setInspectionStartDate(inspectionStartDateDP.getValue().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+            }
+
+            if(report.info.isSamplingDateExist()){
+                report.getInfo().setSamplingDate(samplingDateDP.getValue().format(DateTimeFormatter.ofPattern("MMMM dd, yyyy")));
+            }
+        }
+        else {
+            Alert invalidInputs = new Alert(Alert.AlertType.ERROR);
+            invalidInputs.setTitle("New Report");
+            invalidInputs.setHeaderText("Missing Inputs");
+            invalidInputs.setContentText("Fill in all missing entries.");
+            ButtonType okayButton = new ButtonType("Okay");
+            invalidInputs.getButtonTypes().setAll(okayButton);
+            invalidInputs.show();
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(report.getInterfaces().get(report.interfaceCounter)));
+            Parent root = (Parent) loader.load();
+            if(report.getInterfaces().get(report.interfaceCounter).equals("/application/iat/AirTestingMaker.fxml")) {
+                AirTestingController table = loader.getController();
+                table.getReport(report);
+            }
+            else if(report.getInterfaces().get(report.interfaceCounter).equals("/application/iat/PostAirTestingMaker.fxml")) {
+                PostAirTestingController table = loader.getController();
+                table.getReport(report);
+            }
+            else if(report.getInterfaces().get(report.interfaceCounter).equals("/application/iat/TEMAsbestosFibreMaker.fxml")) {
+                TEMAsbestosFibreController table = loader.getController();
+                table.getReport(report);
+            }
+            report.interfaceCounter++;
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkTextFields() {
+
+        if(report.info.isProjectNumberExist()&&projectNumberTF.getText().equals("")) {
+            return false;
+        }
+
+        if(report.info.isProjectNameExist()&&projectNameTF.getText().equals("")) {
+            return false;
+        }
+
+        if(report.info.isProjectAddressExist()&&projectAddressTF.getText().equals("")) {
+            return false;
+        }
+
+        if(report.info.isProjectCityExist()&&projectCityTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isProjectProvinceExist()&&projectProvinceCB.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isProjectPostalCodeExist()&&projectPostalCodeTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isTechnicianExist()&&technicianTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isProjectManagerExist()&&projectManagerTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isClientNameExist()&&clientNameTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isClientPositionExist()&&clientPositionTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isCompanyNameExist()&&companyNameCB.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isCompanyAddressExist()&&companyAddressTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isCompanyCityExist()&&companyCityTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isCompanyProvinceExist()&&companyProvinceCB.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isCompanyPostalCodeExist()&&companyPostalCodeTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isBuildingNameExist()&&buildingNameTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isSpecificLocationExist()&&specificLocationTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isSiteWorkDateExist()&&siteWorkDateDP.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isReportDateExist()&&reportDateDP.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isPreAbatementStartDateExist()&&preAbatementStartDP.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isVisualAbatementStartExist()&&visualAbatementStartDP.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isVisualAbatementEndExist()&&visualAbatementEndDP.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isPostAbatementDateExist()&&postAbatementDateDP.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isSiteEndDateExist()&&siteEndDateDP.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isSelRepExist()&&SELRepTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isOnSiteTimeExist()&&onSiteTimeS.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isClientAddressExist()&&clientAddressTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isClientCityExist()&&clientCityTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isClientProvinceExist()&&clientProvinceCB.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isClientPostalCodeExist()&&clientPostalCodeTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isLocationOfAirSamplesExist()&&locationOfAirSamplesTF.getText().equals("")){
+            return false;
+        }
+
+        if(report.info.isInspectionStartDateExist()&&inspectionStartDateDP.getValue().equals("")){
+            return false;
+        }
+
+        if(report.info.isSamplingDateExist()&&samplingDateDP.getValue().equals("")){
+            return false;
+        }
+        return true;
     }
 }

@@ -5,23 +5,28 @@ import application.Report;
 import application.iat.sample.AirTestingSample;
 import javafx.collections.FXCollections;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AsbestosAbatementCloseOutReport extends Report {
-    String name;
-    Info info;
     String reportType;
     List<String> deficiencies;
     String procedure;
     String specifications;
     List<AirTestingSample> table;
+    public List<String> interfaces;
+    public int interfaceCounter;
 
     public AsbestosAbatementCloseOutReport(){
         super("AsbestosAbatementCloseOut");
+        this.name="";
+        this.info=new Info();
         this.deficiencies = FXCollections.observableArrayList();
         this.procedure = "";
         this.specifications = "";
         this.table = FXCollections.observableArrayList();
+        this.interfaces = new ArrayList<String>();
+        this.interfaceCounter = 0;
     }
 
     public String getName() {
@@ -78,5 +83,17 @@ public class AsbestosAbatementCloseOutReport extends Report {
 
     public void setTable(List<AirTestingSample> table) {
         this.table = table;
+    }
+
+    public List<String> getInterfaces() {
+        return interfaces;
+    }
+
+    public void setInterfaces(List<String> interfaces) {
+        this.interfaces = interfaces;
+    }
+
+    public void addInterface(String newInterface){
+        this.interfaces.add(newInterface);
     }
 }

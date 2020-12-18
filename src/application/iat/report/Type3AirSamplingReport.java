@@ -8,12 +8,12 @@ import javafx.collections.FXCollections;
 import java.util.List;
 
 public class Type3AirSamplingReport extends Report {
-    String name;
-    Info info;
     String reportType;
     List<PostAirTestingSample> table;
-    Type3AirSamplingReport(){
+    public Type3AirSamplingReport(){
         super("Type3AirSampling");
+        this.name="";
+        this.info=new Info();
         this.table = FXCollections.observableArrayList();
     }
     public String getName() {

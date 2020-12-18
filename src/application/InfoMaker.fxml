@@ -71,10 +71,10 @@
                               <TextField fx:id="projectAddressTF" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="209.0" translateX="25.0" translateY="25.0" />
                               <Label fx:id="projectCityL" text="City" translateX="45.0" translateY="25.0" />
                               <TextField fx:id="projectCityTF" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="98.0" translateX="55.0" translateY="25.0" />
-                              <Label fx:id="clientProvinceL" text="Province" translateX="80.0" translateY="25.0" />
-                              <ChoiceBox fx:id="projectProvinceCB" prefHeight="25.0" prefWidth="57.0" translateX="100.0" translateY="25.0" />
+                              <Label fx:id="projectProvinceL" text="Province" translateX="80.0" translateY="25.0" />
+                              <ChoiceBox fx:id="projectProvinceCB" disable="true" prefHeight="25.0" prefWidth="57.0" translateX="100.0" translateY="25.0" />
                               <Label fx:id="projectPostalCodeL" text="Postal Code" translateX="110.0" translateY="25.0" />
-                              <TextField fx:id="projectPostalCodeTF" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="53.0" translateX="120.0" translateY="25.0" />
+                              <TextField fx:id="projectPostalCodeTF" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="53.0" translateX="120.0" translateY="25.0" />
                            </children>
                         </HBox>
                      </children>
@@ -113,11 +113,11 @@
                         </HBox>
                         <HBox fx:id="companyAddressSection2" prefHeight="66.0" prefWidth="200.0">
                            <children>
-                              <Label text="Pre Abatement Start Date" translateX="10.0" translateY="25.0" />
+                              <Label fx:id="preAbatementStartL" text="Pre Abatement Start Date" translateX="10.0" translateY="25.0" />
                               <DatePicker fx:id="preAbatementStartDP" disable="true" prefHeight="25.0" prefWidth="60.0" translateX="20.0" translateY="25.0" />
-                              <Label fx:id="companyCityL2" text="Visual Abatement Start Date" translateX="30.0" translateY="25.0" />
+                              <Label fx:id="visualAbatementStartL" text="Visual Abatement Start Date" translateX="30.0" translateY="25.0" />
                               <DatePicker fx:id="visualAbatementStartDP" disable="true" prefHeight="25.0" prefWidth="60.0" translateX="45.0" translateY="25.0" />
-                              <Label fx:id="companyProvinceL2" text="Visual Abatement End Date" translateX="60.0" translateY="25.0" />
+                              <Label fx:id="visualAbatementEndL" text="Visual Abatement End Date" translateX="60.0" translateY="25.0" />
                               <DatePicker fx:id="visualAbatementEndDP" disable="true" prefHeight="25.0" prefWidth="60.0" translateX="65.0" translateY="25.0" />
                            </children>
                         </HBox>
@@ -211,8 +211,8 @@
       </ScrollPane>
       <HBox fx:id="buttonSection" layoutX="26.0" layoutY="630.0" prefHeight="25.0" prefWidth="733.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="133.0" text="Change Report Type" translateX="40.0" />
-            <Button mnemonicParsing="false" prefWidth="81.0" text="Next &gt;" translateX="440.0" />
+            <Button fx:id="changeButton" mnemonicParsing="false" onAction="#changeReports" prefHeight="25.0" prefWidth="133.0" text="Change Report Type" translateX="40.0" />
+            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#submitBasicInfo" prefWidth="81.0" text="Next &gt;" translateX="440.0" />
          </children>
       </HBox>
    </children>

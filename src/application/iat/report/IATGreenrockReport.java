@@ -8,13 +8,13 @@ import javafx.collections.FXCollections;
 import java.util.List;
 
 public class IATGreenrockReport extends Report {
-    String name;
-    Info info;
     String reportType;
     List<PostAirTestingSample> table;
 
     public IATGreenrockReport(){
         super("IATGreenrock");
+        this.name="";
+        this.info=new Info();
         this.table= FXCollections.observableArrayList();
     }
 

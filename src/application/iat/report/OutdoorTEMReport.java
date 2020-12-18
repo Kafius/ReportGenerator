@@ -8,12 +8,12 @@ import javafx.collections.FXCollections;
 import java.util.List;
 
 public class OutdoorTEMReport extends Report {
-    String name;
-    Info info;
     String reportType;
     List<TEMAsbestosFibreSample> table;
-    OutdoorTEMReport(){
+    public OutdoorTEMReport(){
         super("OutdoorTEM");
+        this.name="";
+        this.info=new Info();
         this.table = FXCollections.observableArrayList();
     }
     public String getName() {

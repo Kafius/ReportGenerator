@@ -8,8 +8,6 @@ import javafx.collections.FXCollections;
 import java.util.List;
 
 public class Type3CloseOutReport extends Report {
-    String name;
-    Info info;
     String reportType;
     List<AirTestingSample> table;
     List<String> preDeficiencies;
@@ -18,6 +16,8 @@ public class Type3CloseOutReport extends Report {
 
     public Type3CloseOutReport(){
         super("Type3CloseOut");
+        this.name="";
+        this.info=new Info();
         this.table = FXCollections.observableArrayList();
         this.preDeficiencies = FXCollections.observableArrayList();
         this.duringAbatementInspection="";

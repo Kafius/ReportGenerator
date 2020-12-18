@@ -8,16 +8,16 @@ import javafx.collections.FXCollections;
 import java.util.List;
 
 public class Type3AirTestingReport extends Report {
-    String name;
-    Info info;
     String reportType;
     String scopeOfWork;
     String flowRate;
     String postAbatementInspection;
     List<PostAirTestingSample> table;
 
-    Type3AirTestingReport(){
+    public Type3AirTestingReport(){
         super("Type3AirTesting");
+        this.name="";
+        this.info=new Info();
         this.scopeOfWork= "";
         this.flowRate= "";
         this.postAbatementInspection= "";

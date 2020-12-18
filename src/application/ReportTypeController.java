@@ -86,9 +86,9 @@ public class ReportTypeController implements Initializable{
 		list.add(type);
 		type = new ReportType("4","Inspection & Air Testing","Inspection & Air Testing Report - during Type 3","N/A");
 		list.add(type);
-		type = new ReportType("4","Inspection & Air Testing","Pre-Abatement Inspection Report_Type 3_Formal","N/A");
+		type = new ReportType("4","Inspection & Air Testing","Pre-Abatement Inspection Report - Type 3 Formal","N/A");
 		list.add(type);
-		type = new ReportType("5","Inspection & Air Testing","Type 3 Summary Report_Pre, During, Post, Clearance","N/A");
+		type = new ReportType("5","Inspection & Air Testing","Type 3 Summary Report - pre during post clearance","N/A");
 		list.add(type);
 		type = new ReportType("6","Inspection & Air Testing","Type 3 Summary Report_Pre, Post, Clearance","N/A");
 		list.add(type);
@@ -204,6 +204,7 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Pre-Abatement Inspection Report - Type 3 Formal":
+				report = new Type3PreAbatementInspectionReport();
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setCompanyAddressExist(true);
 				report.getInfo().setCompanyCityExist(true);
@@ -215,6 +216,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectCityExist(true);
 				report.getInfo().setProjectProvinceExist(true);
 				report.getInfo().setOnSiteTimeExist(true);
+				break;
 
 			case "Type 3 Summary Report - pre during post clearance":
 				report = new AsbestosAbatementCloseOutReport();
@@ -237,6 +239,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setVisualAbatementEndExist(true);
 				report.getInfo().setPostAbatementDateExist(true);
 				report.getInfo().setSiteEndDateExist(true);
+				break;
 
 			case "Type 3 Summary Report - pre post clearance":
 				report.getInfo().setProjectNumberExist(true);
@@ -262,6 +265,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setVisualAbatementEndExist(true);
 				report.getInfo().setPostAbatementDateExist(true);
 				report.getInfo().setSiteWorkDateExist(true);
+				break;
 
 			case "Post-Abatement Inspection and Air Testing Report - Greenrock Properties":
 				report = new IATGreenrockReport();
@@ -284,9 +288,10 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setVisualAbatementStartExist(true);
 				report.getInfo().setVisualAbatementEndExist(true);
 				report.getInfo().setSiteWorkDateExist(true);
+				break;
 
 			case "Type 2 Summary Report":
-
+				report = new PostInspectionType1Type2Report();
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -306,6 +311,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setVisualAbatementStartExist(true);
 				report.getInfo().setVisualAbatementEndExist(true);
 				report.getInfo().setSiteWorkDateExist(true);
+				break;
 
 			case "Post-Abatement Inspection Report - Building Demolition Type 3":
 				report.getInfo().setSpecificLocationExist(true);
@@ -325,8 +331,10 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setVisualAbatementEndExist(true);
 				report.getInfo().setSiteWorkDateExist(true);
+				break;
 
 			case "Post-Abatement Inspection Report - Type 2 Visual Only":
+				report = new Type2InspectionOnlyReport();
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -344,6 +352,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setVisualAbatementEndExist(true);
 				report.getInfo().setSiteWorkDateExist(true);
+				break;
 
 			case "PCM Air Sampling - Residential":
 				report = new ASResidentialReport();
@@ -359,6 +368,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectPostalCodeExist(true);
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setSiteEndDateExist(true);
+				break;
 
 			case "PCM Air Sampling - Construction Projects":
 				report = new ASConstructingReport();
@@ -373,8 +383,10 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectProvinceExist(true);
 				report.getInfo().setProjectPostalCodeExist(true);
 				report.getInfo().setSiteWorkDateExist(true);
+				break;
 
 			case "Type 3 Clearance Report - Final Visual and Air Sampling":
+				report = new Type3AirSamplingReport();
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -390,8 +402,10 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectManagerExist(true);
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setInspectionStartDateExist(true);
+				break;
 
 			case "TEM Air Sampling During Outdoor Type 3 Operation":
+				report = new OutdoorTEMReport();
 				report.getInfo().setReportDateExist(true);
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setCompanyAddressExist(true);
@@ -404,7 +418,9 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectPostalCodeExist(true);
 				report.getInfo().setInspectionStartDateExist(true);
 				report.getInfo().setProjectManagerExist(true);
+				break;
 			case "Inspection and Air Testing during Abatement_Outdoor Type 3":
+				report = new Type3AirTestingReport();
 				report.getInfo().setReportDateExist(true);
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setCompanyAddressExist(true);
@@ -421,6 +437,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setVisualAbatementStartExist(true);
 				report.getInfo().setTechnicianExist(true);
 				report.getInfo().setProjectManagerExist(true);
+				break;
 		}
 	}
 }

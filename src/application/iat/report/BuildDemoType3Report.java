@@ -4,11 +4,11 @@ import application.Info;
 import application.Report;
 
 public class BuildDemoType3Report extends Report {
-    String name;
-    Info info;
     String reportType;
     BuildDemoType3Report(){
         super("BuildDemoType3");
+        this.name="";
+        this.info=new Info();
     }
 
     public String getName() {

@@ -9,9 +9,6 @@ import com.sun.xml.bind.v2.util.CollisionCheckStack;
 import javafx.collections.FXCollections;
 
 public class WalkInReport extends Report {
-    public Info info;
-    String name;
-	String reportType;
 	public List<Sample> table;
 	List<String> conclusions;
 	int tableLength;
@@ -26,6 +23,7 @@ public class WalkInReport extends Report {
 
 	public WalkInReport(Report report){
 		super(report.reportType);
+		this.table = FXCollections.observableArrayList();
 		this.conclusions = FXCollections.observableArrayList();
 		this.tableLength = 0;
 		this.finalConclusion="";

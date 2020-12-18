@@ -8,14 +8,14 @@ import javafx.collections.FXCollections;
 import java.util.List;
 
 public class MultipleType3Report extends Report {
-    String name;
-    Info info;
     List<String> deficiencies;
     String procedure;
     List<AirTestingSample> table;
 
     MultipleType3Report(){
         super("MultipleType3");
+        this.name="";
+        this.info=new Info();
         this.deficiencies = FXCollections.observableArrayList();
         this.procedure = "";
         this.table = FXCollections.observableArrayList();
