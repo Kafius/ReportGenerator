@@ -52,7 +52,7 @@
       <HBox fx:id="buttonSection" layoutX="25.0" layoutY="630.0" prefHeight="25.0" prefWidth="733.0">
          <children>
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" prefWidth="81.0" text="&lt; Back" translateX="440.0" />
-            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#submitTable" prefHeight="25.0" prefWidth="81.0" text="Next &gt;" translateX="480.0" />
+            <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Next &gt;" translateX="480.0" />
          </children>
       </HBox>
       <GridPane fx:id="entry" alignment="CENTER" layoutX="21.0" layoutY="461.0" prefHeight="137.0" prefWidth="726.0">

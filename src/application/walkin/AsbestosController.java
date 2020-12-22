@@ -118,7 +118,7 @@ public class AsbestosController implements Initializable{
 				materialDescriptionFinal = materialDescriptionCB.getValue();
 			}
 			else if(!colourDescriptionCB.getValue().equals("N/A")&&!materialDescriptionCB.getValue().equals("N/A")) {
-				materialDescriptionFinal = colourDescriptionCB.getValue() + " - " + materialDescriptionCB.getValue();
+				materialDescriptionFinal = materialDescriptionCB.getValue() + " - " + colourDescriptionCB.getValue();
 			}
 			else {
 				materialDescriptionFinal = "No Description";
@@ -147,14 +147,16 @@ public class AsbestosController implements Initializable{
 				sampleNumberTF.getText().equals("")||
 				materialDescriptionCB.getValue().equals("")||
 				materialDescriptionCB.getValue().equals("Material")||
-				colourDescriptionCB.getValue().equals("Colour")||
-				(!asbestosContentTF.getText().equals("")&&asbestosForms.getValue()==null)) {
+				colourDescriptionCB.getValue().equals("Colour")){
 			missingInputError();
 			return false;
 		}
 		else {
 			try {
-				Double.parseDouble(asbestosContentTF.getText());
+				System.out.print(asbestosContentTF.getText().isEmpty());
+				if(!asbestosContentTF.getText().isEmpty()^!asbestosContentTF.getText().equals("0")){
+					Double.parseDouble(asbestosContentTF.getText());
+				}
 			}
 			catch(Exception e) {
 				invalidInputError();

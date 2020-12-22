@@ -76,7 +76,7 @@ public class WalkInReport extends Report {
 	}
 	
 	public void setFileName() {
-		this.name = this.info.getProjectNumber()+"-"+this.info.getProjectAddress()+"-"+this.info.getProjectAddress()+", "+this.info.getProjectCity()+"-Report Final.docx";
+		this.name = this.info.getProjectNumber()+"-"+this.info.getCompanyName()+"-"+this.info.getProjectAddress()+"-Report Final.docx";
 	}
 	
 	public void clearConclusions() {

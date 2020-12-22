@@ -17,12 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -72,6 +67,48 @@ public class ReportTypeController implements Initializable{
 		
 		categoryField.getSelectionModel().selectedItemProperty().addListener( (observableValue,oldValue,newValue) -> {
 			narrow();
+		});
+
+		table.setRowFactory(tv -> {
+			TableRow<ReportType> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if(event.getClickCount() ==2 && (!row.isEmpty())){
+					FXMLLoader loader;
+					Parent root;
+					try {
+						switch(table.getSelectionModel().getSelectedItem().getCategory()){
+							case "Walk In":
+								report= new WalkInReport(table.getSelectionModel().getSelectedItem().getTitle());
+								loader = new FXMLLoader(getClass().getResource("/application/walkin/BasicInfoPrompt.fxml"));
+								root = loader.load();
+								BasicInfoController controller1 = loader.getController();
+								controller1.getReport(report);
+								break;
+							default:
+								report = new Report(table.getSelectionModel().getSelectedItem().getTitle());
+								setInformation(table.getSelectionModel().getSelectedItem().getTitle());
+								loader = new FXMLLoader(getClass().getResource("/application/InfoMaker.fxml"));
+								root = loader.load();
+								InfoController controller = loader.getController();
+								controller.getReport(report);
+								break;
+						}
+
+
+						Stage stage = new Stage();
+						stage.setScene(new Scene(root));
+						stage.setResizable(false);
+						stage.show();
+
+						Stage thisStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+						thisStage.close();
+					}
+					catch(IOException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			return row;
 		});
 	}
 	
@@ -192,6 +229,8 @@ public class ReportTypeController implements Initializable{
 		switch(reportType){
 			case "Inspection & Air Testing Report - during Type 3":
 				report = new siteInspectionReport();
+				report.addInterface("Info.fxml                                                                                                                         ");
+				report.addInterface("");
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);

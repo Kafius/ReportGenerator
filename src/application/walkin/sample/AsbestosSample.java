@@ -25,7 +25,7 @@ public class AsbestosSample extends Sample {
 			sL = "Not Specified";
 		}
 		this.sampleLocation = new SimpleStringProperty(sL);
-		if(aC.equals("0")) {
+		if(aC.equals("0")||(aC.equals("0")&&aF.isEmpty())) {
 			aC = "None Detected"; 
 		}
 		

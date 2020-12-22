@@ -191,6 +191,8 @@ public class GenerateReportController implements Initializable{
 	public XWPFDocument generateHeaderFooter(XWPFDocument document) {
 		replaceTextInFooter(document, "$PROJECT_NUMBER",newReport3.getInfo().getProjectNumber());
 		replaceTextInFooter(document, "$PROJECT_ADDRESS",newReport3.getInfo().getProjectAddress());
+		replaceTextInFooter(document,"$PROJECT_CITY",newReport3.getInfo().getProjectCity());
+		replaceTextInFooter(document,"$PROJECT_PROVINCE",newReport3.getInfo().getProjectProvince());
 		return document;
 	}
 	

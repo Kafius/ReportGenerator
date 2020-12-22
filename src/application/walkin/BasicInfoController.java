@@ -211,10 +211,10 @@ public class BasicInfoController implements Initializable{
 		clientNameTitles.getItems().addAll("Mr.","Mrs.","");
 		clientNameTitles.setValue("Mr.");
 
-		companyProvinceCB.getItems().addAll("NL","PE","NS","NB","QC","ON","MB","SK","AB","BC","YT","NT","NU");
+		companyProvinceCB.getItems().addAll("Newfoundland and Labrador","Prince Edward Island","Nova Scotia","New Brunswick","Quebec","Ontario","Manitoba","Saskatchewan","Alberta","British Columbia");
 		companyProvinceCB.setValue("--");
 
-		projectProvinceCB.getItems().addAll("NL","PE","NS","NB","QC","ON","MB","SK","AB","BC","YT","NT","NU");
+		projectProvinceCB.getItems().addAll("Newfoundland and Labrador","Prince Edward Island","Nova Scotia","New Brunswick","Quebec","Ontario","Manitoba","Saskatchewan","Alberta","British Columbia");
 		projectProvinceCB.setValue("--");
 		
 		try {

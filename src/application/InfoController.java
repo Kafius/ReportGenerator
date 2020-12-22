@@ -18,6 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,94 +40,190 @@ public class InfoController implements Initializable {
     @FXML private Button changeButton;
     @FXML private Button nextButton;
 
-    @FXML Label projectNameL;
-    @FXML Label projectNumberL;
-    @FXML Label SELRepL;
-    @FXML Label technicianL;
-    @FXML Label projectManagerL;
-    @FXML Label projectAddressL;
-    @FXML Label projectCityL;
-    @FXML Label projectProvinceL;
-    @FXML Label projectPostalCodeL;
+    final int textfieldSize = 240;
+    final int translateX = 10;
 
-    @FXML Label buildingNameL;
-    @FXML Label specificLocationL;
-    @FXML Label locationOfAirSamplesL;
+    Label projectNameL = new Label("Project Name");
 
-    @FXML Label siteWorkDateL;
-    @FXML Label reportDateL;
-    @FXML Label onSiteTimeL;
-    @FXML Label samplingDateL;
-    @FXML Label preAbatementStartL;
-    @FXML Label visualAbatementStartL;
-    @FXML Label visualAbatementEndL;
-    @FXML Label postAbatementDateL;
-    @FXML Label siteEndDateL;
-    @FXML Label inspectionStartDateL;
+    Label projectNumberL= new Label("Project Number");
+    Label SELRepL= new Label("SEL Rep");
+    Label technicianL= new Label("Technician");
+    Label projectManagerL= new Label("Project Manager");
+    Label projectAddressL= new Label("Address");
+    Label projectCityL= new Label("City");
+    Label projectProvinceL= new Label("Province");
+    Label projectPostalCodeL= new Label("Postal Code");
 
-    @FXML Label companyNameL;
-    @FXML Label companyAddressL;
-    @FXML Label companyCityL;
-    @FXML Label companyProvinceL;
-    @FXML Label companyPostalCodeL;
+    Label buildingNameL= new Label("Building Name");
+    Label specificLocationL= new Label("Specific Location");
 
-    @FXML Label clientNameL;
-    @FXML Label clientPositionL;
-    @FXML Label clientAddressL;
-    @FXML Label clientCityL;
-    @FXML Label clientProvinceL;
-    @FXML Label clientPostalCodeL;
+    Label siteWorkDateL= new Label("Site Work Date");
+    Label reportDateL= new Label("Report Date");
+    Label onSiteTimeL= new Label("On Site Time");
+    Label samplingDateL= new Label("Sampling Date");
+    Label preAbatementStartL= new Label("Pre Abatement Start Date");
+    Label visualAbatementStartL= new Label("Visual Abatement Start Date");
+    Label visualAbatementEndL= new Label("Visual Abatement End Date");
+    Label postAbatementDateL= new Label("Post Abatement Date");
+    Label siteEndDateL= new Label("Site End Date");
+    Label inspectionStartDateL= new Label("Inspection Start Date");
 
-    @FXML TextField projectNameTF;
-    @FXML TextField projectNumberTF;
-    @FXML TextField SELRepTF;
-    @FXML TextField technicianTF;
-    @FXML TextField projectManagerTF;
-    @FXML TextField projectAddressTF;
-    @FXML TextField projectCityTF;
-    @FXML ChoiceBox<String> projectProvinceCB;
-    @FXML TextField projectPostalCodeTF;
+    Label companyNameL= new Label("Name");
+    Label companyAddressL= new Label("Address");
+    Label companyCityL= new Label("City");
+    Label companyProvinceL= new Label("Province");
+    Label companyPostalCodeL= new Label("Postal Code");
 
-    @FXML TextField buildingNameTF;
-    @FXML TextField specificLocationTF;
-    @FXML TextField locationOfAirSamplesTF;
+    Label clientNameL= new Label("Name");
+    Label clientPositionL= new Label("Position");
+    Label clientAddressL= new Label("Address");
+    Label clientCityL= new Label("City");
+    Label clientProvinceL= new Label("Province");
+    Label clientPostalCodeL= new Label("Postal Code");
 
-    @FXML DatePicker siteWorkDateDP;
-    @FXML DatePicker reportDateDP;
-    @FXML Spinner<String> onSiteTimeS;
-    @FXML DatePicker samplingDateDP;
-    @FXML DatePicker preAbatementStartDP;
-    @FXML DatePicker visualAbatementStartDP;
-    @FXML DatePicker visualAbatementEndDP;
-    @FXML DatePicker postAbatementDateDP;
-    @FXML DatePicker siteEndDateDP;
-    @FXML DatePicker inspectionStartDateDP;
+    TextField projectNameTF = new TextField();
+    TextField projectNumberTF= new TextField();
+    TextField SELRepTF= new TextField();
+    TextField technicianTF= new TextField();
+    TextField projectManagerTF= new TextField();
+    TextField projectAddressTF= new TextField();
+    TextField projectCityTF= new TextField();
+    ChoiceBox<String> projectProvinceCB = new ChoiceBox<>();
+    TextField projectPostalCodeTF= new TextField();
 
-    @FXML ComboBox<String> companyNameCB;
-    @FXML TextField companyAddressTF;
-    @FXML TextField companyCityTF;
-    @FXML ChoiceBox<String> companyProvinceCB;
-    @FXML TextField companyPostalCodeTF;
+    TextField buildingNameTF= new TextField();
+    TextField specificLocationTF= new TextField();
 
-    @FXML ChoiceBox<String> clientPrefixCB;
-    @FXML TextField clientNameTF;
-    @FXML TextField clientPositionTF;
-    @FXML TextField clientAddressTF;
-    @FXML TextField clientCityTF;
-    @FXML ChoiceBox<String> clientProvinceCB;
-    @FXML TextField clientPostalCodeTF;
+    DatePicker siteWorkDateDP = new DatePicker();
+    DatePicker reportDateDP = new DatePicker();
+    Spinner<String> onSiteTimeS;
+    DatePicker samplingDateDP = new DatePicker();
+    DatePicker preAbatementStartDP = new DatePicker();
+    DatePicker visualAbatementStartDP = new DatePicker();
+    DatePicker visualAbatementEndDP = new DatePicker();
+    DatePicker postAbatementDateDP = new DatePicker();
+    DatePicker siteEndDateDP = new DatePicker();
+    DatePicker inspectionStartDateDP = new DatePicker();
+
+    ComboBox<String> companyNameCB = new ComboBox<>();
+    TextField companyAddressTF= new TextField();
+    TextField companyCityTF= new TextField();
+    ChoiceBox<String> companyProvinceCB = new ChoiceBox<>();
+    TextField companyPostalCodeTF= new TextField();
+
+    ChoiceBox<String> clientPrefixCB = new ChoiceBox<>();
+    TextField clientNameTF= new TextField();
+    TextField clientPositionTF= new TextField();
+    TextField clientAddressTF= new TextField();
+    TextField clientCityTF= new TextField();
+    ChoiceBox<String> clientProvinceCB = new ChoiceBox<>();
+    TextField clientPostalCodeTF= new TextField();
+
+    @FXML GridPane projectInfoBox;
+    int projectRow = 0;
+    int projectColumn = 0;
+
+    @FXML GridPane locationInfoBox;
+    int locationRow = 0;
+    int locationColumn = 0;
+
+    @FXML GridPane timeDateInfoBox;
+    int timeDateRow = 0;
+    int timeDateColumn = 0;
+    @FXML GridPane companyInfoBox;
+    int companyRow = 0;
+    int companyColumn = 0;
+
+    @FXML GridPane clientInfoBox;
+    int clientRow = 0;
+    int clientColumn = 0;
 
     ObservableList<String> companyNames = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        clientProvinceCB.getItems().addAll("NL","PE","NS","NB","QC","ON","MB","SK","AB","BC","YT","NT","NU");
+        projectNameTF.setMaxWidth(textfieldSize);
+        projectNumberTF.setMaxWidth(textfieldSize);
+        SELRepTF.setMaxWidth(textfieldSize);
+        technicianTF.setMaxWidth(textfieldSize);
+        projectManagerTF.setMaxWidth(textfieldSize);
+        projectAddressTF.setMaxWidth(textfieldSize);
+        projectCityTF.setMaxWidth(textfieldSize);
+        projectProvinceCB.setMaxWidth(textfieldSize);
+        projectPostalCodeTF.setMaxWidth(textfieldSize);
+
+        buildingNameTF.setMaxWidth(textfieldSize);
+        specificLocationTF.setMaxWidth(textfieldSize);
+
+        siteWorkDateDP.setMaxWidth(textfieldSize);
+        reportDateDP.setMaxWidth(textfieldSize);
+        samplingDateDP.setMaxWidth(textfieldSize);
+        preAbatementStartDP.setMaxWidth(textfieldSize);
+        visualAbatementStartDP.setMaxWidth(textfieldSize);
+        visualAbatementEndDP.setMaxWidth(textfieldSize);
+        postAbatementDateDP.setMaxWidth(textfieldSize);
+        siteEndDateDP.setMaxWidth(textfieldSize);
+        inspectionStartDateDP.setMaxWidth(textfieldSize);
+
+        companyNameCB.setMaxWidth(textfieldSize);
+        companyAddressTF.setMaxWidth(textfieldSize);
+        companyCityTF.setMaxWidth(textfieldSize);
+        companyProvinceCB.setMaxWidth(textfieldSize);
+        companyPostalCodeTF.setMaxWidth(textfieldSize);
+
+        clientPrefixCB.setMaxWidth(textfieldSize);
+        clientNameTF.setMaxWidth(textfieldSize);
+        clientPositionTF.setMaxWidth(textfieldSize);
+        clientAddressTF.setMaxWidth(textfieldSize);
+        clientCityTF.setMaxWidth(textfieldSize);
+        clientProvinceCB.setMaxWidth(textfieldSize);
+        clientPostalCodeTF.setMaxWidth(textfieldSize);
+
+        projectNameL.setTranslateX(translateX);
+
+        projectNumberL.setTranslateX(translateX);
+        SELRepL.setTranslateX(translateX);
+        technicianL.setTranslateX(translateX);
+        projectManagerL.setTranslateX(translateX);
+        projectAddressL.setTranslateX(translateX);
+        projectCityL.setTranslateX(translateX);
+        projectProvinceL.setTranslateX(translateX);
+        projectPostalCodeL.setTranslateX(translateX);
+
+        buildingNameL.setTranslateX(translateX);
+        specificLocationL.setTranslateX(translateX);
+
+        siteWorkDateL.setTranslateX(translateX);
+        reportDateL.setTranslateX(translateX);
+        onSiteTimeL.setTranslateX(translateX);
+        samplingDateL.setTranslateX(translateX);
+        preAbatementStartL.setTranslateX(translateX);
+        visualAbatementStartL.setTranslateX(translateX);
+        visualAbatementEndL.setTranslateX(translateX);
+        postAbatementDateL.setTranslateX(translateX);
+        siteEndDateL.setTranslateX(translateX);
+        inspectionStartDateL.setTranslateX(translateX);
+
+        companyNameL.setTranslateX(translateX);
+        companyAddressL.setTranslateX(translateX);
+        companyCityL.setTranslateX(translateX);
+        companyProvinceL.setTranslateX(translateX);
+        companyPostalCodeL.setTranslateX(translateX);
+
+        clientNameL.setTranslateX(translateX);
+        clientPositionL.setTranslateX(translateX);
+        clientAddressL.setTranslateX(translateX);
+        clientCityL.setTranslateX(translateX);
+        clientProvinceL.setTranslateX(translateX);
+        clientPostalCodeL.setTranslateX(translateX);
+
+        clientProvinceCB.getItems().addAll("Newfoundland and Labrador","Prince Edward Island","Nova Scotia","New Brunswick","Quebec","Ontario","Manitoba","Saskatchewan","Alberta","British Columbia");
         clientProvinceCB.setValue("--");
 
-        companyProvinceCB.getItems().addAll("NL","PE","NS","NB","QC","ON","MB","SK","AB","BC","YT","NT","NU");
+        companyProvinceCB.getItems().addAll("Newfoundland and Labrador","Prince Edward Island","Nova Scotia","New Brunswick","Quebec","Ontario","Manitoba","Saskatchewan","Alberta","British Columbia");
         companyProvinceCB.setValue("--");
 
-        projectProvinceCB.getItems().addAll("NL","PE","NS","NB","QC","ON","MB","SK","AB","BC","YT","NT","NU");
+        projectProvinceCB.getItems().addAll("Newfoundland and Labrador","Prince Edward Island","Nova Scotia","New Brunswick","Quebec","Ontario","Manitoba","Saskatchewan","Alberta","British Columbia");
         projectProvinceCB.setValue("--");
 
         try {
@@ -174,7 +272,6 @@ public class InfoController implements Initializable {
 
         buildingNameTF.setText(selectedReport.info.getBuildingName());
         specificLocationTF.setText(selectedReport.info.getSpecificLocation());
-        locationOfAirSamplesTF.setText(selectedReport.info.getLocationOfAirSamples());
 
         companyNameCB.setValue(selectedReport.info.getCompanyName());
         companyAddressTF.setText(selectedReport.info.getCompanyAddress());
@@ -190,205 +287,405 @@ public class InfoController implements Initializable {
         clientPostalCodeTF.setText(selectedReport.info.getClientPostalCode());
 
         if(selectedReport.info.isProjectNumberExist()) {
-            projectNumberTF.setDisable(false);
-        }
-        else{
-            projectNumberTF.setText("Not required");
+            projectInfoBox.add(projectNumberL,projectColumn,projectRow);
+            projectColumn++;
+
+            projectInfoBox.add(projectNumberTF,projectColumn,projectRow);
+            projectColumn++;
+
+            if(projectColumn==4){
+                projectColumn=0;
+                projectRow++;
+            }
+
         }
 
         if(selectedReport.info.isProjectNameExist()) {
-            projectNameTF.setDisable(false);
-        }
-        else{
-            projectNameTF.setText("Not required");
+            projectInfoBox.add(projectNameL,projectColumn,projectRow);
+            projectColumn++;
+
+            projectInfoBox.add(projectNameTF,projectColumn,projectRow);
+            projectColumn++;
+
+            if(projectColumn==4){
+                projectColumn=0;
+                projectRow++;
+            }
         }
 
         if(selectedReport.info.isProjectAddressExist()) {
-            projectAddressTF.setDisable(false);
-        }
-        else{
-            projectAddressTF.setText("Not required");
+            projectInfoBox.add(projectAddressL,projectColumn,projectRow);
+            projectColumn++;
+
+            projectInfoBox.add(projectAddressTF,projectColumn,projectRow);
+            projectColumn++;
+
+            if(projectColumn==4){
+                projectColumn=0;
+                projectRow++;
+            }
         }
 
         if(selectedReport.info.isProjectCityExist()){
-            projectCityTF.setDisable(false);
-        }
-        else{
-            projectCityTF.setText("Not required");
+            projectInfoBox.add(projectCityL,projectColumn,projectRow);
+            projectColumn++;
+
+            projectInfoBox.add(projectCityTF,projectColumn,projectRow);
+            projectColumn++;
+
+            if(projectColumn==4){
+                projectColumn=0;
+                projectRow++;
+            }
         }
 
+        //TODO
         if(selectedReport.info.isProjectProvinceExist()){
-            projectProvinceCB.setDisable(false);
-        }
-        else{
-            projectProvinceCB.setValue("Not required");
+            projectInfoBox.add(projectProvinceL,projectColumn,projectRow);
+            projectColumn++;
+
+            projectInfoBox.add(projectProvinceCB,projectColumn,projectRow);
+            projectColumn++;
+
+            if(projectColumn==4){
+                projectColumn=0;
+                projectRow++;
+            }
         }
 
         if(selectedReport.info.isProjectPostalCodeExist()){
-            projectPostalCodeTF.setDisable(false);
-        }
-        else{
-            projectPostalCodeTF.setText("Not required");
+            projectInfoBox.add(projectPostalCodeL,projectColumn,projectRow);
+            projectColumn++;
+
+            projectInfoBox.add(projectPostalCodeTF,projectColumn,projectRow);
+            projectColumn++;
+
+            if(projectColumn==4){
+                projectColumn=0;
+                projectRow++;
+            }
         }
 
         if(selectedReport.info.isTechnicianExist()){
-            technicianTF.setDisable(false);
-        }
-        else{
-            technicianTF.setText("Not required");
+            projectInfoBox.add(projectNumberL,projectColumn,projectRow);
+            projectColumn++;
+
+            projectInfoBox.add(projectNumberTF,projectColumn,projectRow);
+            projectColumn++;
+
+            if(projectColumn==4){
+                projectColumn=0;
+                projectRow++;
+            }
         }
 
         if(selectedReport.info.isProjectManagerExist()){
-            projectManagerTF.setDisable(false);
-        }
-        else{
-            projectManagerTF.setText("Not required");
+            projectInfoBox.add(projectManagerL,projectColumn,projectRow);
+            projectColumn++;
+
+            projectInfoBox.add(projectManagerTF,projectColumn,projectRow);
+            projectColumn++;
+
+            if(projectColumn==4){
+                projectColumn=0;
+                projectRow++;
+            }
         }
 
+        //TODO
         if(selectedReport.info.isClientNameExist()){
             clientNameTF.setDisable(false);
             clientPrefixCB.setDisable(false);
         }
-        else{
-            clientNameTF.setText("Not required");
-        }
 
         if(selectedReport.info.isClientPositionExist()){
-            clientPositionTF.setDisable(false);
-        }
-        else{
-            clientPositionTF.setText("Not required");
+            clientInfoBox.add(clientNameL,clientColumn,clientRow);
+            clientColumn++;
+
+            clientInfoBox.add(clientNameTF,clientColumn,clientRow);
+            clientColumn++;
+
+            if(clientColumn==4){
+                clientColumn=0;
+                clientRow++;
+            }
         }
 
         if(selectedReport.info.isCompanyNameExist()){
-            companyNameCB.setDisable(false);
-        }
-        else{
-            companyNameCB.setValue("Not Required");
+            companyInfoBox.add(companyNameL,companyColumn,companyRow);
+            companyColumn++;
+
+            companyInfoBox.add(companyNameCB,companyColumn,companyRow);
+            companyColumn++;
+
+            if(companyColumn==4){
+                companyColumn=0;
+                companyRow++;
+            }
         }
 
         if(selectedReport.info.isCompanyAddressExist()){
-            companyAddressTF.setDisable(false);
-        }
-        else{
-            companyAddressTF.setText("Not required");
+            companyInfoBox.add(companyAddressL,companyColumn,companyRow);
+            companyColumn++;
+
+            companyInfoBox.add(companyAddressTF,companyColumn,companyRow);
+            companyColumn++;
+
+            if(companyColumn==4){
+                companyColumn=0;
+                companyRow++;
+            }
         }
 
         if(selectedReport.info.isCompanyCityExist()){
-            companyCityTF.setDisable(false);
-        }
-        else{
-            companyCityTF.setText("Not required");
+            companyInfoBox.add(companyCityL,companyColumn,companyRow);
+            companyColumn++;
+
+            companyInfoBox.add(companyCityTF,companyColumn,companyRow);
+            companyColumn++;
+
+            if(companyColumn==4){
+                companyColumn=0;
+                companyRow++;
+            }
         }
 
         if(selectedReport.info.isCompanyProvinceExist()){
-            companyProvinceCB.setDisable(false);
-        }
-        else{
-            companyProvinceCB.setValue("Not required");
+            companyInfoBox.add(companyProvinceL,companyColumn,companyRow);
+            companyColumn++;
+
+            companyInfoBox.add(companyProvinceCB,companyColumn,companyRow);
+            companyColumn++;
+
+            if(companyColumn==4){
+                companyColumn=0;
+                companyRow++;
+            }
         }
 
         if(selectedReport.info.isCompanyPostalCodeExist()){
-            companyPostalCodeTF.setDisable(false);
-        }
-        else{
-            companyPostalCodeTF.setText("Not required");
+            companyInfoBox.add(companyPostalCodeL,companyColumn,companyRow);
+            companyColumn++;
+
+            companyInfoBox.add(companyPostalCodeTF,companyColumn,companyRow);
+            companyColumn++;
+
+            if(companyColumn==4){
+                companyColumn=0;
+                companyRow++;
+            }
         }
 
         if(selectedReport.info.isBuildingNameExist()){
-            buildingNameTF.setDisable(false);
-        }
-        else{
-            buildingNameTF.setText("Not required");
+            locationInfoBox.add(buildingNameL,locationColumn,locationRow);
+            locationColumn++;
+
+            locationInfoBox.add(buildingNameTF,locationColumn,locationRow);
+            locationColumn++;
+
+            if(locationColumn==4){
+                locationColumn=0;
+                locationRow++;
+            }
         }
 
         if(selectedReport.info.isSpecificLocationExist()){
-            specificLocationTF.setDisable(false);
-        }
-        else{
-            specificLocationTF.setText("Not required");
+            locationInfoBox.add(specificLocationL,locationColumn,locationRow);
+            locationColumn++;
+
+            locationInfoBox.add(specificLocationTF,locationColumn,locationRow);
+            locationColumn++;
+
+            if(locationColumn==4){
+                locationColumn=0;
+                locationRow++;
+            }
         }
 
         if(selectedReport.info.isSiteWorkDateExist()){
-            siteWorkDateDP.setDisable(false);
+            timeDateInfoBox.add(siteWorkDateL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(siteEndDateDP,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            if(timeDateColumn==4){
+                timeDateColumn=0;
+                timeDateRow++;
+            }
         }
 
         if(selectedReport.info.isReportDateExist()){
-            reportDateDP.setDisable(false);
+            timeDateInfoBox.add(reportDateL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(reportDateDP,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            if(timeDateColumn==4){
+                timeDateColumn=0;
+                timeDateRow++;
+            }
         }
 
         if(selectedReport.info.isPreAbatementStartDateExist()){
-            preAbatementStartDP.setDisable(false);
+            timeDateInfoBox.add(preAbatementStartL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(preAbatementStartDP,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            if(timeDateColumn==4){
+                timeDateColumn=0;
+                timeDateRow++;
+            }
         }
 
         if(selectedReport.info.isVisualAbatementStartExist()){
-            visualAbatementStartDP.setDisable(false);
+            timeDateInfoBox.add(visualAbatementStartL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(visualAbatementStartDP,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            if(timeDateColumn==4){
+                timeDateColumn=0;
+                timeDateRow++;
+            }
         }
 
         if(selectedReport.info.isVisualAbatementEndExist()){
-            visualAbatementEndDP.setDisable(false);
+            timeDateInfoBox.add(visualAbatementEndL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(visualAbatementEndDP,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            if(timeDateColumn==4){
+                timeDateColumn=0;
+                timeDateRow++;
+            }
         }
 
         if(selectedReport.info.isPostAbatementDateExist()){
-            postAbatementDateDP.setDisable(false);
+            timeDateInfoBox.add(postAbatementDateL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(postAbatementDateDP,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            if(timeDateColumn==4){
+                timeDateColumn=0;
+                timeDateRow++;
+            }
         }
 
         if(selectedReport.info.isSiteEndDateExist()){
-            siteEndDateDP.setDisable(false);
+            timeDateInfoBox.add(siteEndDateL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(siteEndDateDP,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            if(timeDateColumn==4){
+                timeDateColumn=0;
+                timeDateRow++;
+            }
         }
 
         if(selectedReport.info.isSelRepExist()){
-            SELRepTF.setDisable(false);
-        }
-        else{
-            SELRepTF.setText("Not required");
+            projectInfoBox.add(SELRepL,projectColumn,projectRow);
+            projectColumn++;
+
+            projectInfoBox.add(SELRepTF,projectColumn,projectRow);
+            projectColumn++;
+
+            if(projectColumn==4){
+                projectColumn=0;
+                projectRow++;
+            }
         }
 
         if(selectedReport.info.isOnSiteTimeExist()){
-            onSiteTimeS.setDisable(false);
+            //TODO
         }
 
         if(selectedReport.info.isClientAddressExist()){
-            clientAddressTF.setDisable(false);
-        }
-        else{
-            clientAddressTF.setText("Not required");
+            clientInfoBox.add(clientAddressL,clientColumn,clientRow);
+            clientColumn++;
+
+            clientInfoBox.add(clientAddressTF,clientColumn,clientRow);
+            clientColumn++;
+
+            if(clientColumn==4){
+                clientColumn=0;
+                clientRow++;
+            }
         }
 
         if(selectedReport.info.isClientCityExist()){
-            clientCityTF.setDisable(false);
-        }
-        else{
-            clientCityTF.setText("Not required");
+            clientInfoBox.add(clientCityL,clientColumn,clientRow);
+            clientColumn++;
+
+            clientInfoBox.add(clientCityTF,clientColumn,clientRow);
+            clientColumn++;
+
+            if(clientColumn==4){
+                clientColumn=0;
+                clientRow++;
+            }
         }
 
         if(selectedReport.info.isClientProvinceExist()){
-            clientProvinceCB.setDisable(false);
-        }
-        else{
-            clientProvinceCB.setValue("Not required");
+            clientInfoBox.add(clientProvinceL,clientColumn,clientRow);
+            clientColumn++;
+
+            clientInfoBox.add(clientProvinceCB,clientColumn,clientRow);
+            clientColumn++;
+
+            if(clientColumn==4){
+                clientColumn=0;
+                clientRow++;
+            }
         }
 
         if(selectedReport.info.isClientPostalCodeExist()){
-            clientPostalCodeTF.setDisable(false);
-        }
-        else{
-            clientPostalCodeTF.setText("Not required");
-        }
+            clientInfoBox.add(clientPostalCodeL,clientColumn,clientRow);
+            clientColumn++;
 
-        if(selectedReport.info.isLocationOfAirSamplesExist()){
-            locationOfAirSamplesTF.setDisable(false);
-        }
-        else{
-            locationOfAirSamplesTF.setText("Not required");
+            clientInfoBox.add(clientPostalCodeTF,clientColumn,clientRow);
+            clientColumn++;
+
+            if(clientColumn==4){
+                clientColumn=0;
+                clientRow++;
+            }
         }
 
         if(selectedReport.info.isInspectionStartDateExist()){
-            inspectionStartDateDP.setDisable(false);
+            timeDateInfoBox.add(inspectionStartDateL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(inspectionStartDateDP,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            if(timeDateColumn==4){
+                timeDateColumn=0;
+                timeDateRow++;
+            }
         }
 
         if(selectedReport.info.isSamplingDateExist()){
-            samplingDateDP.setDisable(false);
+            timeDateInfoBox.add(samplingDateL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(samplingDateDP,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            if(timeDateColumn==4){
+                timeDateColumn=0;
+                timeDateRow++;
+            }
         }
 
     }
@@ -540,10 +837,6 @@ public class InfoController implements Initializable {
 
             if(report.info.isClientPostalCodeExist()){
                 report.getInfo().setClientPostalCode(clientPostalCodeTF.getText());
-            }
-
-            if(report.info.isLocationOfAirSamplesExist()){
-                report.getInfo().setLocationOfAirSamples(locationOfAirSamplesTF.getText());
             }
 
             if(report.info.isInspectionStartDateExist()){
@@ -712,9 +1005,6 @@ public class InfoController implements Initializable {
             return false;
         }
 
-        if(report.info.isLocationOfAirSamplesExist()&&locationOfAirSamplesTF.getText().equals("")){
-            return false;
-        }
 
         if(report.info.isInspectionStartDateExist()&&inspectionStartDateDP.getValue().equals("")){
             return false;
