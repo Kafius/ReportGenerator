@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -49,7 +50,7 @@
             <Image url="@../../pictures/safetechlogo1.png" />
          </image>
       </ImageView>
-      <HBox layoutX="25.0" layoutY="630.0" prefHeight="25.0" prefWidth="733.0">
+      <HBox fx:id="buttonSection" layoutX="25.0" layoutY="630.0" prefHeight="25.0" prefWidth="733.0">
          <children>
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" prefWidth="81.0" text="&lt; Back" translateX="440.0" />
             <Button fx:id="nextButton" mnemonicParsing="false" onAction="#submitTable" prefHeight="25.0" prefWidth="81.0" text="Next &gt;" translateX="480.0" />
@@ -79,8 +80,9 @@
             <Label fx:id="asbestosContentL" alignment="TOP_CENTER" text="Asbestos Content:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="asbestosContentTF" maxWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" />
-                  <ChoiceBox fx:id="asbestosForms" prefHeight="25.0" prefWidth="197.0" />
+                  <TextField fx:id="asbestosContentTF" maxWidth="-Infinity" prefHeight="25.0" prefWidth="36.0" />
+                  <ChoiceBox fx:id="asbestosForms" prefHeight="25.0" prefWidth="116.0" />
+                  <CheckBox fx:id="noneDetected" mnemonicParsing="false" text="None Detected" translateX="10.0" translateY="5.0" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">

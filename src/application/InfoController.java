@@ -719,6 +719,18 @@ public class InfoController implements Initializable {
     @FXML
     public void submitBasicInfo(ActionEvent event) {
         if(checkTextFields()) {
+            if(companyNameCB.getValue().equals("Home Owner")){
+                if(report.info.isCompanyAddressExist()&&report.info.isProjectAddressExist()){
+                    projectAddressTF.setText(companyAddressTF.getText());
+                }
+                if(report.info.isCompanyCityExist()&&report.info.isProjectCityExist()){
+                    projectCityTF.setText(companyAddressTF.getText());
+                }
+                if(report.info.isCompanyProvinceExist()&&report.info.isProjectProvinceExist()){
+                    projectProvinceCB.setValue(companyProvinceCB.getValue());
+                }
+            }
+
             if(report.info.isProjectNumberExist()) {
                 report.getInfo().setProjectNumber(projectNumberTF.getText());
             }
@@ -1005,12 +1017,18 @@ public class InfoController implements Initializable {
             return false;
         }
 
-
         if(report.info.isInspectionStartDateExist()&&inspectionStartDateDP.getValue().equals("")){
             return false;
         }
 
         if(report.info.isSamplingDateExist()&&samplingDateDP.getValue().equals("")){
+            return false;
+        }
+
+        if((!companyNameCB.getValue().equals("Home Owner")&&
+                (report.info.isProjectAddressExist()&&projectAddressTF.getText().equals(""))||
+                (report.info.isProjectCityExist()&&projectCityTF.getText().equals(""))||
+                (report.info.isProjectProvinceExist()&&projectProvinceCB.getValue().equals("")))){
             return false;
         }
         return true;

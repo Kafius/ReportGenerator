@@ -17,15 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -85,8 +77,25 @@ public class AsbestosController implements Initializable{
 	//Buttons for Table 1: Bulk Sample Analytical Results for Determination of Asbestos Content
 	@FXML private Button addSample, removeSample, nextButton, backButton;
 
+	@FXML private CheckBox noneDetected;
+
 	@Override
-	public void initialize(URL location, ResourceBundle resources) { 
+	public void initialize(URL location, ResourceBundle resources) {
+
+		noneDetected.selectedProperty().addListener(observable -> {
+			if(noneDetected.isSelected()){
+				asbestosForms.setValue("");
+				asbestosForms.setDisable(true);
+
+				asbestosContentTF.setText("0");
+				asbestosContentTF.setDisable(true);
+			}
+			else{
+				asbestosForms.setDisable(false);
+				asbestosContentTF.setDisable(false);
+			}
+		});
+
 		sampleNumber.setCellValueFactory(new PropertyValueFactory<Sample, String>("sampleNumber"));
 		materialDescription.setCellValueFactory(new PropertyValueFactory<Sample, String>("materialDescription"));
 		sampleLocation.setCellValueFactory(new PropertyValueFactory<Sample, String>("sampleLocation"));
@@ -147,16 +156,16 @@ public class AsbestosController implements Initializable{
 				sampleNumberTF.getText().equals("")||
 				materialDescriptionCB.getValue().equals("")||
 				materialDescriptionCB.getValue().equals("Material")||
-				colourDescriptionCB.getValue().equals("Colour")){
+				colourDescriptionCB.getValue().equals("Colour")||
+				(asbestosContentTF.getText().equals("")&&asbestosForms.getValue()==null)||
+				(!asbestosContentTF.getText().equals("")&&asbestosForms.getValue()==null)||
+						(!asbestosContentTF.getText().equals("")&&asbestosForms.getValue()==null)){
 			missingInputError();
 			return false;
 		}
 		else {
 			try {
-				System.out.print(asbestosContentTF.getText().isEmpty());
-				if(!asbestosContentTF.getText().isEmpty()^!asbestosContentTF.getText().equals("0")){
 					Double.parseDouble(asbestosContentTF.getText());
-				}
 			}
 			catch(Exception e) {
 				invalidInputError();

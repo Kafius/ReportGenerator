@@ -207,7 +207,6 @@ public class BasicInfoController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 		clientNameTitles.getItems().addAll("Mr.","Mrs.","");
 		clientNameTitles.setValue("Mr.");
 
@@ -231,13 +230,19 @@ public class BasicInfoController implements Initializable{
 		}
 		companyNameCB.valueProperty().addListener((observable,oldValue,newValue)->{
 			if(newValue.equals("Home Owner")) {
-				projectAddressTF.setText(companyAddressTF.getText());
-				projectCityTF.setText(companyCityTF.getText());
-				projectProvinceCB.setValue(companyProvinceCB.getValue());
-				
 				projectAddressTF.setDisable(true);
 				projectCityTF.setDisable(true);
 				projectProvinceCB.setDisable(true);
+
+				companyAddressTF.textProperty().addListener((observable1,oldValue1,newValue1)->{
+					projectAddressTF.setText(companyAddressTF.getText());
+				});
+				companyCityTF.textProperty().addListener((observable2,oldValue2,newValue2)->{
+					projectCityTF.setText(companyCityTF.getText());
+				});
+				companyProvinceCB.valueProperty().addListener((observable3,oldValue3,newValue3)->{
+					projectProvinceCB.setValue(companyProvinceCB.getValue());
+				});
 			}
 			else {
 				projectAddressTF.setDisable(false);
