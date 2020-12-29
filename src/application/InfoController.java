@@ -1,12 +1,5 @@
 package application;
 
-import application.iat.AirTestingController;
-import application.iat.PostAirTestingController;
-import application.iat.TEMAsbestosFibreController;
-import application.walkin.AsbestosController;
-import application.walkin.BacteroidesController;
-import application.walkin.LeadController;
-import application.walkin.MouldGrowthController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,12 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -96,7 +87,7 @@ public class InfoController implements Initializable {
 
     DatePicker siteWorkDateDP = new DatePicker();
     DatePicker reportDateDP = new DatePicker();
-    Spinner<String> onSiteTimeS;
+    Spinner<String> onSiteTimeS = new Spinner<>(0,100,0,1);
     DatePicker samplingDateDP = new DatePicker();
     DatePicker preAbatementStartDP = new DatePicker();
     DatePicker visualAbatementStartDP = new DatePicker();
@@ -260,33 +251,83 @@ public class InfoController implements Initializable {
 
     public void getReport(Report selectedReport){
         report = selectedReport;
+        if(report.info.isProjectNumberExist()){
+            projectNumberTF.setText(selectedReport.info.getProjectNumber());
+        }
+        if(report.info.isSelRepExist()){
+            SELRepTF.setText(selectedReport.info.getSelRep());
+        }
+        if(report.info.isTechnicianExist()) {
+            technicianTF.setText(selectedReport.info.getTechnician());
+        }
+        if(report.info.isProjectManagerExist()){
+            projectManagerTF.setText(selectedReport.info.getProjectManager());
+        }
 
-        projectNumberTF.setText(selectedReport.info.getProjectNumber());
-        SELRepTF.setText(selectedReport.info.getSelRep());
-        technicianTF.setText(selectedReport.info.getTechnician());
-        projectManagerTF.setText(selectedReport.info.getProjectManager());
-        projectAddressTF.setText(selectedReport.info.getProjectAddress());
-        projectCityTF.setText(selectedReport.info.getProjectCity());
-        projectProvinceCB.setValue(selectedReport.info.getProjectProvince());
-        projectPostalCodeTF.setText(selectedReport.info.getProjectPostalCode());
+        if(report.info.isProjectAddressExist()){
+            projectAddressTF.setText(selectedReport.info.getProjectAddress());
+        }
 
-        buildingNameTF.setText(selectedReport.info.getBuildingName());
-        specificLocationTF.setText(selectedReport.info.getSpecificLocation());
+        if(report.info.isProjectCityExist()){
+            projectCityTF.setText(selectedReport.info.getProjectCity());
+        }
 
-        companyNameCB.setValue(selectedReport.info.getCompanyName());
-        companyAddressTF.setText(selectedReport.info.getCompanyAddress());
-        companyCityTF.setText(selectedReport.info.getCompanyCity());
-        companyProvinceCB.setValue(selectedReport.info.getCompanyProvince());
-        companyPostalCodeTF.setText(selectedReport.info.getCompanyPostalCode());
+        if(report.info.isProjectProvinceExist()){
+            projectProvinceCB.setValue(selectedReport.info.getProjectProvince());
+        }
 
-        clientNameTF.setText(selectedReport.info.getClientName());
-        clientPositionTF.setText(selectedReport.info.getClientPosition());
-        clientAddressTF.setText(selectedReport.info.getClientAddress());
-        clientCityTF.setText(selectedReport.info.getClientCity());
-        clientProvinceCB.setValue(selectedReport.info.getClientProvince());
-        clientPostalCodeTF.setText(selectedReport.info.getClientPostalCode());
+        if(report.info.isProjectPostalCodeExist()){
+            projectPostalCodeTF.setText(selectedReport.info.getProjectPostalCode());
+        }
 
-        if(selectedReport.info.isProjectNumberExist()) {
+        if(report.info.isBuildingNameExist()){
+            buildingNameTF.setText(selectedReport.info.getBuildingName());
+        }
+
+        if(report.info.isSpecificLocationExist()){
+            specificLocationTF.setText(selectedReport.info.getSpecificLocation());
+        }
+
+        if(report.info.isCompanyNameExist()){
+            companyNameCB.setValue(selectedReport.info.getCompanyName());
+        }
+
+        if(report.info.isCompanyAddressExist()){
+            companyAddressTF.setText(selectedReport.info.getCompanyAddress());
+        }
+
+        if(report.info.isCompanyCityExist()){
+            companyCityTF.setText(selectedReport.info.getCompanyCity());
+        }
+
+        if(report.info.isCompanyProvinceExist()){
+            companyProvinceCB.setValue(selectedReport.info.getCompanyProvince());
+        }
+
+        if(report.info.isCompanyPostalCodeExist()){
+            companyPostalCodeTF.setText(selectedReport.info.getCompanyPostalCode());
+        }
+
+        if(report.info.isClientNameExist()){
+            clientNameTF.setText(selectedReport.info.getClientName());
+        }
+
+        if(report.info.isClientPositionExist()){
+            clientPositionTF.setText(selectedReport.info.getClientPosition());
+        }
+        if(report.info.isClientAddressExist()) {
+            clientAddressTF.setText(selectedReport.info.getClientAddress());
+        }
+        if(report.info.isClientCityExist()) {
+            clientCityTF.setText(selectedReport.info.getClientCity());
+        }
+        if(report.info.isClientPositionExist()) {
+            clientProvinceCB.setValue(selectedReport.info.getClientProvince());
+        }
+        if(report.info.isClientPositionExist()) {
+            clientPostalCodeTF.setText(selectedReport.info.getClientPostalCode());
+        }
+        if(report.info.isProjectNumberExist()) {
             projectInfoBox.add(projectNumberL,projectColumn,projectRow);
             projectColumn++;
 
@@ -300,7 +341,7 @@ public class InfoController implements Initializable {
 
         }
 
-        if(selectedReport.info.isProjectNameExist()) {
+        if(report.info.isProjectNameExist()) {
             projectInfoBox.add(projectNameL,projectColumn,projectRow);
             projectColumn++;
 
@@ -313,7 +354,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isProjectAddressExist()) {
+        if(report.info.isProjectAddressExist()) {
             projectInfoBox.add(projectAddressL,projectColumn,projectRow);
             projectColumn++;
 
@@ -326,7 +367,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isProjectCityExist()){
+        if(report.info.isProjectCityExist()){
             projectInfoBox.add(projectCityL,projectColumn,projectRow);
             projectColumn++;
 
@@ -339,8 +380,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        //TODO
-        if(selectedReport.info.isProjectProvinceExist()){
+        if(report.info.isProjectProvinceExist()){
             projectInfoBox.add(projectProvinceL,projectColumn,projectRow);
             projectColumn++;
 
@@ -353,7 +393,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isProjectPostalCodeExist()){
+        if(report.info.isProjectPostalCodeExist()){
             projectInfoBox.add(projectPostalCodeL,projectColumn,projectRow);
             projectColumn++;
 
@@ -366,7 +406,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isTechnicianExist()){
+        if(report.info.isTechnicianExist()){
             projectInfoBox.add(projectNumberL,projectColumn,projectRow);
             projectColumn++;
 
@@ -379,7 +419,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isProjectManagerExist()){
+        if(report.info.isProjectManagerExist()){
             projectInfoBox.add(projectManagerL,projectColumn,projectRow);
             projectColumn++;
 
@@ -392,13 +432,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        //TODO
-        if(selectedReport.info.isClientNameExist()){
-            clientNameTF.setDisable(false);
-            clientPrefixCB.setDisable(false);
-        }
-
-        if(selectedReport.info.isClientPositionExist()){
+        if(report.info.isClientNameExist()){
             clientInfoBox.add(clientNameL,clientColumn,clientRow);
             clientColumn++;
 
@@ -411,7 +445,20 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isCompanyNameExist()){
+        if(report.info.isClientPositionExist()){
+            clientInfoBox.add(clientPositionL,clientColumn,clientRow);
+            clientColumn++;
+
+            clientInfoBox.add(clientPositionTF,clientColumn,clientRow);
+            clientColumn++;
+
+            if(clientColumn==4){
+                clientColumn=0;
+                clientRow++;
+            }
+        }
+
+        if(report.info.isCompanyNameExist()){
             companyInfoBox.add(companyNameL,companyColumn,companyRow);
             companyColumn++;
 
@@ -424,7 +471,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isCompanyAddressExist()){
+        if(report.info.isCompanyAddressExist()){
             companyInfoBox.add(companyAddressL,companyColumn,companyRow);
             companyColumn++;
 
@@ -437,7 +484,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isCompanyCityExist()){
+        if(report.info.isCompanyCityExist()){
             companyInfoBox.add(companyCityL,companyColumn,companyRow);
             companyColumn++;
 
@@ -450,7 +497,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isCompanyProvinceExist()){
+        if(report.info.isCompanyProvinceExist()){
             companyInfoBox.add(companyProvinceL,companyColumn,companyRow);
             companyColumn++;
 
@@ -463,7 +510,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isCompanyPostalCodeExist()){
+        if(report.info.isCompanyPostalCodeExist()){
             companyInfoBox.add(companyPostalCodeL,companyColumn,companyRow);
             companyColumn++;
 
@@ -476,7 +523,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isBuildingNameExist()){
+        if(report.info.isBuildingNameExist()){
             locationInfoBox.add(buildingNameL,locationColumn,locationRow);
             locationColumn++;
 
@@ -489,7 +536,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isSpecificLocationExist()){
+        if(report.info.isSpecificLocationExist()){
             locationInfoBox.add(specificLocationL,locationColumn,locationRow);
             locationColumn++;
 
@@ -502,11 +549,11 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isSiteWorkDateExist()){
+        if(report.info.isSiteWorkDateExist()){
             timeDateInfoBox.add(siteWorkDateL,timeDateColumn,timeDateRow);
             timeDateColumn++;
 
-            timeDateInfoBox.add(siteEndDateDP,timeDateColumn,timeDateRow);
+            timeDateInfoBox.add(siteWorkDateDP,timeDateColumn,timeDateRow);
             timeDateColumn++;
 
             if(timeDateColumn==4){
@@ -515,7 +562,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isReportDateExist()){
+        if(report.info.isReportDateExist()){
             timeDateInfoBox.add(reportDateL,timeDateColumn,timeDateRow);
             timeDateColumn++;
 
@@ -528,7 +575,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isPreAbatementStartDateExist()){
+        if(report.info.isPreAbatementStartDateExist()){
             timeDateInfoBox.add(preAbatementStartL,timeDateColumn,timeDateRow);
             timeDateColumn++;
 
@@ -541,7 +588,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isVisualAbatementStartExist()){
+        if(report.info.isVisualAbatementStartExist()){
             timeDateInfoBox.add(visualAbatementStartL,timeDateColumn,timeDateRow);
             timeDateColumn++;
 
@@ -567,7 +614,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isPostAbatementDateExist()){
+        if(report.info.isPostAbatementDateExist()){
             timeDateInfoBox.add(postAbatementDateL,timeDateColumn,timeDateRow);
             timeDateColumn++;
 
@@ -580,7 +627,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isSiteEndDateExist()){
+        if(report.info.isSiteEndDateExist()){
             timeDateInfoBox.add(siteEndDateL,timeDateColumn,timeDateRow);
             timeDateColumn++;
 
@@ -593,7 +640,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isSelRepExist()){
+        if(report.info.isSelRepExist()){
             projectInfoBox.add(SELRepL,projectColumn,projectRow);
             projectColumn++;
 
@@ -606,11 +653,19 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isOnSiteTimeExist()){
-            //TODO
+        if(report.info.isOnSiteTimeExist()){
+            timeDateInfoBox.add(onSiteTimeL,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+
+            timeDateInfoBox.add(onSiteTimeS,timeDateColumn,timeDateRow);
+            timeDateColumn++;
+            if(clientColumn==4){
+                clientColumn=0;
+                clientRow++;
+            }
         }
 
-        if(selectedReport.info.isClientAddressExist()){
+        if(report.info.isClientAddressExist()){
             clientInfoBox.add(clientAddressL,clientColumn,clientRow);
             clientColumn++;
 
@@ -623,7 +678,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isClientCityExist()){
+        if(report.info.isClientCityExist()){
             clientInfoBox.add(clientCityL,clientColumn,clientRow);
             clientColumn++;
 
@@ -636,7 +691,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isClientProvinceExist()){
+        if(report.info.isClientProvinceExist()){
             clientInfoBox.add(clientProvinceL,clientColumn,clientRow);
             clientColumn++;
 
@@ -649,7 +704,7 @@ public class InfoController implements Initializable {
             }
         }
 
-        if(selectedReport.info.isClientPostalCodeExist()){
+        if(report.info.isClientPostalCodeExist()){
             clientInfoBox.add(clientPostalCodeL,clientColumn,clientRow);
             clientColumn++;
 
@@ -719,15 +774,17 @@ public class InfoController implements Initializable {
     @FXML
     public void submitBasicInfo(ActionEvent event) {
         if(checkTextFields()) {
-            if(companyNameCB.getValue().equals("Home Owner")){
-                if(report.info.isCompanyAddressExist()&&report.info.isProjectAddressExist()){
-                    projectAddressTF.setText(companyAddressTF.getText());
-                }
-                if(report.info.isCompanyCityExist()&&report.info.isProjectCityExist()){
-                    projectCityTF.setText(companyAddressTF.getText());
-                }
-                if(report.info.isCompanyProvinceExist()&&report.info.isProjectProvinceExist()){
-                    projectProvinceCB.setValue(companyProvinceCB.getValue());
+            if(report.info.isCompanyNameExist()){
+                if(companyNameCB.getValue().equals("Home Owner")){
+                    if(report.info.isCompanyAddressExist()&&report.info.isProjectAddressExist()){
+                        projectAddressTF.setText(companyAddressTF.getText());
+                    }
+                    if(report.info.isCompanyCityExist()&&report.info.isProjectCityExist()){
+                        projectCityTF.setText(companyAddressTF.getText());
+                    }
+                    if(report.info.isCompanyProvinceExist()&&report.info.isProjectProvinceExist()){
+                        projectProvinceCB.setValue(companyProvinceCB.getValue());
+                    }
                 }
             }
 
@@ -871,21 +928,12 @@ public class InfoController implements Initializable {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(report.getInterfaces().get(report.interfaceCounter)));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportMaker.FXML"));
             Parent root = (Parent) loader.load();
-            if(report.getInterfaces().get(report.interfaceCounter).equals("/application/iat/AirTestingMaker.fxml")) {
-                AirTestingController table = loader.getController();
-                table.getReport(report);
-            }
-            else if(report.getInterfaces().get(report.interfaceCounter).equals("/application/iat/PostAirTestingMaker.fxml")) {
-                PostAirTestingController table = loader.getController();
-                table.getReport(report);
-            }
-            else if(report.getInterfaces().get(report.interfaceCounter).equals("/application/iat/TEMAsbestosFibreMaker.fxml")) {
-                TEMAsbestosFibreController table = loader.getController();
-                table.getReport(report);
-            }
-            report.interfaceCounter++;
+
+            GenerateReportController controller = loader.getController();
+            controller.getReport(report);
+
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -938,6 +986,12 @@ public class InfoController implements Initializable {
         }
 
         if(report.info.isCompanyNameExist()&&companyNameCB.getValue().equals("")){
+            if((!companyNameCB.getValue().equals("Home Owner")&&
+                    (report.info.isProjectAddressExist()&&projectAddressTF.getText().equals(""))||
+                    (report.info.isProjectCityExist()&&projectCityTF.getText().equals(""))||
+                    (report.info.isProjectProvinceExist()&&projectProvinceCB.getValue().equals("")))){
+                return false;
+            }
             return false;
         }
 
@@ -965,31 +1019,31 @@ public class InfoController implements Initializable {
             return false;
         }
 
-        if(report.info.isSiteWorkDateExist()&&siteWorkDateDP.getValue().equals("")){
+        if(report.info.isSiteWorkDateExist()&&siteWorkDateDP.getValue()==null){
             return false;
         }
 
-        if(report.info.isReportDateExist()&&reportDateDP.getValue().equals("")){
+        if(report.info.isReportDateExist()&&reportDateDP.getValue()==null){
             return false;
         }
 
-        if(report.info.isPreAbatementStartDateExist()&&preAbatementStartDP.getValue().equals("")){
+        if(report.info.isPreAbatementStartDateExist()&&preAbatementStartDP.getValue()==null){
             return false;
         }
 
-        if(report.info.isVisualAbatementStartExist()&&visualAbatementStartDP.getValue().equals("")){
+        if(report.info.isVisualAbatementStartExist()&&visualAbatementStartDP.getValue()==null){
             return false;
         }
 
-        if(report.info.isVisualAbatementEndExist()&&visualAbatementEndDP.getValue().equals("")){
+        if(report.info.isVisualAbatementEndExist()&&visualAbatementEndDP.getValue()==null){
             return false;
         }
 
-        if(report.info.isPostAbatementDateExist()&&postAbatementDateDP.getValue().equals("")){
+        if(report.info.isPostAbatementDateExist()&&postAbatementDateDP.getValue()==null){
             return false;
         }
 
-        if(report.info.isSiteEndDateExist()&&siteEndDateDP.getValue().equals("")){
+        if(report.info.isSiteEndDateExist()&&siteEndDateDP.getValue()==null){
             return false;
         }
 
@@ -1017,20 +1071,14 @@ public class InfoController implements Initializable {
             return false;
         }
 
-        if(report.info.isInspectionStartDateExist()&&inspectionStartDateDP.getValue().equals("")){
+        if(report.info.isInspectionStartDateExist()&&inspectionStartDateDP.getValue()==null){
             return false;
         }
 
-        if(report.info.isSamplingDateExist()&&samplingDateDP.getValue().equals("")){
+        if(report.info.isSamplingDateExist()&&samplingDateDP.getValue()==null){
             return false;
         }
 
-        if((!companyNameCB.getValue().equals("Home Owner")&&
-                (report.info.isProjectAddressExist()&&projectAddressTF.getText().equals(""))||
-                (report.info.isProjectCityExist()&&projectCityTF.getText().equals(""))||
-                (report.info.isProjectProvinceExist()&&projectProvinceCB.getValue().equals("")))){
-            return false;
-        }
         return true;
     }
 }

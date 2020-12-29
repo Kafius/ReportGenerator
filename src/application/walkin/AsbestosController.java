@@ -29,7 +29,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class AsbestosController implements Initializable{
-	WalkInReport newReport2 = new WalkInReport("Asbestos");
+	WalkInReport newReport2;
 	
 	//holds conclusion sentences for all 3 scenarios
 	String conclusion1 = "";

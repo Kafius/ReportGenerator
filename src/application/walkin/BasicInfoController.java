@@ -165,9 +165,9 @@ public class BasicInfoController implements Initializable{
 	}
 	
 	//gets data from previous prompt
-	public void getReport(Report report) {
-		newReport=new WalkInReport(report);
-		
+	public void getReport(WalkInReport report) {
+		newReport=report;
+		System.out.println(newReport.info.getCompanyName());
 		companyNameCB.setValue(newReport.info.getCompanyName());
 		companyAddressTF.setText(newReport.info.getCompanyAddress());
 		companyCityTF.setText(newReport.info.getCompanyCity());

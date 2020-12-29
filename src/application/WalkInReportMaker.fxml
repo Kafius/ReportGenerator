@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="763.0"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="application.GenerateWalkInReportController">
+   <HBox fx:id="buttonBox" layoutX="15.0" layoutY="620.0" prefHeight="25.0" prefWidth="733.0">
+      <Button fx:id="backToBasicInfoEditorButton" mnemonicParsing="false" onAction="#goToBasicInfo" prefHeight="25.0"
+              prefWidth="169.0" text="Return to Basic Info Editor" translateX="320.0"/>
+      <Button fx:id="backToTableEditorButton" mnemonicParsing="false" onAction="#goToTable" prefHeight="25.0"
+              prefWidth="169.0" text="Return to Table Editor" translateX="360.0"/>
+   </HBox>
+   <Label fx:id="title" layoutX="26.0" layoutY="14.0" text="Create a New Report">
+      <font>
+         <Font name="System Bold" size="20.0"/>
+      </font>
+   </Label>
+   <Label fx:id="subtitle" layoutX="43.0" layoutY="63.0" text="Confirm Info">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Label>
+   <Line fx:id="topBorder" endX="661.0" layoutX="101.0" layoutY="602.0" startX="-100.0"/>
+   <Line fx:id="bottomBorder" endX="661.0" layoutX="101.0" layoutY="92.0" startX="-100.0"/>
+   <ImageView fx:id="logo" fitHeight="90.0" fitWidth="150.0" layoutX="605.0" layoutY="8.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../pictures/safetechlogo1.png"/>
+   </ImageView>
+   <Rectangle fx:id="googleDriveRect" arcHeight="5.0" arcWidth="5.0" fill="#cae6ff00" height="195.0" layoutX="87.0"
+              layoutY="116.0" stroke="#d0cfcf" strokeType="INSIDE" width="220.0"/>
+   <Rectangle fx:id="emailRect" arcHeight="5.0" arcWidth="5.0" fill="#cae6ff00" height="195.0" layoutX="444.0"
+              layoutY="116.0" onMouseClicked="#openWord" stroke="#d0cfcf" strokeType="INSIDE" width="220.0"/>
+   <ImageView fx:id="googledriveicon" fitHeight="150.0" fitWidth="195.0" layoutX="122.0" layoutY="138.0"
+              onMouseClicked="#generateReport" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <Image url="@../pictures/googledriveicon.png"/>
+   </ImageView>
+   <TextArea fx:id="allData" layoutX="24.0" layoutY="335.0" prefHeight="200.0" prefWidth="717.0"/>
+   <ImageView fx:id="wordicon" fitHeight="150.0" fitWidth="195.0" layoutX="473.0" layoutY="138.0"
+              onMouseClicked="#openWord" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;">
+      <Image url="@../pictures/wordicon.png"/>
+   </ImageView>
+</AnchorPane>

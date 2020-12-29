@@ -56,4 +56,16 @@ public class Report {
     public void addInterface(String newInterface){
         this.interfaces.add(newInterface);
     }
+
+    public void nextInterface(){
+        this.interfaceCounter++;
+    }
+
+    public int getInterfaceCounter() {
+        return interfaceCounter;
+    }
+
+    public void setInterfaceCounter(int interfaceCounter) {
+        this.interfaceCounter = interfaceCounter;
+    }
 }

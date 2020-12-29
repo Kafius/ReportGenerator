@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.iat.report.*;
 import application.walkin.BasicInfoController;
 import application.walkin.report.WalkInReport;
 import data.ReportType;
@@ -78,11 +77,12 @@ public class ReportTypeController implements Initializable{
 					try {
 						switch(table.getSelectionModel().getSelectedItem().getCategory()){
 							case "Walk In":
-								report= new WalkInReport(table.getSelectionModel().getSelectedItem().getTitle());
+								WalkInReport report2;
+								report2= new WalkInReport(table.getSelectionModel().getSelectedItem().getTitle());
 								loader = new FXMLLoader(getClass().getResource("/application/walkin/BasicInfoPrompt.fxml"));
 								root = loader.load();
 								BasicInfoController controller1 = loader.getController();
-								controller1.getReport(report);
+								controller1.getReport(report2);
 								break;
 							default:
 								report = new Report(table.getSelectionModel().getSelectedItem().getTitle());
@@ -113,7 +113,7 @@ public class ReportTypeController implements Initializable{
 	}
 	
 	public void getReportTypeList() {
-		ReportType type = new ReportType("0","Walk In","Asbestos","N/A");
+		ReportType type = new ReportType("0	","Walk In","Asbestos","N/A");
 		list.add(type);
 		type = new ReportType("1","Walk In","Bacteroides","N/A");
 		list.add(type);
@@ -149,7 +149,22 @@ public class ReportTypeController implements Initializable{
 		list.add(type);
 		type = new ReportType("16","Inspection & Air Testing","Inspection and Air Testing during Abatement_Outdoor Type 3","N/A");
 		list.add(type);
-
+		type = new ReportType("17","Asbestos and Sampling Surveys","Asbestos Survey","");
+		list.add(type);
+		type = new ReportType("18","Asbestos and Sampling Surveys","Bulk Sample Report","");
+		list.add(type);
+		type = new ReportType("19","Asbestos and Sampling Surveys","Bulk Sampling History","");
+		list.add(type);
+		type = new ReportType("20","Asbestos and Sampling Surveys","Bulk Sample Form (Field Form)","");
+		list.add(type);
+		type = new ReportType("21","Asbestos and Sampling Surveys","Surface Sampling TEM Wipes","");
+		list.add(type);
+		type = new ReportType("22","Asbestos and Sampling Surveys","Surface Sampling TEM Microvacuum","");
+		list.add(type);
+		type = new ReportType("23","Asbestos and Sampling Surveys","Asbestos Management Program with Procedures","");
+		list.add(type);
+		type = new ReportType("24","Asbestos and Sampling Surveys","Asbestos Bulk Sample Report Vermiculite","");
+		list.add(type);
 	}
 	
 	public void uncheckButton() {
@@ -164,16 +179,17 @@ public class ReportTypeController implements Initializable{
 		try {
 			switch(table.getSelectionModel().getSelectedItem().getCategory()){
 				case "Walk In":
-					report= new WalkInReport(table.getSelectionModel().getSelectedItem().getTitle());
+					WalkInReport report2;
+					report2= new WalkInReport(table.getSelectionModel().getSelectedItem().getTitle());
 					loader = new FXMLLoader(getClass().getResource("/application/walkin/BasicInfoPrompt.fxml"));
 					root = loader.load();
 					BasicInfoController controller1 = loader.getController();
-					controller1.getReport(report);
+					controller1.getReport(report2);
 					break;
 				default:
 					report = new Report(table.getSelectionModel().getSelectedItem().getTitle());
 					setInformation(table.getSelectionModel().getSelectedItem().getTitle());
-					loader = new FXMLLoader(getClass().getResource("/application/InfoMaker.fxml"));
+					loader = new FXMLLoader(getClass().getResource("application/InfoMaker.fxml"));
 					root = loader.load();
 					InfoController controller = loader.getController();
 					controller.getReport(report);
@@ -226,11 +242,8 @@ public class ReportTypeController implements Initializable{
 	}
 
 	public void setInformation(String reportType){
-		switch(reportType){
+		switch(reportType) {
 			case "Inspection & Air Testing Report - during Type 3":
-				report = new siteInspectionReport();
-				report.addInterface("Info.fxml                                                                                                                         ");
-				report.addInterface("");
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -243,7 +256,6 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Pre-Abatement Inspection Report - Type 3 Formal":
-				report = new Type3PreAbatementInspectionReport();
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setCompanyAddressExist(true);
 				report.getInfo().setCompanyCityExist(true);
@@ -258,7 +270,6 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Type 3 Summary Report - pre during post clearance":
-				report = new AsbestosAbatementCloseOutReport();
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -284,7 +295,6 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectNumberExist(true);
 
 			case "Type 3 Close Out Report":
-				report = new Type3CloseOutReport();
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -307,7 +317,6 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Post-Abatement Inspection and Air Testing Report - Greenrock Properties":
-				report = new IATGreenrockReport();
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
@@ -330,7 +339,6 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Type 2 Summary Report":
-				report = new PostInspectionType1Type2Report();
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -373,7 +381,6 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Post-Abatement Inspection Report - Type 2 Visual Only":
-				report = new Type2InspectionOnlyReport();
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -394,7 +401,6 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "PCM Air Sampling - Residential":
-				report = new ASResidentialReport();
 				report.getInfo().setClientNameExist(true);
 				report.getInfo().setClientAddressExist(true);
 				report.getInfo().setClientCityExist(true);
@@ -410,7 +416,6 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "PCM Air Sampling - Construction Projects":
-				report = new ASConstructingReport();
 				report.getInfo().setClientNameExist(true);
 				report.getInfo().setClientAddressExist(true);
 				report.getInfo().setClientCityExist(true);
@@ -425,7 +430,6 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Type 3 Clearance Report - Final Visual and Air Sampling":
-				report = new Type3AirSamplingReport();
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -444,7 +448,6 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "TEM Air Sampling During Outdoor Type 3 Operation":
-				report = new OutdoorTEMReport();
 				report.getInfo().setReportDateExist(true);
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setCompanyAddressExist(true);
@@ -459,7 +462,6 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectManagerExist(true);
 				break;
 			case "Inspection and Air Testing during Abatement_Outdoor Type 3":
-				report = new Type3AirTestingReport();
 				report.getInfo().setReportDateExist(true);
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setCompanyAddressExist(true);
@@ -477,6 +479,24 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setTechnicianExist(true);
 				report.getInfo().setProjectManagerExist(true);
 				break;
+			case "Asbestos Survey":
+				report.getInfo().setProjectManagerExist(true);
+				break;
+			case "Bulk Sample Report":
+				break;
+			case "Bulk Sampling History":
+				break;
+			case "Bulk Sample Form (Field Form)":
+				break;
+			case "Surface Sampling TEM Wipes":
+				break;
+			case "Surface Sampling TEM Microvacuum":
+				break;
+			case "Asbestos Management Program with Procedures":
+				break;
+			case "Asbestos Bulk Sample Report Vermiculite":
+				break;
+
 		}
 	}
 }
