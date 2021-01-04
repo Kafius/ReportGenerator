@@ -165,6 +165,45 @@ public class ReportTypeController implements Initializable{
 		list.add(type);
 		type = new ReportType("24","Asbestos and Sampling Surveys","Asbestos Bulk Sample Report Vermiculite","");
 		list.add(type);
+
+
+
+		type = new ReportType("27","Method of Procedures (MOP)","Type 2 Drilling with HEPA Dust Collection Device - with enclosure","");
+		list.add(type);
+		type = new ReportType("28","Method of Procedures (MOP)","Type 2 Drilling with HEPA Dust Collection Device - no enclosure","");
+		list.add(type);
+		type = new ReportType("29","Method of Procedures (MOP)","Type 3 Removal of Ducting (Vertical) in Building with ACM Fireproofing","");
+		list.add(type);
+		type = new ReportType("30","Method of Procedures (MOP)","Abatement Plan (Type 1 2 and 3)","");
+		list.add(type);
+		type = new ReportType("31","Lead","Lead Bulk Sample Report","");
+		list.add(type);
+		type = new ReportType("32","Lead","Lead and Asbestos Bulk Sample Report","");
+		list.add(type);
+		type = new ReportType("33","Lead","Post-Abatement Inspection and Surface Sampling Report - Class 2a","");
+		list.add(type);
+		type = new ReportType("34","Lead","Lead Class 3b Daily Inspection Report","");
+		list.add(type);
+		type = new ReportType("35","Lead","Lead Class 3b Summary Report","");
+		list.add(type);
+		type = new ReportType("36","Mould & Water Damage","Water Damage Assessment Report - Mould Air Sampling and Sewage Sampling","");
+		list.add(type);
+		type = new ReportType("37","Mould & Water Damage","Water Damage Assessment Report - with Sewage Sampling","");
+		list.add(type);
+		type = new ReportType("38","Mould & Water Damage","Water Damage Assessment Report - with Mould Air Sampling","");
+		list.add(type);
+		type = new ReportType("39","Mould & Water Damage","Water Damage Assessment Report - No Mould Air Sampling or Sewage Sampling","");
+		list.add(type);
+		type = new ReportType("40","Mould & Water Damage","Post-Remediation Verification Report - Post Insp and Testing Only","");
+		list.add(type);
+		type = new ReportType("41","Mould & Water Damage","Mould Remediation Close-Out Report - Full Version","");
+		list.add(type);
+		type = new ReportType("42","Mould & Water Damage","Determination of Sewage Contamination Report","");
+		list.add(type);
+		type = new ReportType("43","Mould & Water Damage","Mould and Water Damage Assessment Report","");
+		list.add(type);
+		type = new ReportType("44","Construction","Dust Control Plan","");
+		list.add(type);
 	}
 	
 	public void uncheckButton() {
@@ -480,22 +519,177 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectManagerExist(true);
 				break;
 			case "Asbestos Survey":
-				report.getInfo().setProjectManagerExist(true);
+
 				break;
 			case "Bulk Sample Report":
-				break;
-			case "Bulk Sampling History":
-				break;
-			case "Bulk Sample Form (Field Form)":
+				report.getInfo().setReportDateExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setPreAbatementStartDateExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
 				break;
 			case "Surface Sampling TEM Wipes":
+				report.getInfo().setProjectNameExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setReportDateExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
 				break;
 			case "Surface Sampling TEM Microvacuum":
+				report.getInfo().setProjectNameExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setTechnicianExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				report.getInfo().setProjectNumberExist(true);
+				report.getInfo().setReportDateExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
 				break;
 			case "Asbestos Management Program with Procedures":
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientAddressExist(true);
+				report.getInfo().setClientCityExist(true);
+				report.getInfo().setClientProvinceExist(true);
 				break;
 			case "Asbestos Bulk Sample Report Vermiculite":
+				report.getInfo().setReportDateExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setBuildingNameExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setSiteWorkDateExist(true);
+				report.getInfo().setVisualAbatementStartExist(true);
 				break;
+
+			case "Type 2 Drilling with HEPA Dust Collection Device - with enclosure":
+				report.getInfo().setProjectNameExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientAddressExist(true);
+				report.getInfo().setClientCityExist(true);
+				report.getInfo().setClientProvinceExist(true);
+				report.getInfo().setClientPostalCodeExist(true);
+				report.getInfo().setReportDateExist(true);
+				break;
+
+			case "Type 2 Drilling with HEPA Dust Collection Device - no enclosure":
+				break;
+
+			case "Type 3 Removal of Ducting (Vertical) in Building with ACM Fireproofing":
+				report.getInfo().setProjectNameExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientAddressExist(true);
+				report.getInfo().setClientCityExist(true);
+				report.getInfo().setClientProvinceExist(true);
+				report.getInfo().setClientPostalCodeExist(true);
+				report.getInfo().setReportDateExist(true);
+				break;
+
+			case "Abatement Plan (Type 1 2 and 3)":
+				report.getInfo().setProjectNameExist(true);
+				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientAddressExist(true);
+				report.getInfo().setClientCityExist(true);
+				report.getInfo().setClientProvinceExist(true);
+				report.getInfo().setClientPostalCodeExist(true);
+				report.getInfo().setReportDateExist(true);
+				break;
+
+			case "Lead Bulk Sample Report":
+				report.getInfo().setReportDateExist(true);
+				report.getInfo().setCompanyNameExist(true);
+				report.getInfo().setCompanyAddressExist(true);
+				report.getInfo().setCompanyCityExist(true);
+				report.getInfo().setCompanyProvinceExist(true);
+				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
+				report.getInfo().setProjectAddressExist(true);
+				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setVisualAbatementStartExist(true);
+				report.getInfo().setProjectManagerExist(true);
+				break;
+
+			case "Lead and Asbestos Bulk Sample Report":
+				break;
+
+			case "Post-Abatement Inspection and Surface Sampling Report - Class 2a":
+				break;
+
+			case "Lead Class 3b Daily Inspection Report":
+				break;
+
+			case "Lead Class 3b Summary Report":
+				break;
+
+			case "Water Damage Assessment Report - Mould Air Sampling and Sewage Sampling":
+				break;
+
+			case "Water Damage Assessment Report - with Sewage Sampling":
+				break;
+
+			case "Water Damage Assessment Report - with Mould Air Sampling":
+				break;
+
+			case "Water Damage Assessment Report - No Mould Air Sampling or Sewage Sampling":
+				break;
+
+			case "Post-Remediation Verification Report - Post Insp and Testing Only":
+				break;
+
+			case "Mould Remediation Close-Out Report - Full Version":
+				break;
+
+			case "Determination of Sewage Contamination Report":
+				break;
+
+			case "Mould and Water Damage Assessment Report":
+				break;
+
+			case "Dust Control Plan":
+				break;
+
 
 		}
 	}

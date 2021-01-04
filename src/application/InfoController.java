@@ -407,10 +407,10 @@ public class InfoController implements Initializable {
         }
 
         if(report.info.isTechnicianExist()){
-            projectInfoBox.add(projectNumberL,projectColumn,projectRow);
+            projectInfoBox.add(technicianL,projectColumn,projectRow);
             projectColumn++;
 
-            projectInfoBox.add(projectNumberTF,projectColumn,projectRow);
+            projectInfoBox.add(technicianTF,projectColumn,projectRow);
             projectColumn++;
 
             if(projectColumn==4){
