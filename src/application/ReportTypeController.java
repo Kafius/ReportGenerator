@@ -283,15 +283,20 @@ public class ReportTypeController implements Initializable{
 	public void setInformation(String reportType){
 		switch(reportType) {
 			case "Inspection & Air Testing Report - during Type 3":
+				report.setReportType("AirTesting1");
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
 				report.getInfo().setProjectProvinceExist(true);
 				report.getInfo().setProjectPostalCodeExist(true);
+				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setClientNameExist(true);
+				report.getInfo().setBuildingNameExist(true);
 				report.getInfo().setSpecificLocationExist(true);
-				report.getInfo().setSiteWorkDateExist(true);
+				report.getInfo().setVisualAbatementStartExist(true);
 				report.getInfo().setSelRepExist(true);
+				report.getInfo().setOnSiteTimeExist(true);
+				report.getInfo().setReportDateExist(true);
 				break;
 
 			case "Pre-Abatement Inspection Report - Type 3 Formal":

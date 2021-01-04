@@ -45,6 +45,10 @@ public class Report {
         this.reportType = reportType;
     }
 
+    public void setFileName(){
+        this.name = info.getProjectNumber()+"-Report Final.docx";
+    }
+
     public List<String> getInterfaces() {
         return interfaces;
     }

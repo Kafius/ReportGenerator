@@ -926,20 +926,37 @@ public class InfoController implements Initializable {
             invalidInputs.show();
             return;
         }
+        if(report.getReportType().equals("AirTesting1")){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AT1Maker.fxml"));
+                Parent root = (Parent) loader.load();
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportMaker.FXML"));
-            Parent root = (Parent) loader.load();
+                GenerateAT1Controller controller = loader.getController();
+                controller.getReport(report);
 
-            GenerateReportController controller = loader.getController();
-            controller.getReport(report);
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
 
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportMaker.fxml"));
+                Parent root = (Parent) loader.load();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+                GenerateReportController controller = loader.getController();
+                controller.getReport(report);
+
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -1051,7 +1068,7 @@ public class InfoController implements Initializable {
             return false;
         }
 
-        if(report.info.isOnSiteTimeExist()&&onSiteTimeS.getValue().equals("")){
+        if(report.info.isOnSiteTimeExist()&&onSiteTimeS.getValue()==null){
             return false;
         }
 

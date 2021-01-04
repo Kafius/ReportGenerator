@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.GenerateReportController;
+import application.GenerateWalkInReportController;
 import application.walkin.report.WalkInReport;
 import application.walkin.sample.AsbestosSample;
 import application.walkin.sample.Sample;
@@ -234,9 +235,9 @@ public class AsbestosController implements Initializable{
 				newReport2.addConclusion(conclusion3);
 			}
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/"+"ReportMaker.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/WalkInReportMaker.fxml"));
 				Parent root = (Parent) loader.load();
-				GenerateReportController finalReport = loader.getController();
+				GenerateWalkInReportController finalReport = loader.getController();
 				finalReport.getReport(newReport2);
 				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 				stage.setScene(new Scene(root));

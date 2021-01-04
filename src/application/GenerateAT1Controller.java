@@ -11,14 +11,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.walkin.*;
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFFooter;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableCell;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.apache.poi.xwpf.usermodel.*;
 import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlException;
 
@@ -46,7 +39,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import application.walkin.report.WalkInReport;
 
-public class GenerateReportController implements Initializable{
+public class GenerateAT1Controller implements Initializable{
     Report report;
 
     //visuals
@@ -117,7 +110,6 @@ public class GenerateReportController implements Initializable{
             //document=generateSampleTable(document);
             document=generateInfo(document);
             //document=generateConclusions(document);
-            document=generateHeaderFooter(document);
             File tempLocation = new File("/temp");
             FileOutputStream out = new FileOutputStream(tempLocation+"/temp.docx");
             document.write(out);
@@ -132,35 +124,15 @@ public class GenerateReportController implements Initializable{
 
     //replaces text in word document
     private static XWPFDocument replaceText(XWPFDocument doc, String findText, String replaceText){
-        for (XWPFParagraph p : doc.getParagraphs()) {
-            System.out.print(p.getRuns());
-            for (XWPFRun r : p.getRuns()) {
-                String text = r.getText(0);
-                System.out.println(text);
-                if(text!=null&&text.contains(findText)) {
-                    text= text.replace(findText, replaceText);
-                    r.setText(text,0);
-                }
-            }
-        }
-        return doc;
-    }
-
-    //replace text within a word document footer (uses replaceText)
-    private static XWPFDocument replaceTextInFooter(XWPFDocument doc, String findText, String replaceText) {
-        for(XWPFFooter f : doc.getFooterList()) {
-            for(XWPFTable t : f.getTables()) {
-                for(XWPFTableRow tr : t.getRows()) {
-                    for(XWPFTableCell c : tr.getTableCells()) {
-                        for(XWPFParagraph p : c.getParagraphs()) {
-                            for(XWPFRun r : p.getRuns()) {
-                                String text  = r.getText(0);
-                                System.out.println(text);
-                                if(text!=null&&text.contains(findText)) {
-                                    text = text.replace(findText,replaceText);
-                                    r.setText(text,0);
-                                }
-
+        for(XWPFTable t : doc.getTables()){
+            for(XWPFTableRow tr :t.getRows()){
+                for(XWPFTableCell tc : tr.getTableCells()){
+                    for (XWPFParagraph p : tc.getParagraphs()) {
+                        for (XWPFRun r : p.getRuns()) {
+                            String text = r.getText(0);
+                            if(text!=null&&text.contains(findText)) {
+                                text= text.replace(findText, replaceText);
+                                r.setText(text,0);
                             }
                         }
                     }
@@ -168,6 +140,24 @@ public class GenerateReportController implements Initializable{
             }
         }
 
+        return doc;
+    }
+
+    //replace text within a word document footer (uses replaceText)
+
+    private static XWPFDocument replaceTextInHeader(XWPFDocument doc, String findText, String replaceText) {
+        for(XWPFHeader h : doc.getHeaderList()){
+            for(XWPFParagraph p : h.getParagraphs()){
+                for(XWPFRun r : p.getRuns()){
+                    String text = r.getText(0);
+                    System.out.println(text);
+                    if(text!=null&&text.contains(findText)) {
+                        text = text.replace(findText,replaceText);
+                        r.setText(text,0);
+                    }
+                }
+            }
+        }
         return doc;
     }
 
@@ -190,138 +180,6 @@ public class GenerateReportController implements Initializable{
         }
         return document;
     } */
-
-    //main function for footer
-    public XWPFDocument generateHeaderFooter(XWPFDocument document) {
-        if(report.info.isProjectNumberExist()) {
-            replaceTextInFooter(document,"$PROJECTNUMBER",report.getInfo().getProjectNumber());
-        }
-
-        if(report.info.isProjectNameExist()) {
-            replaceTextInFooter(document,"$PROJECTNAME",report.getInfo().getProjectName());
-        }
-
-        if(report.info.isProjectAddressExist()) {
-            replaceTextInFooter(document,"$PROJECTADDRESS",report.getInfo().getProjectAddress());
-        }
-
-        if(report.info.isProjectCityExist()){
-            replaceTextInFooter(document,"$PROJECTCITY",report.getInfo().getProjectCity());
-        }
-
-        if(report.info.isProjectProvinceExist()){
-            replaceTextInFooter(document,"$PROJECTPROVINCE",report.getInfo().getProjectProvince());
-        }
-
-        if(report.info.isProjectPostalCodeExist()){
-            replaceTextInFooter(document,"$PROJECTPOSTALCODE",report.getInfo().getProjectPostalCode());
-        }
-
-        if(report.info.isTechnicianExist()){
-            replaceTextInFooter(document,"$TECHNICIAN",report.getInfo().getTechnician());
-        }
-
-        if(report.info.isProjectManagerExist()){
-            replaceTextInFooter(document,"$PROJECTMANAGER",report.getInfo().getProjectManager());
-        }
-
-        if(report.info.isClientNameExist()){
-            replaceTextInFooter(document,"$CLIENTNAME",report.getInfo().getClientName());
-        }
-
-        if(report.info.isClientPositionExist()){
-            replaceTextInFooter(document,"$CLIENTPOSITION",report.getInfo().getClientPosition());
-        }
-
-        if(report.info.isCompanyNameExist()){
-            replaceTextInFooter(document,"$COMPANYNAME",report.getInfo().getCompanyName());
-        }
-
-        if(report.info.isCompanyAddressExist()){
-            replaceTextInFooter(document,"$COMPANYADDRESS",report.getInfo().getCompanyAddress());
-        }
-
-        if(report.info.isCompanyCityExist()){
-            replaceTextInFooter(document,"$COMPANYCITY",report.getInfo().getCompanyCity());
-        }
-
-        if(report.info.isCompanyProvinceExist()){
-            replaceTextInFooter(document,"$COMPANYPROVINCE",report.getInfo().getCompanyProvince());
-        }
-
-        if(report.info.isCompanyPostalCodeExist()){
-            replaceTextInFooter(document,"$COMPANYPOSTALCODE",report.getInfo().getCompanyPostalCode());
-        }
-
-        if(report.info.isBuildingNameExist()){
-            replaceTextInFooter(document,"$BUILDINGNAME",report.getInfo().getBuildingName());
-        }
-
-        if(report.info.isSpecificLocationExist()){
-            replaceTextInFooter(document,"$SPECIFICLOCATION",report.getInfo().getSpecificLocation());
-        }
-
-        if(report.info.isSiteWorkDateExist()){
-            replaceTextInFooter(document,"$SITEWORKDATE",report.getInfo().getSiteWorkDate());
-        }
-
-        if(report.info.isReportDateExist()){
-            replaceTextInFooter(document,"$REPORTDATE",report.getInfo().getReportDate());
-        }
-
-        if(report.info.isPreAbatementStartDateExist()){
-            replaceTextInFooter(document,"$PREABATEMENTSTARTDATE",report.getInfo().getPreAbatementStartDate());
-        }
-
-        if(report.info.isVisualAbatementStartExist()){
-            replaceTextInFooter(document,"$VISUALABATEMENTSTART",report.getInfo().getVisualAbatementStart());
-        }
-
-        if(report.info.isVisualAbatementEndExist()){
-            replaceTextInFooter(document,"$VISUALABATEMENTEND",report.getInfo().getVisualAbatementEnd());
-        }
-
-        if(report.info.isPostAbatementDateExist()){
-            replaceTextInFooter(document,"$POSTINSPECTIONDATE",report.getInfo().getPostAbatementDate());
-        }
-
-        if(report.info.isSiteEndDateExist()){
-            replaceTextInFooter(document,"$SITEENDDATE",report.getInfo().getSiteEndDate());
-        }
-
-        if(report.info.isSelRepExist()){
-            replaceTextInFooter(document,"$SELREP",report.getInfo().getSelRep());
-        }
-
-        if(report.info.isOnSiteTimeExist()){
-            replaceTextInFooter(document,"$ONSITETIME",report.getInfo().getOnSiteTime());
-        }
-
-        if(report.info.isClientAddressExist()){
-            replaceTextInFooter(document,"$CLIENTADDRESS",report.getInfo().getClientAddress());
-        }
-
-        if(report.info.isClientCityExist()){
-            replaceTextInFooter(document,"$CLIENTCITY",report.getInfo().getClientCity());
-        }
-
-        if(report.info.isClientProvinceExist()){
-            replaceTextInFooter(document,"$CLIENTPROVINCE", report.getInfo().getClientProvince());
-        }
-
-        if(report.info.isClientPostalCodeExist()){
-            replaceTextInFooter(document,"$CLIENTPOSTALCODE",report.getInfo().getClientPostalCode());
-        }
-
-        if(report.info.isInspectionStartDateExist()){
-            replaceTextInFooter(document, "$INSPECTIONSTARTDATE",report.getInfo().getInspectionStartDate());
-        }
-
-        if(report.info.isSamplingDateExist()){
-            replaceTextInFooter(document,"$SAMPLING_DATE",report.getInfo().getSamplingDate());
-        }
-        return document;
-    }
 
     //sets run with multiple characteristics
     private static void setRun (XWPFRun run , String fontFamily , int fontSize , String colorRGB , String text , boolean bold , boolean addBreak) {
@@ -413,7 +271,6 @@ public class GenerateReportController implements Initializable{
             //document=generateSampleTable(document);
             document=generateInfo(document);
             //document=generateConclusions(document);
-            document=generateHeaderFooter(document);
             saveReportChooser.setInitialFileName(report.getName());
             File directory = new File(System.getProperty("user.home"));
             saveReportChooser.setInitialDirectory(directory);
@@ -459,133 +316,44 @@ public class GenerateReportController implements Initializable{
 
     //uploads basic info to document
     public XWPFDocument generateInfo(XWPFDocument document) {
-        if(report.info.isProjectNumberExist()) {
-            replaceText(document,"$PROJECTNUMBER",report.getInfo().getProjectNumber());
-        }
+        replaceTextInHeader(document,"$PROJECTNUMBER",report.getInfo().getProjectNumber());
+        replaceText(document,"$PROJECTNUMBER",report.getInfo().getProjectNumber());
 
-        if(report.info.isProjectNameExist()) {
-            replaceText(document,"$PROJECTNAME",report.getInfo().getProjectName());
-        }
+        replaceTextInHeader(document,"$PROJECTADDRESS",report.getInfo().getProjectAddress());
+        replaceText(document,"$PROJECTADDRESS",report.getInfo().getProjectAddress());
 
-        if(report.info.isProjectAddressExist()) {
-            replaceText(document,"$PROJECTADDRESS",report.getInfo().getProjectAddress());
-        }
+        replaceTextInHeader(document,"$PROJECTCITY",report.getInfo().getProjectCity());
+        replaceText(document,"$PROJECTCITY",report.getInfo().getProjectCity());
 
-        if(report.info.isProjectCityExist()){
-            replaceText(document,"$PROJECTCITY",report.getInfo().getProjectCity());
-        }
+        replaceTextInHeader(document,"$PROJECTPROVINCE",report.getInfo().getProjectProvince());
+        replaceText(document,"$PROJECTPROVINCE",report.getInfo().getProjectProvince());
 
-        if(report.info.isProjectProvinceExist()){
-            replaceText(document,"$PROJECTPROVINCE",report.getInfo().getProjectProvince());
-        }
+        replaceTextInHeader(document,"$PROJECTPOSTALCODE",report.getInfo().getProjectPostalCode());
+        replaceText(document,"$PROJECTPOSTALCODE",report.getInfo().getProjectPostalCode());
 
-        if(report.info.isProjectPostalCodeExist()){
-            replaceText(document,"$PROJECTPOSTALCODE",report.getInfo().getProjectPostalCode());
-        }
+        replaceTextInHeader(document,"$CLIENTNAME",report.getInfo().getClientName());
+        replaceText(document,"$CLIENTNAME",report.getInfo().getClientName());
 
-        if(report.info.isTechnicianExist()){
-            replaceText(document,"$TECHNICIAN",report.getInfo().getTechnician());
-        }
+        replaceTextInHeader(document,"$COMPANYNAME",report.getInfo().getCompanyName());
+        replaceText(document,"$COMPANYNAME",report.getInfo().getCompanyName());
 
-        if(report.info.isProjectManagerExist()){
-            replaceText(document,"$PROJECTMANAGER",report.getInfo().getProjectManager());
-        }
+        replaceTextInHeader(document,"$BUILDINGNAME",report.getInfo().getBuildingName());
+        replaceText(document,"$BUILDINGNAME",report.getInfo().getBuildingName());
 
-        if(report.info.isClientNameExist()){
-            replaceText(document,"$CLIENTNAME",report.getInfo().getClientName());
-        }
+        replaceTextInHeader(document,"$SPECIFICLOCATION",report.getInfo().getSpecificLocation());
+        replaceText(document,"$SPECIFICLOCATION",report.getInfo().getSpecificLocation());
 
-        if(report.info.isClientPositionExist()){
-            replaceText(document,"$CLIENTPOSITION",report.getInfo().getClientPosition());
-        }
+        replaceTextInHeader(document,"$REPORTDATE",report.getInfo().getReportDate());
+        replaceText(document,"$REPORTDATE",report.getInfo().getReportDate());
 
-        if(report.info.isCompanyNameExist()){
-            replaceText(document,"$COMPANYNAME",report.getInfo().getCompanyName());
-        }
+        replaceTextInHeader(document,"$VISUALABATEMENTSTART",report.getInfo().getVisualAbatementStart());
+        replaceText(document,"$VISUALABATEMENTSTART",report.getInfo().getVisualAbatementStart());
 
-        if(report.info.isCompanyAddressExist()){
-            replaceText(document,"$COMPANYADDRESS",report.getInfo().getCompanyAddress());
-        }
+        replaceTextInHeader(document,"$SELREP",report.getInfo().getSelRep());
+        replaceText(document,"$SELREP",report.getInfo().getSelRep());
 
-        if(report.info.isCompanyCityExist()){
-            replaceText(document,"$COMPANYCITY",report.getInfo().getCompanyCity());
-        }
-
-        if(report.info.isCompanyProvinceExist()){
-            replaceText(document,"$COMPANYPROVINCE",report.getInfo().getCompanyProvince());
-        }
-
-        if(report.info.isCompanyPostalCodeExist()){
-            replaceText(document,"$COMPANYPOSTALCODE",report.getInfo().getCompanyPostalCode());
-        }
-
-        if(report.info.isBuildingNameExist()){
-            replaceText(document,"$BUILDINGNAME",report.getInfo().getBuildingName());
-        }
-
-        if(report.info.isSpecificLocationExist()){
-            replaceText(document,"$SPECIFICLOCATION",report.getInfo().getSpecificLocation());
-        }
-
-        if(report.info.isSiteWorkDateExist()){
-            replaceText(document,"$SITEWORKDATE",report.getInfo().getSiteWorkDate());
-        }
-
-        if(report.info.isReportDateExist()){
-            replaceText(document,"$REPORTDATE",report.getInfo().getReportDate());
-        }
-
-        if(report.info.isPreAbatementStartDateExist()){
-            replaceText(document,"$PREABATEMENTSTARTDATE",report.getInfo().getPreAbatementStartDate());
-        }
-
-        if(report.info.isVisualAbatementStartExist()){
-            replaceText(document,"$VISUALABATEMENTSTART",report.getInfo().getVisualAbatementStart());
-        }
-
-        if(report.info.isVisualAbatementEndExist()){
-            replaceText(document,"$VISUALABATEMENTEND",report.getInfo().getVisualAbatementEnd());
-        }
-
-        if(report.info.isPostAbatementDateExist()){
-            replaceText(document,"$POSTINSPECTIONDATE",report.getInfo().getPostAbatementDate());
-        }
-
-        if(report.info.isSiteEndDateExist()){
-            replaceText(document,"$SITEENDDATE",report.getInfo().getSiteEndDate());
-        }
-
-        if(report.info.isSelRepExist()){
-            replaceText(document,"$SELREP",report.getInfo().getSelRep());
-        }
-
-        if(report.info.isOnSiteTimeExist()){
-            replaceText(document,"$ONSITETIME",report.getInfo().getOnSiteTime());
-        }
-
-        if(report.info.isClientAddressExist()){
-            replaceText(document,"$CLIENTADDRESS",report.getInfo().getClientAddress());
-        }
-
-        if(report.info.isClientCityExist()){
-            replaceText(document,"$CLIENTCITY",report.getInfo().getClientCity());
-        }
-
-        if(report.info.isClientProvinceExist()){
-            replaceText(document,"$CLIENTPROVINCE", report.getInfo().getClientProvince());
-        }
-
-        if(report.info.isClientPostalCodeExist()){
-            replaceText(document,"$CLIENTPOSTALCODE",report.getInfo().getClientPostalCode());
-        }
-
-        if(report.info.isInspectionStartDateExist()){
-            replaceText(document, "$INSPECTIONSTARTDATE",report.getInfo().getInspectionStartDate());
-        }
-
-        if(report.info.isSamplingDateExist()){
-            replaceText(document,"$SAMPLING_DATE",report.getInfo().getSamplingDate());
-        }
+        replaceTextInHeader(document,"$ONSITETIME",report.getInfo().getOnSiteTime());
+        replaceText(document,"$ONSITETIME",report.getInfo().getOnSiteTime());
         return document;
     }
 
@@ -597,7 +365,7 @@ public class GenerateReportController implements Initializable{
         }
 
         if(report.info.isProjectNameExist()) {
-           summary+=report.getInfo().getProjectName()+"\n\n";
+            summary+=report.getInfo().getProjectName()+"\n\n";
         }
 
         if(report.info.isProjectAddressExist()) {
