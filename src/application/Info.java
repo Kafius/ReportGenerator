@@ -11,6 +11,7 @@ public class Info {
 	private String projectManager; //done
 	private String clientName; //done
 	private String clientPosition;
+	private String clientContact;
 	private String companyName; //done
 	private String companyAddress; //done
 	private String companyCity; //done
@@ -44,7 +45,8 @@ public class Info {
 	private boolean technicianExist; //done
 	private boolean projectManagerExist; //done
 	private boolean clientNameExist; //done
-	private boolean clientPositionExist;
+	private boolean clientPositionExist; //done
+	private boolean clientContactExist;
 	private boolean companyNameExist; //done
 	private boolean companyAddressExist; //done
 	private boolean companyCityExist; //done
@@ -70,74 +72,6 @@ public class Info {
 	private boolean samplingDateExist; //done
 
 
-	public Info(boolean projectNumberExist,
-			boolean projectNameExist,
-			boolean projectAddressExist,
-			boolean projectCityExist,
-			boolean projectProvinceExist,
-			boolean projectPostalCodeExist,
-			boolean technicianExist,
-			boolean projectManagerExist,
-			boolean clientNameExist,
-			boolean clientPositionExist,
-			boolean companyNameExist,
-			boolean companyAddressExist,
-			boolean companyCityExist,
-			boolean companyProvinceExist,
-			boolean companyPostalCodeExist,
-			boolean buildingNameExist,
-			boolean specificLocationExist,
-			boolean siteWorkDateExist,
-			boolean reportDateExist,
-			boolean preAbatementStartDateExist,
-			boolean visualAbatementStartExist,
-			boolean visualAbatementEndExist,
-			boolean postAbatementDateExist,
-			boolean siteEndDateExist,
-			boolean selRepExist,
-			boolean onSiteTimeExist,
-			boolean clientAddressExist,
-			boolean clientCityExist,
-			boolean clientProvinceExist,
-			boolean clientPostalCodeExist,
-			boolean locationOfAirSamplesExist,
-			boolean inspectionStartDateExist,
-			boolean samplingDateExist ) {
-
-		this.projectNumberExist = projectNumberExist;
-		this.projectNameExist = projectNameExist;
-		this.projectAddressExist = projectAddressExist;
-		this.projectCityExist = projectCityExist;
-		this.projectProvinceExist = projectProvinceExist;
-		this.projectPostalCodeExist = projectPostalCodeExist;
-		this.technicianExist = technicianExist;
-		this.projectManagerExist = projectManagerExist;
-		this.clientNameExist = clientNameExist;
-		this.clientPositionExist = clientPositionExist;
-		this.companyNameExist = companyNameExist;
-		this.companyAddressExist = companyAddressExist;
-		this.companyCityExist = companyCityExist;
-		this.companyProvinceExist = companyProvinceExist;
-		this.companyPostalCodeExist = companyPostalCodeExist;
-		this.buildingNameExist = buildingNameExist;
-		this.specificLocationExist = specificLocationExist;
-		this.siteWorkDateExist = siteWorkDateExist;
-		this.reportDateExist = reportDateExist;
-		this.preAbatementStartDateExist = preAbatementStartDateExist;
-		this.visualAbatementStartExist = visualAbatementStartExist;
-		this.visualAbatementEndExist = visualAbatementEndExist;
-		this.postAbatementDateExist = postAbatementDateExist;
-		this.siteEndDateExist = siteEndDateExist;
-		this.selRepExist = selRepExist;
-		this.onSiteTimeExist = onSiteTimeExist;
-		this.clientAddressExist = clientAddressExist;
-		this.clientCityExist = clientCityExist;
-		this.clientProvinceExist = clientProvinceExist;
-		this.clientPostalCodeExist = clientPostalCodeExist;
-		this.locationOfAirSamplesExist = locationOfAirSamplesExist;
-		this.inspectionStartDateExist = inspectionStartDateExist;
-		this.samplingDateExist = samplingDateExist;
-	}
 	public Info() {
 
 		this.projectNumberExist=false; //done
@@ -150,6 +84,7 @@ public class Info {
 		this.projectManagerExist=false; //done
 		this.clientNameExist=false; //done
 		this.clientPositionExist=false;
+		this.clientContactExist=false;
 		this.companyNameExist=false; //done
 		this.companyAddressExist=false; //done
 		this.companyCityExist=false; //done
@@ -184,6 +119,7 @@ public class Info {
 		this.projectManager="";
 		this.clientName="";
 		this.clientPosition="";
+		this.clientContact="";
 		this.companyName="";
 		this.companyAddress="";
 		this.companyCity="";
@@ -288,6 +224,10 @@ public class Info {
 	public void setClientPosition(String clientPosition) {
 		this.clientPosition = clientPosition;
 	}
+
+	public String getClientContact(){ return clientContact; }
+
+	public void setClientContact(String clientContact){ this.clientContact = clientContact; }
 
 	public String getCompanyName() {
 		return companyName;
@@ -472,6 +412,10 @@ public class Info {
 	public void setClientPositionExist(boolean clientPositionExist) {
 		this.clientPositionExist = clientPositionExist;
 	}
+
+	public boolean isClientContactExist() { return clientContactExist; }
+
+	public void setClientContactExist(boolean clientContactExist) {this.clientContactExist = clientContactExist; }
 
 	public boolean isCompanyNameExist() {
 		return companyNameExist;

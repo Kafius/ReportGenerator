@@ -291,6 +291,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectPostalCodeExist(true);
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientContactExist(true);
 				report.getInfo().setBuildingNameExist(true);
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setVisualAbatementStartExist(true);
@@ -300,21 +301,29 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Pre-Abatement Inspection Report - Type 3 Formal":
+				report.setReportType("AirTesting2");
+				report.getInfo().setReportDateExist(true);
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setCompanyAddressExist(true);
 				report.getInfo().setCompanyCityExist(true);
 				report.getInfo().setCompanyProvinceExist(true);
 				report.getInfo().setCompanyPostalCodeExist(true);
+				report.getInfo().setClientNameExist(true);
+				report.getInfo().setClientPositionExist(true);
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setBuildingNameExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
 				report.getInfo().setProjectProvinceExist(true);
+				report.getInfo().setProjectPostalCodeExist(true);
 				report.getInfo().setOnSiteTimeExist(true);
 				break;
 
 			case "Type 3 Summary Report - pre during post clearance":
+				report.setReportType("AirTesting3");
 				report.getInfo().setSpecificLocationExist(true);
+				report.getInfo().setBuildingNameExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
 				report.getInfo().setProjectPostalCodeExist(true);
@@ -325,20 +334,17 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setCompanyCityExist(true);
 				report.getInfo().setCompanyProvinceExist(true);
 				report.getInfo().setCompanyPostalCodeExist(true);
-				report.getInfo().setTechnicianExist(true);
-				report.getInfo().setProjectManagerExist(true);
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setPreAbatementStartDateExist(true);
-				report.getInfo().setVisualAbatementStartExist(true);
-				report.getInfo().setVisualAbatementEndExist(true);
-				report.getInfo().setPostAbatementDateExist(true);
 				report.getInfo().setSiteEndDateExist(true);
 				break;
 
 			case "Type 3 Summary Report - pre post clearance":
+				report.setReportType("AirTesting4");
 				report.getInfo().setProjectNumberExist(true);
 
 			case "Type 3 Close Out Report":
+				report.setReportType("AirTesting5");
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -361,6 +367,7 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Post-Abatement Inspection and Air Testing Report - Greenrock Properties":
+				report.setReportType("AirTesting6");
 				report.getInfo().setProjectNumberExist(true);
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
@@ -383,6 +390,7 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Type 2 Summary Report":
+				report.setReportType("AirTesting7");
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -405,6 +413,7 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Post-Abatement Inspection Report - Building Demolition Type 3":
+				report.setReportType("AirTesting8");
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -425,6 +434,7 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Post-Abatement Inspection Report - Type 2 Visual Only":
+				report.setReportType("AirTesting9");
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -445,6 +455,7 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "PCM Air Sampling - Residential":
+				report.setReportType("AirTesting10");
 				report.getInfo().setClientNameExist(true);
 				report.getInfo().setClientAddressExist(true);
 				report.getInfo().setClientCityExist(true);
@@ -460,6 +471,7 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "PCM Air Sampling - Construction Projects":
+				report.setReportType("AirTesting11");
 				report.getInfo().setClientNameExist(true);
 				report.getInfo().setClientAddressExist(true);
 				report.getInfo().setClientCityExist(true);
@@ -474,6 +486,7 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "Type 3 Clearance Report - Final Visual and Air Sampling":
+				report.setReportType("AirTesting12");
 				report.getInfo().setSpecificLocationExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
@@ -492,6 +505,7 @@ public class ReportTypeController implements Initializable{
 				break;
 
 			case "TEM Air Sampling During Outdoor Type 3 Operation":
+				report.setReportType("AirTesting13");
 				report.getInfo().setReportDateExist(true);
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setCompanyAddressExist(true);
@@ -506,6 +520,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setProjectManagerExist(true);
 				break;
 			case "Inspection and Air Testing during Abatement_Outdoor Type 3":
+				report.setReportType("AirTesting14");
 				report.getInfo().setReportDateExist(true);
 				report.getInfo().setCompanyNameExist(true);
 				report.getInfo().setCompanyAddressExist(true);

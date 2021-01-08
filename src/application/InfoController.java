@@ -87,7 +87,7 @@ public class InfoController implements Initializable {
 
     DatePicker siteWorkDateDP = new DatePicker();
     DatePicker reportDateDP = new DatePicker();
-    Spinner<String> onSiteTimeS = new Spinner<>(0,100,0,1);
+    Spinner<Integer> onSiteTimeS = new Spinner<>(0,100,0,1);
     DatePicker samplingDateDP = new DatePicker();
     DatePicker preAbatementStartDP = new DatePicker();
     DatePicker visualAbatementStartDP = new DatePicker();
@@ -889,7 +889,7 @@ public class InfoController implements Initializable {
             }
 
             if(report.info.isOnSiteTimeExist()){
-                report.getInfo().setOnSiteTime(onSiteTimeS.getValue());
+                report.getInfo().setOnSiteTime(onSiteTimeS.getValue().toString());
             }
 
             if(report.info.isClientAddressExist()){
@@ -932,6 +932,22 @@ public class InfoController implements Initializable {
                 Parent root = (Parent) loader.load();
 
                 GenerateAT1Controller controller = loader.getController();
+                controller.getReport(report);
+
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(report.getReportType().equals("AirTesting2")){
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AT2Maker.fxml"));
+                Parent root = (Parent) loader.load();
+
+                GenerateAT2Controller controller = loader.getController();
                 controller.getReport(report);
 
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

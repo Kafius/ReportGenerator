@@ -39,7 +39,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import application.walkin.report.WalkInReport;
 
-public class GenerateAT1Controller implements Initializable{
+public class GenerateAT3Controller implements Initializable{
     Report report;
 
     //visuals
@@ -93,10 +93,9 @@ public class GenerateAT1Controller implements Initializable{
         FileOutputStream out = new FileOutputStream(fileLocation);
         doc.write(out);
     }
-
     public void openWord() {
         try {
-            XWPFDocument document = new XWPFDocument(getClass().getResourceAsStream("/templates/"+report.getReportType()+"TemplateReport.docx"));
+            XWPFDocument document = new XWPFDocument(getClass().getResourceAsStream("/templates/AirTesting2TemplateReport.docx"));
             document=generateInfo(document);
             File tempLocation = new File("/temp");
             FileOutputStream out = new FileOutputStream(tempLocation+"/temp.docx");
@@ -112,37 +111,29 @@ public class GenerateAT1Controller implements Initializable{
 
     //replaces text in word document
     private static XWPFDocument replaceText(XWPFDocument doc, String findText, String replaceText){
-        for(XWPFTable t : doc.getTables()){
-            for(XWPFTableRow tr :t.getRows()){
-                for(XWPFTableCell tc : tr.getTableCells()){
-                    for (XWPFParagraph p : tc.getParagraphs()) {
-                        for (XWPFRun r : p.getRuns()) {
-                            String text = r.getText(0);
-                            System.out.println(text);
-                            if(text!=null&&text.contains(findText)) {
-                                text= text.replace(findText, replaceText);
-                                r.setText(text,0);
-                            }
-                        }
-                    }
+        for (XWPFParagraph p : doc.getParagraphs()) {
+            for (XWPFRun r : p.getRuns()) {
+                String text = r.getText(0);
+                System.out.println(text);
+                if(text!=null&&text.contains(findText)) {
+                    text= text.replace(findText, replaceText);
+                    r.setText(text,0);
                 }
             }
         }
-
         return doc;
     }
 
     //replace text within a word document footer (uses replaceText)
 
-    private static XWPFDocument replaceTextInHeader(XWPFDocument doc, String findText, String replaceText) {
-        for(XWPFHeader h : doc.getHeaderList()){
-            for(XWPFTable t : h.getTables()){
+    private static XWPFDocument replaceTextInFooter(XWPFDocument doc, String findText, String replaceText) {
+        for(XWPFFooter f : doc.getFooterList()){
+            for(XWPFTable t : f.getTables()){
                 for(XWPFTableRow tr : t.getRows()){
                     for(XWPFTableCell tc : tr.getTableCells()){
                         for(XWPFParagraph p : tc.getParagraphs()){
                             for(XWPFRun r : p.getRuns()){
                                 String text = r.getText(0);
-                                System.out.println(text);
                                 if(text!=null&&text.contains(findText)) {
                                     text = text.replace(findText,replaceText);
                                     r.setText(text,0);
@@ -188,7 +179,7 @@ public class GenerateAT1Controller implements Initializable{
     //main function for generating report. goes through all functions
     public void generateReport(MouseEvent event) {
         try {
-            XWPFDocument document = new XWPFDocument(getClass().getResourceAsStream("/templates/AirTesting1TemplateReport.docx"));
+            XWPFDocument document = new XWPFDocument(getClass().getResourceAsStream("/templates/AirTesting2TemplateReport.docx"));
             document=generateInfo(document);
             saveReportChooser.setInitialFileName(report.getName());
             File directory = new File(System.getProperty("user.home"));
@@ -235,47 +226,50 @@ public class GenerateAT1Controller implements Initializable{
 
     //uploads basic info to document
     public XWPFDocument generateInfo(XWPFDocument document) {
-        replaceTextInHeader(document,"$PROJECTNUMBER",report.getInfo().getProjectNumber());
+        replaceTextInFooter(document,"$PROJECTNUMBER",report.getInfo().getProjectNumber());
         replaceText(document,"$PROJECTNUMBER",report.getInfo().getProjectNumber());
 
-        replaceTextInHeader(document,"$PROJECTADDRESS",report.getInfo().getProjectAddress());
+        replaceTextInFooter(document,"$PROJECTADDRESS",report.getInfo().getProjectAddress());
         replaceText(document,"$PROJECTADDRESS",report.getInfo().getProjectAddress());
 
-        replaceTextInHeader(document,"$PROJECTCITY",report.getInfo().getProjectCity());
+        replaceTextInFooter(document,"$PROJECTCITY",report.getInfo().getProjectCity());
         replaceText(document,"$PROJECTCITY",report.getInfo().getProjectCity());
 
-        replaceTextInHeader(document,"$PROJECTPROVINCE",report.getInfo().getProjectProvince());
+        replaceTextInFooter(document,"$PROJECTPROVINCE",report.getInfo().getProjectProvince());
         replaceText(document,"$PROJECTPROVINCE",report.getInfo().getProjectProvince());
 
-        replaceTextInHeader(document,"$PROJECTPOSTALCODE",report.getInfo().getProjectPostalCode());
+        replaceTextInFooter(document,"$PROJECTPOSTALCODE",report.getInfo().getProjectPostalCode());
         replaceText(document,"$PROJECTPOSTALCODE",report.getInfo().getProjectPostalCode());
 
-        replaceTextInHeader(document,"$CLIENTNAME",report.getInfo().getClientName());
+        replaceTextInFooter(document,"$CLIENTNAME",report.getInfo().getClientName());
         replaceText(document,"$CLIENTNAME",report.getInfo().getClientName());
 
-        replaceTextInHeader(document,"$CLIENTCONTACT",report.getInfo().getClientContact());
-        replaceText(document,"$CLIENTCONTACT",report.getInfo().getClientContact());
+        replaceTextInFooter(document,"$CLIENTPOSITION",report.getInfo().getClientContact());
+        replaceText(document,"$CLIENTPOSITION",report.getInfo().getClientContact());
 
-        replaceTextInHeader(document,"$COMPANYNAME",report.getInfo().getCompanyName());
-        replaceText(document,"$COMPANYNAME",report.getInfo().getCompanyName());
-
-        replaceTextInHeader(document,"$BUILDINGNAME",report.getInfo().getBuildingName());
+        replaceTextInFooter(document,"$BUILDINGNAME",report.getInfo().getBuildingName());
         replaceText(document,"$BUILDINGNAME",report.getInfo().getBuildingName());
 
-        replaceTextInHeader(document,"$SPECIFICLOCATION",report.getInfo().getSpecificLocation());
+        replaceTextInFooter(document,"$SPECIFICLOCATION",report.getInfo().getSpecificLocation());
         replaceText(document,"$SPECIFICLOCATION",report.getInfo().getSpecificLocation());
 
-        replaceTextInHeader(document,"$REPORTDATE",report.getInfo().getReportDate());
+        replaceTextInFooter(document,"$REPORTDATE",report.getInfo().getReportDate());
         replaceText(document,"$REPORTDATE",report.getInfo().getReportDate());
 
-        replaceTextInHeader(document,"$VISUALABATEMENTSTART",report.getInfo().getVisualAbatementStart());
+        replaceTextInFooter(document,"$VISUALABATEMENTSTART",report.getInfo().getVisualAbatementStart());
         replaceText(document,"$VISUALABATEMENTSTART",report.getInfo().getVisualAbatementStart());
 
-        replaceTextInHeader(document,"$SELREP",report.getInfo().getSelRep());
+        replaceTextInFooter(document,"$SELREP",report.getInfo().getSelRep());
         replaceText(document,"$SELREP",report.getInfo().getSelRep());
 
-        replaceTextInHeader(document,"$ONSITETIME",report.getInfo().getOnSiteTime());
         replaceText(document,"$ONSITETIME",report.getInfo().getOnSiteTime());
+
+        replaceText(document,"$COMPANYADDRESS",report.getInfo().getCompanyAddress());
+        replaceText(document,"$COMPANYCITY",report.getInfo().getCompanyCity());
+        replaceText(document,"$COMPANYPROVINCE",report.getInfo().getCompanyProvince());
+        replaceText(document,"$COMPANYPOSTALCODE",report.getInfo().getCompanyPostalCode());
+
+        replaceText(document,"$COMPANYNAME",report.getInfo().getCompanyName());
         return document;
     }
 
@@ -312,10 +306,6 @@ public class GenerateAT1Controller implements Initializable{
 
         if(report.info.isClientPositionExist()){
             summary+=report.getInfo().getClientPosition()+"\n\n";
-        }
-
-        if(report.info.isCompanyNameExist()){
-            summary+=report.getInfo().getCompanyName()+"\n\n";
         }
 
         if(report.info.isBuildingNameExist()){
