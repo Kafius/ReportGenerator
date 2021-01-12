@@ -95,7 +95,7 @@ public class GenerateAT3Controller implements Initializable{
     }
     public void openWord() {
         try {
-            XWPFDocument document = new XWPFDocument(getClass().getResourceAsStream("/templates/AirTesting2TemplateReport.docx"));
+            XWPFDocument document = new XWPFDocument(getClass().getResourceAsStream("/templates/AirTesting3TemplateReport.docx"));
             document=generateInfo(document);
             File tempLocation = new File("/temp");
             FileOutputStream out = new FileOutputStream(tempLocation+"/temp.docx");
@@ -270,6 +270,8 @@ public class GenerateAT3Controller implements Initializable{
         replaceText(document,"$COMPANYPOSTALCODE",report.getInfo().getCompanyPostalCode());
 
         replaceText(document,"$COMPANYNAME",report.getInfo().getCompanyName());
+
+        replaceText(document, "$PREABATEMENTSTARTDATE", report.getInfo().getPreAbatementStartDate());
         return document;
     }
 
@@ -363,7 +365,7 @@ public class GenerateAT3Controller implements Initializable{
         if(report.info.isSamplingDateExist()){
             summary+=report.getInfo().getSamplingDate()+"\n\n";
         }
-
+        report.setFileName();
         summary+="File Name: "+report.getName()+"\n";
 
         return summary;

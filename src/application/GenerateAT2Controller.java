@@ -364,7 +364,7 @@ public class GenerateAT2Controller implements Initializable{
         if(report.info.isSamplingDateExist()){
             summary+=report.getInfo().getSamplingDate()+"\n\n";
         }
-
+        report.setFileName();
         summary+="File Name: "+report.getName()+"\n";
 
         return summary;

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.iat.report.IAT1;
 import application.walkin.BasicInfoController;
 import application.walkin.report.WalkInReport;
 import data.ReportType;
@@ -225,6 +226,19 @@ public class ReportTypeController implements Initializable{
 					BasicInfoController controller1 = loader.getController();
 					controller1.getReport(report2);
 					break;
+
+				case "Inspection & Air Testing":
+					switch(table.getSelectionModel().getSelectedItem().getTitle()){
+						case("Inspection & Air Testing Report - during Type 3"):
+							IAT1 report3;
+							report3 = new IAT1(table.getSelectionModel().getSelectedItem().getTitle());
+							setInformation(table.getSelectionModel().getSelectedItem().getTitle());
+							loader = new FXMLLoader(getClass().getResource("application/InfoMaker.fxml"));
+							root = loader.load();
+							InfoController controller = loader.getController();
+							controller.getReport(report3);
+							break;
+					}
 				default:
 					report = new Report(table.getSelectionModel().getSelectedItem().getTitle());
 					setInformation(table.getSelectionModel().getSelectedItem().getTitle());
@@ -326,6 +340,7 @@ public class ReportTypeController implements Initializable{
 				report.getInfo().setBuildingNameExist(true);
 				report.getInfo().setProjectAddressExist(true);
 				report.getInfo().setProjectCityExist(true);
+				report.getInfo().setProjectProvinceExist(true);
 				report.getInfo().setProjectPostalCodeExist(true);
 				report.getInfo().setClientNameExist(true);
 				report.getInfo().setClientPositionExist(true);

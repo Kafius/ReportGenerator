@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import application.iat.report.IAT1;
 import application.walkin.*;
 import org.apache.poi.xwpf.usermodel.*;
 import org.apache.xmlbeans.XmlCursor;
@@ -40,7 +41,7 @@ import javafx.stage.Stage;
 import application.walkin.report.WalkInReport;
 
 public class GenerateAT1Controller implements Initializable{
-    Report report;
+    IAT1 report;
 
     //visuals
     @FXML private Label title, subtitle;
@@ -79,7 +80,7 @@ public class GenerateAT1Controller implements Initializable{
     }
 
     //gets data from previous prompt
-    public void getReport(Report report2) {
+    public void getReport(IAT1 report2) {
         report = report2;
         summarizedReportInfo = setSummary();
         allData.setText(summarizedReportInfo);
@@ -373,9 +374,16 @@ public class GenerateAT1Controller implements Initializable{
         if(report.info.isSamplingDateExist()){
             summary+=report.getInfo().getSamplingDate()+"\n\n";
         }
-
+        report.setFileName();
         summary+="File Name: "+report.getName()+"\n";
 
         return summary;
+    }
+
+    public XWPFDocument generateTable(XWPFDocument doc){
+        XWPFTableRow SampleTableRows[] = new XWPFTableRow[report.getTable().size()];
+        XWPFParagraph cellOne;
+        XWPFTableRow tableRow = doc.getTableArray(0).getRow(17);
+        return doc;
     }
 }

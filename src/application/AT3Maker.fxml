@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GenerateAT2Controller">
+<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GenerateAT3Controller">
     <HBox fx:id="buttonBox" layoutX="15.0" layoutY="620.0" prefHeight="25.0" prefWidth="733.0">
         <Button fx:id="backToBasicInfoEditorButton" mnemonicParsing="false" onAction="#goToInfo" prefHeight="25.0" prefWidth="169.0" text="Return to Basic Info Editor" translateX="320.0" />
         <Button fx:id="backToTableEditorButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="169.0" text="Return to Table Editor" translateX="360.0" />
